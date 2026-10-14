@@ -1,5 +1,6 @@
 <?php
 defined('ABSPATH') || exit;
+orisa_flag_script('matter'); // декор matter/throwable как в оригинале 404.html
 get_header();
 ?>
 <div class="container pt-150">
