@@ -12,9 +12,13 @@ if (!$hide_footer) :
             </main>
             <!-- Footer -->
             <?php get_template_part('template-parts/footer-standard'); ?>
+        </div>
+    </div>
     <?php get_template_part('template-parts/back-to-top'); ?>
 <?php else : ?>
             </main>
+        </div>
+    </div>
 <?php endif; ?>
 <?php wp_footer(); ?>
 </body>

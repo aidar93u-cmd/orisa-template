@@ -90,6 +90,22 @@ function orisa_copyright($text) {
 }
 
 /**
+ * Уникальный суффикс ID внутри страницы (аккордеоны, табы, слайдеры).
+ * Если у блока задан якорь — используется он, иначе счётчик.
+ */
+function orisa_block_uid($prefix) {
+    $anchor = get_sub_field('anchor');
+    if (is_string($anchor) && $anchor !== '') {
+        return sanitize_html_class($prefix . '-' . preg_replace('/[^A-Za-z0-9_-]/', '', $anchor));
+    }
+    if (!isset($GLOBALS['orisa_block_uid_counter'])) {
+        $GLOBALS['orisa_block_uid_counter'] = 0;
+    }
+    $GLOBALS['orisa_block_uid_counter']++;
+    return sanitize_html_class($prefix . '-' . $GLOBALS['orisa_block_uid_counter']);
+}
+
+/**
  * Флаги условных скриптов: цикл Flexible Content выставляет
  * $orisa_block_flags['matter'] / ['pricing-3'] / ['services-4'] / ['services-details-4'].
  */
