@@ -1,18 +1,14 @@
 /***************************************************
 ==================== JS INDEX ======================
 ****************************************************
-01. PreLoader Js
 02. Common Js
 03. Nice Select Js
-04. magnificPopup img view
 05. magnificPopup video view
-05b. Home 11 hero reel modal (native video)
 06. back to top
 07. scroll wrapper
 08. mobile menu Js
-09. auto update year
 10. Sidebar Js
-11. Close Handlers (cartmini / body-overlay)
+11. Close Handlers (body-overlay)
 12. Search Js
 13. portfolio-item-hover (service-item hover)
 14. card-award hover (expanded image follows cursor)
@@ -31,17 +27,12 @@
 27. move-up
 28. at-about-svg-wrap
 29. at-title-text
-30. panel pin section (mg-portfolio-pin)
-31. panel pin section (at-header-pin)
 32. section-fix (pin section-title + stacking cards)
 33. section-title-pin
 34. data-countdown
 35. at-item-anime marque
-36. at-pricing-area
-37. auto update year (.update-year)
 38. fade-class-active
 39. character Animation
-40. Parallax Js
 41. Archive blog sidebar_right sticky
 42. ripple-image
 43. Odometer counter
@@ -53,12 +44,8 @@
 49. scroll-move-up2 animation
 50. zoom-in-full (badge-zoon-in)
 51. scroll-section card stacking
-52. change price / price plan toggle
 53. scroll-rotate, scroll-move-right/left
-54. Journey list vertical line
 55. initPortfolioFilter
-56. initProductDetails
-57. initShopCart
 58. text-scramble
 ****************************************************
 ****************************************************/
@@ -68,28 +55,7 @@
 
     var windowOn = $(window);
 
-    ////////////////////////////////////////////////////
-    // 01. PreLoader Js
-    // windowOn.on('load', function () {
-    //     setTimeout(function () {
-    //         $('.page-loader').fadeOut('slow');
-    //     }, 1000);
-    //     gsap.to('.bar', 1.5, {
-    //         delay: 0,
-    //         height: 0,
-    //         stagger: {
-    //             amount: 0.5,
-    //         },
-    //         ease: 'power4.inOut',
-    //     });
-    // });
-    // var logoLoading = document.querySelector('.page-loader-logo img');
-    // logoLoading.addEventListener('load', function () {
-    //     gsap.to(logoLoading, { duration: 1, scale: 1.5 });
-    // });
-
-    ////////////////////////////////////////////////////
-    // 02. Common Js
+// 02. Common Js
     $('[data-background]').each(function () {
         $(this).css('background-image', 'url( ' + $(this).attr('data-background') + '  )');
     });
@@ -114,51 +80,12 @@
     // 03. Nice Select Js
     $('.at-select').niceSelect();
 
-    ////////////////////////////////////////////////////
-    // 04. magnificPopup img view
-    $('.popup-image').magnificPopup({
-        type: 'image',
-        gallery: {
-            enabled: true,
-        },
-    });
-
-    ////////////////////////////////////////////////////
-    // 05. magnificPopup video view
+// 05. magnificPopup video view
     $('.popup-video').magnificPopup({
         type: 'iframe',
     });
 
-    ////////////////////////////////////////////////////
-    // 05b. Home 11 hero reel modal (native video)
-    var sec1Home11ReelModalEl = document.getElementById('sec1Home11ReelModal');
-    var sec1Home11ReelVideoEl = document.getElementById('sec1Home11ReelVideo');
-    if (sec1Home11ReelModalEl && sec1Home11ReelVideoEl) {
-        // ScrollSmoother wraps #smooth-content with transforms; fixed modals must sit on body or they won't overlay the viewport
-        if (sec1Home11ReelModalEl.parentElement !== document.body) {
-            document.body.appendChild(sec1Home11ReelModalEl);
-        }
-
-        $(document).on('click', '.js-home-11-reel-modal-trigger', function (e) {
-            e.preventDefault();
-            if (typeof bootstrap !== 'undefined' && bootstrap.Modal) {
-                bootstrap.Modal.getOrCreateInstance(sec1Home11ReelModalEl).show();
-            } else if ($.fn.modal) {
-                $(sec1Home11ReelModalEl).modal('show');
-            }
-        });
-
-        sec1Home11ReelModalEl.addEventListener('shown.bs.modal', function () {
-            sec1Home11ReelVideoEl.play().catch(function () {});
-        });
-        sec1Home11ReelModalEl.addEventListener('hidden.bs.modal', function () {
-            sec1Home11ReelVideoEl.pause();
-            sec1Home11ReelVideoEl.currentTime = 0;
-        });
-    }
-
-    ////////////////////////////////////////////////////
-    // 06. back to top
+// 06. back to top
     function back_to_top() {
         var $btn = $('#back_to_top');
         var $wrapper = $('.back-to-top-wrapper');
@@ -316,12 +243,7 @@
         $btn.attr('aria-expanded', String(!isOpen));
     });
 
-    ////////////////////////////////////////////////////
-    // 09. auto update year
-    $('#year').text(new Date().getFullYear());
-
-    ////////////////////////////////////////////////////
-    // 10. Sidebar Js
+// 10. Sidebar Js
     $('.at-menu-bar').on('click', function () {
         $('.at-offcanvas').addClass('opened');
         $('.body-overlay').addClass('apply');
@@ -337,9 +259,8 @@
 
 
     ////////////////////////////////////////////////////
-    // 11. Close Handlers (cartmini / body-overlay)
-    $('.cartmini-close-btn, .body-overlay').on('click', function () {
-        $('.cartmini__area').removeClass('opened cartmini-opened');
+    // 11. Close Handlers (body-overlay)
+    $('.body-overlay').on('click', function () {
         $('.body-overlay').removeClass('apply');
     });
 
@@ -1480,63 +1401,7 @@
 
     initProject();
 
-    ////////////////////////////////////////////////////
-    // 30. panel pin section (mg-portfolio-pin)
-    if (typeof gsap !== 'undefined') {
-        let pr2 = gsap.matchMedia();
-        pr2.add('(min-width: 1199px)', () => {
-            let panels = document.querySelectorAll('.mg-portfolio-pin');
-            if (panels.length > 0) {
-                let tl = gsap.timeline();
-                panels.forEach((section, index) => {
-                    if (section) {
-                        tl.to(section, {
-                            scrollTrigger: {
-                                trigger: section,
-                                pin: section,
-                                scrub: 1,
-                                start: 'top 5%',
-                                end: 'bottom 90%',
-                                endTrigger: '.mg-portfolio-area',
-                                pinSpacing: false,
-                                // markers: true,
-                            },
-                        });
-                    }
-                });
-            }
-        });
-    }
-
-    ////////////////////////////////////////////////////
-    // 31. panel pin section (at-header-pin)
-    if (typeof gsap !== 'undefined') {
-        let pr2 = gsap.matchMedia();
-        pr2.add('(min-width: 1199px)', () => {
-            let panels = document.querySelectorAll('.at-header-pin');
-            if (panels.length > 0) {
-                let tl = gsap.timeline();
-                panels.forEach((section, index) => {
-                    if (section) {
-                        tl.to(section, {
-                            scrollTrigger: {
-                                trigger: section,
-                                pin: section,
-                                scrub: 1,
-                                start: '30% top',
-                                end: 'bottom bottom',
-                                endTrigger: '.home-2-section-13',
-                                pinSpacing: false,
-                                // markers: true,
-                            },
-                        });
-                    }
-                });
-            }
-        });
-    }
-    ////////////////////////////////////////////////////
-    // 32. section-fix (pin section-title + stacking cards)
+// 32. section-fix (pin section-title + stacking cards)
     if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
         function buildSectionFixStack(sectionFix) {
             const sectionTitlePin = sectionFix.querySelector('.section-title-pin');
@@ -1734,37 +1599,7 @@
         }
     }
 
-    ////////////////////////////////////////////////////
-    // 36. at-pricing-area
-    function tabtable_active() {
-        const $elements = {
-            monthly: $('#at-nav-monthly'),
-            yearly: $('#at-nav-yearly'),
-            switcher: $('#at-switcher-input'),
-            tabMonthly: $('#at-tab-monthly'),
-            tabYearly: $('#at-tab-yearly'),
-        };
-
-        const setActive = (isMonthly) => {
-            $elements.switcher.prop('checked', isMonthly);
-            $elements.monthly.toggleClass('is-active', isMonthly);
-            $elements.yearly.toggleClass('is-active', !isMonthly);
-            $elements.tabMonthly.toggleClass('at-tab-hide', !isMonthly);
-            $elements.tabYearly.toggleClass('at-tab-hide', isMonthly);
-        };
-
-        [$elements.monthly, $elements.yearly].forEach(($el) => $el.on('click', () => setActive($el.is($elements.monthly))));
-
-        $elements.switcher.on('click', () => setActive(!$elements.monthly.hasClass('is-active')));
-    }
-    if ($('#at-nav-monthly').length) tabtable_active();
-
-    ////////////////////////////////////////////////////
-    // 37. auto update year (.update-year)
-    $('.update-year').text(new Date().getFullYear());
-
-    ////////////////////////////////////////////////////
-    // 38. fade-class-active
+// 38. fade-class-active
     if (typeof gsap !== 'undefined' && $('.at_fade_anim').length > 0) {
         gsap.utils.toArray('.at_fade_anim').forEach((item) => {
             if (!item) return;
@@ -1861,108 +1696,7 @@
         });
     }
 
-    ////////////////////////////////////////////////////
-    // 39c. Stack-on-scroll: home-12 selected projects
-    // Pin the whole container, then slide each card up from below to land on
-    // top of the previous one. Container stays pinned until the entire stack
-    // is assembled, then the section scrolls away as a single unit.
-    if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
-        const stackContainer = document.querySelector('.sec-2-home-12__cards');
-        const stackCards = stackContainer ? gsap.utils.toArray(stackContainer.querySelectorAll('.card-home-12-project')) : [];
-        if (stackContainer && stackCards.length > 1) {
-            gsap.matchMedia().add('(min-width: 992px)', () => {
-                const stackTopOffset = 96;   // distance from viewport top for the first card
-                const stackStep = 14;         // visible "peek" each landed card leaves above the next
-                const stepScale = 0.025;      // how much each previous card shrinks when a new one lands
-                const initialPeek = 50;       // initial gap below each card before scrolling starts
-
-                // Measure tallest card BEFORE we remove cards from flow
-                // (after going absolute, offsetHeight no longer reflects the
-                // natural in-flow height the container needs to reserve).
-                let tallest = 0;
-                stackCards.forEach((c) => { tallest = Math.max(tallest, c.offsetHeight); });
-
-                // Anchor every card at the same top position; layering = stacking order.
-                stackCards.forEach((card, i) => {
-                    gsap.set(card, {
-                        position: 'absolute',
-                        left: 0,
-                        right: 0,
-                        top: 0,
-                        margin: 0,
-                        zIndex: i + 1,
-                    });
-                });
-                gsap.set(stackContainer, {
-                    position: 'relative',
-                    // Reserve room for the tallest card plus the initial peek
-                    // gaps between every pair of cards.
-                    height: tallest + initialPeek * (stackCards.length - 1),
-                });
-
-                // One unit of scroll distance per card hand-off.
-                const stepDuration = () => window.innerHeight * 0.7;
-
-                const tl = gsap.timeline({
-                    defaults: { ease: 'none' },
-                    scrollTrigger: {
-                        trigger: stackContainer,
-                        start: () => 'top ' + stackTopOffset + 'px',
-                        end: () => '+=' + stepDuration() * (stackCards.length - 1),
-                        pin: true,
-                        pinSpacing: true,
-                        scrub: true,
-                        invalidateOnRefresh: true,
-                    },
-                });
-
-                // Cards 2..N start below the viewport, then slide up to land
-                // on top of the stack with the configured peek offset.
-                for (let i = 1; i < stackCards.length; i++) {
-                    const incoming = stackCards[i];
-                    gsap.set(incoming, { yPercent: 100 });
-
-                    tl.to(incoming, { yPercent: 0, duration: 1 }, i - 1);
-
-                    // Shrink every previously-landed card by one step.
-                    for (let j = 0; j < i; j++) {
-                        const offsetFromTop = (i - j) * stackStep;
-                        const scaleAtThisStep = 1 - (i - j) * stepScale;
-                        tl.to(stackCards[j], {
-                            y: offsetFromTop,
-                            scale: scaleAtThisStep,
-                            duration: 1,
-                        }, i - 1);
-                    }
-                }
-
-                // Cards contain lazy images — refresh once they're loaded so
-                // the tallest-card height measurement is accurate.
-                if (typeof imagesLoaded === 'function') {
-                    imagesLoaded(stackContainer, () => ScrollTrigger.refresh());
-                }
-            });
-        }
-    }
-
-    ////////////////////////////////////////////////////
-    // 40. Parallax Js
-    if ($('.scene').length > 0) {
-        $('.scene').parallax({
-            scalarX: 5.0,
-            scalarY: 5.0,
-        });
-    }
-    if ($('.scene-y').length > 0) {
-        $('.scene-y').parallax({
-            scalarY: 5.0,
-            scalarX: 0,
-        });
-    }
-
-
-    ////////////////////////////////////////////////////
-    // 41. Archive blog sidebar_right sticky
+// 41. Archive blog sidebar_right sticky
     if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
         var archiveSection = document.querySelector('.sec-1-archive-2');
         if (archiveSection) {
@@ -2470,46 +2204,7 @@
         });
     }
 
-    ////////////////////////////////////////////////////
-    // 47c. sec-1-portfolio-details-5 — fade hero with counter + bars + prev/next
-    if ($('.sec-1-portfolio-details-5__slider').length > 0) {
-        const $counterNum = $('.sec-1-portfolio-details-5__counter-num');
-        const pad = (n) => String(n).padStart(2, '0');
-
-        new Swiper('.sec-1-portfolio-details-5__slider', {
-            slidesPerView: 1,
-            spaceBetween: 0,
-            speed: 800,
-            loop: true,
-            grabCursor: true,
-            effect: 'fade',
-            fadeEffect: { crossFade: true },
-            autoplay: {
-                delay: 4500,
-                disableOnInteraction: false,
-                pauseOnMouseEnter: true,
-            },
-            pagination: {
-                el: '.sec-1-portfolio-details-5__pagination',
-                clickable: true,
-            },
-            navigation: {
-                nextEl: '.sec-1-portfolio-details-5__nav--next',
-                prevEl: '.sec-1-portfolio-details-5__nav--prev',
-            },
-            on: {
-                slideChange: function () {
-                    $counterNum.text(pad(this.realIndex + 1));
-                },
-                init: function () {
-                    $counterNum.text(pad(this.realIndex + 1));
-                },
-            },
-        });
-    }
-
-    ////////////////////////////////////////////////////
-    // 47d. sec-3-portfolio-details-6 — horizontal scroll gallery
+// 47d. sec-3-portfolio-details-6 — horizontal scroll gallery
     if ($('.sec-3-portfolio-details-6__slider').length > 0) {
         const $captionNum = $('.sec-3-portfolio-details-6__caption-num');
         const totalSlides6 = $('.sec-3-portfolio-details-6__slider .swiper-slide').length;
@@ -2730,35 +2425,7 @@
         });
     }
 
-    ////////////////////////////////////////////////////
-    // 52. change price / price plan toggle
-    function updatePriceByPlan(isBusiness) {
-        if (isBusiness) {
-            $('.text-price-starter').html('$2,400');
-            $('.text-price-growth').html('$5,600');
-            $('.text-price-scale').html('$7,200');
-        } else {
-            $('.text-price-starter').html('$1,200');
-            $('.text-price-growth').html('$2,800');
-            $('.text-price-scale').html('$3,600');
-        }
-    }
-    $('.change-price-plan .price-plan-toggle__input').on('change', function () {
-        updatePriceByPlan($(this).is(':checked'));
-    });
-    $('.change-price-plan .price-plan-toggle-label').on('click', function () {
-        var plan = $(this).attr('data-plan');
-        var $input = $('#price-plan-toggle');
-        if (plan === 'business') {
-            $input.prop('checked', true);
-        } else {
-            $input.prop('checked', false);
-        }
-        updatePriceByPlan($input.is(':checked'));
-    });
-
-    ////////////////////////////////////////////////////
-    // 53. scroll-rotate, scroll-move-right/left
+// 53. scroll-rotate, scroll-move-right/left
     let scrollRotate = document.querySelectorAll('.scroll-rotate');
     scrollRotate.forEach((scrollRotate) => {
         gsap.to(scrollRotate, {
@@ -2796,30 +2463,7 @@
         });
     });
 
-    ////////////////////////////////////////////////////
-    // 54. Journey list vertical line
-    if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
-        const journeyListWrap = document.querySelector('.journey-list-wrap');
-        const journeyListLine = document.querySelector('.journey-list-line');
-        if (journeyListWrap && journeyListLine) {
-            gsap.set(journeyListLine, { height: 0 });
-            gsap.to(journeyListLine, {
-                height: '100%',
-                ease: 'none',
-                scrollTrigger: {
-                    trigger: journeyListWrap,
-                    start: 'top 50%',
-                    end: 'top top',
-                    scrub: 1.2,
-                    invalidateOnRefresh: true,
-                    // markers: true,
-                },
-            });
-        }
-    }
-
-    ////////////////////////////////////////////////////
-    // 55. initPortfolioFilter
+// 55. initPortfolioFilter
     function initPortfolioFilter() {
         const filterButtons = document.querySelectorAll('.filter-portfolio .filter-btn');
         const portfolioCards = document.querySelectorAll('.mg-portfolio-item, .card-portfolio, .card_case__studies, .blog-card, .blog-card-2, .product-card');
@@ -2894,185 +2538,7 @@
         });
     }
 
-    ////////////////////////////////////////////////////
-    // 56. initProductDetails
-    function initProductDetails() {
-        var right = document.querySelector('.content-product-right');
-        if (!right) return;
-
-        // Size selection
-        var sizeBtns = right.querySelectorAll('.content-product-right__size');
-        sizeBtns.forEach(function (btn) {
-            btn.addEventListener('click', function () {
-                sizeBtns.forEach(function (b) { b.classList.remove('active'); });
-                this.classList.add('active');
-            });
-        });
-
-        // Color selection
-        var colorBtns = right.querySelectorAll('.content-product-right__color');
-        colorBtns.forEach(function (btn) {
-            btn.addEventListener('click', function () {
-                colorBtns.forEach(function (b) { b.classList.remove('active'); });
-                this.classList.add('active');
-            });
-        });
-
-        // Quantity +/- 
-        var qtyVal = right.querySelector('.content-product-right__qty-val, .qty-val');
-        var qtyDown = right.querySelector('.qty-down');
-        var qtyUp = right.querySelector('.qty-up');
-        if (qtyVal && qtyDown) {
-            qtyDown.addEventListener('click', function (e) {
-                e.preventDefault();
-                var n = parseInt(qtyVal.textContent, 10) || 1;
-                if (n > 1) qtyVal.textContent = n - 1;
-            });
-        }
-        if (qtyVal && qtyUp) {
-            qtyUp.addEventListener('click', function (e) {
-                e.preventDefault();
-                var n = parseInt(qtyVal.textContent, 10) || 0;
-                qtyVal.textContent = n + 1;
-            });
-        }
-    }
-
-    ////////////////////////////////////////////////////
-    // 57. initShopCart (select all, quantity +/-, delete, summary)
-    function initShopCart() {
-        var $cartList = $('.cart-list');
-        if (!$cartList.length) return;
-
-        var $selectAll = $cartList.find('.cart-select-all');
-        var $itemChecks = $cartList.find('.cart-item-check');
-        var $removeSelected = $cartList.find('.cart-remove-selected');
-        var $summary = $('.cart-summary');
-        var appliedDiscount = 0; // amount in dollars, set when coupon applied
-
-        // Parse price string e.g. "$64" or "$72.50" to number
-        function parsePrice(str) {
-            if (!str || typeof str !== 'string') return 0;
-            var num = parseFloat(str.replace(/[$,]/g, '').trim(), 10);
-            return isNaN(num) ? 0 : num;
-        }
-
-        // Format number as currency
-        function formatMoney(num) {
-            return '$' + (Math.round(num * 100) / 100).toFixed(2);
-        }
-
-        // Get estimated delivery date (e.g. 5 business days)
-        function getEstimatedDeliveryDays() {
-            return 5;
-        }
-
-        function formatDeliveryDate(daysFromNow) {
-            var d = new Date();
-            d.setDate(d.getDate() + daysFromNow);
-            var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-            return d.getDate() + ' ' + months[d.getMonth()] + ' ' + d.getFullYear();
-        }
-
-        function updateCartSummary() {
-            if (!$summary.length) return;
-
-            var $items = $cartList.find('.cart-item');
-            var subtotal = 0;
-
-            $items.each(function () {
-                var $item = $(this);
-                var price = parsePrice($item.find('.cart-item__price').text());
-                var qty = parseInt($item.find('.cart-item-qty-val').text(), 10) || 1;
-                subtotal += price * qty;
-            });
-
-            var discount = Math.min(appliedDiscount, subtotal);
-            var tax = 0;
-            var subtotalAfter = Math.max(0, subtotal - discount);
-            var shipping = 0; // Free
-            var total = subtotalAfter + shipping;
-
-            $summary.find('.cart-summary__subtotal').text(formatMoney(subtotal));
-            $summary.find('.cart-summary__discount').text(formatMoney(discount));
-            $summary.find('.cart-summary__tax').text(formatMoney(tax));
-            $summary.find('.cart-summary__subtotal-after').text(formatMoney(subtotalAfter));
-            $summary.find('.cart-summary__shipping').text('Free');
-            $summary.find('.cart-summary__total').text(formatMoney(total));
-            $summary.find('.cart-summary__delivery-date').text(formatDeliveryDate(getEstimatedDeliveryDays()));
-        }
-
-        // Coupon apply: optional demo – set discount and update summary
-        $summary.on('click', '.cart-summary__coupon-btn', function (e) {
-            e.preventDefault();
-            var code = $summary.find('.cart-summary__coupon-input').val().trim().toUpperCase();
-            // Demo: e.g. "SAVE10" = $10 off, "SAVE20" = $20 off
-            if (code === 'SAVE10') appliedDiscount = 10;
-            else if (code === 'SAVE20') appliedDiscount = 20;
-            else appliedDiscount = 0;
-            updateCartSummary();
-        });
-
-        // Select All: check/uncheck all item checkboxes
-        $selectAll.on('change', function () {
-            var checked = this.checked;
-            $itemChecks.prop('checked', checked);
-        });
-
-        // Item checkbox: sync "Select All" state
-        $itemChecks.on('change', function () {
-            var total = $itemChecks.length;
-            var checked = $itemChecks.filter(':checked').length;
-            $selectAll.prop('checked', total > 0 && total === checked);
-        });
-
-        // Remove selected: remove all checked items from DOM
-        $removeSelected.on('click', function () {
-            $cartList.find('.cart-item-check:checked').closest('.cart-item').fadeOut(300, function () {
-                $(this).remove();
-                updateCartSummary();
-            });
-        });
-
-        // Quantity minus
-        $cartList.on('click', '.cart-item-qty-minus', function (e) {
-            e.preventDefault();
-            var $val = $(this).siblings('.cart-item-qty-val');
-            var n = parseInt($val.text(), 10) || 1;
-            if (n > 1) {
-                $val.text(n - 1);
-                updateCartSummary();
-            }
-        });
-
-        // Quantity plus
-        $cartList.on('click', '.cart-item-qty-plus', function (e) {
-            e.preventDefault();
-            var $val = $(this).siblings('.cart-item-qty-val');
-            var n = parseInt($val.text(), 10) || 0;
-            $val.text(n + 1);
-            updateCartSummary();
-        });
-
-        // Delete single item
-        $cartList.on('click', '.cart-item-delete', function (e) {
-            e.preventDefault();
-            $(this).closest('.cart-item').fadeOut(300, function () {
-                $(this).remove();
-                updateCartSummary();
-            });
-        });
-
-        // Initial summary and delivery date
-        updateCartSummary();
-    }
-
-    initPortfolioFilter();
-    initProductDetails();
-    initShopCart();
-
-    ////////////////////////////////////////////////////
-    // 57b. Home 14 — Section 4 gallery filter
+// 57b. Home 14 — Section 4 gallery filter
     function initSec4Home14Filter() {
         const tabsContainer = document.querySelector('.sec-4-home-14__tabs');
         if (!tabsContainer) return;
@@ -3314,106 +2780,6 @@
         $(window).on('load', initHoverParallax);
     }
 
-    ////////////////////////////////////////////////////
-    // Footer 10 — cursor parallax on hero deco images (opposite motion for depth)
-    function initFooter10HeroParallax() {
-        if (typeof gsap === 'undefined') return;
-        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-
-        const hero = document.querySelector('.footer-10__hero');
-        if (!hero) return;
-
-        const decos = hero.querySelectorAll('.footer-10__deco');
-        if (!decos.length) return;
-
-        const mq = window.matchMedia('(min-width: 768px)');
-        let active = false;
-        let teardown = null;
-
-        const strength = 28;
-        const yFactor = 0.58;
-        const rotMax = 5;
-
-        function disable() {
-            if (teardown) {
-                teardown();
-                teardown = null;
-            }
-            decos.forEach((wrap) => {
-                const img = wrap.querySelector('img');
-                if (img) gsap.to(img, { x: 0, y: 0, rotation: 0, duration: 0.5, ease: 'power2.out' });
-            });
-            active = false;
-        }
-
-        function enable() {
-            if (active) return;
-            active = true;
-
-            const items = [...decos]
-                .map((wrap) => {
-                    const img = wrap.querySelector('img');
-                    if (!img) return null;
-                    const dir = wrap.classList.contains('footer-10__deco--left') ? 1 : -1;
-                    gsap.set(img, { transformOrigin: '50% 50%' });
-                    const xTo = gsap.quickTo(img, 'x', { duration: 0.7, ease: 'power3.out' });
-                    const yTo = gsap.quickTo(img, 'y', { duration: 0.7, ease: 'power3.out' });
-                    const rotTo = gsap.quickTo(img, 'rotation', { duration: 0.85, ease: 'power3.out' });
-                    return { xTo, yTo, rotTo, dir };
-                })
-                .filter(Boolean);
-
-            const onMove = (e) => {
-                const rect = hero.getBoundingClientRect();
-                const hw = rect.width / 2 || 1;
-                const hh = rect.height / 2 || 1;
-                const nx = (e.clientX - rect.left - hw) / hw;
-                const ny = (e.clientY - rect.top - hh) / hh;
-                items.forEach(({ xTo, yTo, rotTo, dir }) => {
-                    xTo(nx * strength * dir);
-                    yTo(ny * strength * yFactor * -dir);
-                    rotTo(nx * rotMax * -dir * 0.45);
-                });
-            };
-
-            const onLeave = () => {
-                items.forEach(({ xTo, yTo, rotTo }) => {
-                    xTo(0);
-                    yTo(0);
-                    rotTo(0);
-                });
-            };
-
-            hero.addEventListener('mousemove', onMove);
-            hero.addEventListener('mouseleave', onLeave);
-
-            teardown = () => {
-                hero.removeEventListener('mousemove', onMove);
-                hero.removeEventListener('mouseleave', onLeave);
-            };
-        }
-
-        function sync() {
-            if (mq.matches) {
-                enable();
-            } else {
-                disable();
-            }
-        }
-
-        sync();
-        if (typeof mq.addEventListener === 'function') {
-            mq.addEventListener('change', sync);
-        } else if (typeof mq.addListener === 'function') {
-            mq.addListener(sync);
-        }
-    }
-
-    if (typeof gsap !== 'undefined') {
-        initFooter10HeroParallax();
-    } else {
-        $(window).on('load', initFooter10HeroParallax);
-    }
 
     ////////////////////////////////////////////////////
     // scroll-driven continuous rotation
@@ -3479,144 +2845,4 @@
         $(window).on('load', initScrollRotate);
     }
 
-    ////////////////////////////////////////////////////
-    // 60. Home 11 sec-5 — Modern services section animations
-    // Staggered card entrance + scroll parallax on images
-    function initHome11Sec5Animations() {
-        if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
-
-        const section = document.querySelector('.sec-5-home-11');
-        if (!section) return;
-
-        const cards = section.querySelectorAll('.sec-5-home-11__card');
-        const mediaImages = section.querySelectorAll('.sec-5-home-11__card-media img');
-        const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-        // ── Staggered card entrance ──────────────────────────────
-        if (cards.length && !reduceMotion) {
-            gsap.set(cards, { willChange: 'transform, opacity' });
-
-            const tl = gsap.timeline({
-                scrollTrigger: {
-                    trigger: section,
-                    start: 'top 75%',
-                    toggleActions: 'play none none none',
-                },
-            });
-
-            tl.fromTo(
-                cards,
-                { y: 60, opacity: 0, scale: 0.96 },
-                {
-                    y: 0,
-                    opacity: 1,
-                    scale: 1,
-                    duration: 0.7,
-                    stagger: 0.1,
-                    ease: 'power3.out',
-                    clearProps: 'willChange',
-                },
-            );
-        }
-
-        // ── Card image scroll parallax ──────────────────────────
-        if (mediaImages.length && !reduceMotion) {
-            mediaImages.forEach((img) => {
-                const card = img.closest('.sec-5-home-11__card');
-                if (!card) return;
-
-                gsap.set(img, { willChange: 'transform' });
-
-                gsap.fromTo(
-                    img,
-                    { y: '-6%', scale: 1.08 },
-                    {
-                        y: '6%',
-                        scale: 1,
-                        ease: 'none',
-                        scrollTrigger: {
-                            trigger: card,
-                            start: 'top bottom',
-                            end: 'bottom top',
-                            scrub: 0.8,
-                            invalidateOnRefresh: true,
-                        },
-                    },
-                );
-            });
-        }
-    }
-
-    if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
-        initHome11Sec5Animations();
-    } else {
-        $(window).on('load', initHome11Sec5Animations);
-    }
-
-    ////////////////////////////////////////////////////
-    // 61. Home 15 sec-1 — title-meta width follows the visible width of "Orisa Agency Portfolio"
-    function initSec1Home15TitleMeta() {
-        var titles = document.querySelectorAll('.sec-1-home-15__title');
-        if (!titles.length) return;
-
-        function measureTextWidth(el) {
-            try {
-                var range = document.createRange();
-                range.selectNodeContents(el);
-                var rects = range.getClientRects();
-                var maxW = 0;
-                for (var i = 0; i < rects.length; i++) {
-                    if (rects[i].width > maxW) maxW = rects[i].width;
-                }
-                if (range.detach) range.detach();
-                return maxW || el.getBoundingClientRect().width;
-            } catch (e) {
-                return el.getBoundingClientRect().width;
-            }
-        }
-
-        function applyTo(title) {
-            var section = title.closest('.sec-1-home-15');
-            if (!section) return;
-            var meta = section.querySelector('.sec-1-home-15__title-meta');
-            if (!meta) return;
-
-            meta.style.width = '';
-            meta.style.marginLeft = '';
-            meta.style.marginRight = '';
-
-            var w = measureTextWidth(title);
-            if (!w || !isFinite(w)) return;
-
-            var maxW = title.parentNode ? title.parentNode.getBoundingClientRect().width : w;
-            if (w > maxW) w = maxW;
-
-            meta.style.width = Math.ceil(w) + 'px';
-            meta.style.marginLeft = 'auto';
-            meta.style.marginRight = 'auto';
-        }
-
-        function applyAll() {
-            for (var i = 0; i < titles.length; i++) applyTo(titles[i]);
-        }
-
-        applyAll();
-
-        if (document.fonts && typeof document.fonts.ready !== 'undefined') {
-            document.fonts.ready.then(applyAll).catch(function () {});
-        }
-
-        var resizeTimer;
-        window.addEventListener('resize', function () {
-            clearTimeout(resizeTimer);
-            resizeTimer = setTimeout(applyAll, 120);
-        });
-
-        if (typeof ResizeObserver !== 'undefined') {
-            var ro = new ResizeObserver(function () { applyAll(); });
-            for (var j = 0; j < titles.length; j++) ro.observe(titles[j]);
-        }
-    }
-
-    initSec1Home15TitleMeta();
 })(jQuery);

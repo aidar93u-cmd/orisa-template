@@ -145,3 +145,55 @@ Safelist deep: `/^at-/ /swiper-/ /mfp-/ /odometer-/ /nice-select/ /carouselTicke
   (остались только xmark/plus), аккордеоны FAQ, countdown на coming-soon.
 - Опционально после 1в: второй проход CSS (модули main.js для удалённых страниц держат классы
   `sec-1-home-12-slider` и т.п.) — только по решению заказчика.
+
+## 3. Этап 1в — мёртвые модули main.js (проверено, применено)
+
+Метод: 69 номерных маркеров → таблица «модуль | селекторы | совпадения в 27 HTML»
+(`C:\Temp\opencode\jsmodtable.txt` + `jsverdict.py`), затем ручная проверка каждого DEAD-кандидата
+точными строками + карта вызовов функций (все `name(` в main.js) для транзитивного замыкания.
+Номера строк ниже — по python-splitlines (3622 physiological; Get-Content считает иначе из-за
+одиночных CR — на резку не влияет, границы задавались маркерами с assert-ами).
+
+### Удалено целиком (модули, все селекторы отсутствуют в 27 HTML, функции нигде не вызываются)
+| Модуль | Причина |
+|---|---|
+| 01 PreLoader | весь блок закомментирован + `.page-loader` разметки нет (0/27; ответ на вопрос про прелоадер: прелоадера нет) |
+| 04 magnificPopup img | `.popup-image` 0/27 (видео `.popup-video` живёт на 3 стр. — модуль 05 оставлен) |
+| 05b home-11 modal | `sec1Home11*` 0/27 |
+| 09 + 37 year | `#year` и `.update-year` 0/27 (год в футерах — plain text) |
+| 30 mg-portfolio-pin, 31 at-header-pin | 0/27 |
+| 36 pricing tabs | `#at-nav-monthly*` 0/27; вызов `tabtable_active()` только внутри модуля |
+| 39c home-12 | `card-home-12*/sec-2-home-12*` 0/27 |
+| 40 Parallax | `.scene/.scene-y` 0/27; единственный потребитель `vendors/parallax.js` → файл удалён (16 КБ) + тег из 27 HTML |
+| 52 price toggle | `#price-plan-toggle/text-price-*` 0/27; `updatePriceByPlan` вызывался только изнутри |
+| 54 journey | `journey-list-*` 0/27 (70 вхождений `journey` — обычный текст, не классы) |
+| 56 initProductDetails, 57 initShopCart + хелперы | `.cart-list/.content-product*` 0/27 (магазин удалён); хелперы `formatMoney/parsePrice/updateCartSummary/formatDeliveryDate/getEstimatedDeliveryDays` вызывались только внутри (все колл-сайты в L2954–3067); вызовы `initProductDetails();initShopCart();` (L3071–3072) удалены вместе |
+| 60 home-11 sec5 | `sec-5-home-11*` 0/27; вызов только из gsap-guard блока (удалён целиком) |
+| 61 home-15 | `sec-1-home-15__title*` 0/27; вызов в конце файла удалён, `})(jQuery);` сохранён (assert) |
+| 47c portfolio-details-5 | `sec-1-portfolio-details-5*` 0/27 |
+
+### Точечно
+- Модуль 11: удалены 2 cartmini-строки из общего хендлера (`.cartmini__area` нет в разметке);
+  хендлер переписан только на `.body-overlay`, комментарий правлен. Проверка: других `cartmini` в JS нет.
+- Модуль 59: удалены функция `initFooter10HeroParallax` + её if/else вызов (`.footer-10__*` 0/27);
+  живое (`sec-1-home-9`, hover-parallax, scroll-rotate) не тронуто.
+- TOC-шапка main.js: удалены 13 строк удалённых модулей + правка 11 (комментарии, ноль риска).
+
+### Оставлено сознательно (смешанные модули, мёртвая часть неотделима построчно)
+- 19 anim-zoomin/isotope (345 строк): живое (`.anim-zoomin` 185 ссылок) + мёртвые home-10/15/8/12 ветки без
+  именованных функций — резать только построчным аудитом, не в этом этапе.
+- 47b (home-12/15 мёртвые слайдеры + home-13/14 живые), 47d (pd-5 мёртв? — нет: 47d это pd-6+home-13, жив;
+  мёртвый был 47c, удалён), 32 section-fix (gsap-guard ветки мертвы без gsap, ванильная часть жива),
+  14 card-award (первичный анализ «0 вызовов» опровергнут: IIFE + addEventListener — всё живо).
+- `vendors/jquery.elevatezoom.js` (57 КБ) оставлен: подключён на 27, вызовов в JS нет, но это vendor-файл —
+  исключить из enqueue на этапе 2, не удалять файл сейчас (решение зафиксировано; в отчёте этапа 2).
+
+### Проверки (все PASS)
+- `node --check assets/js/main.js` — PASS (после каждой правки; чинились: перекрытие срезов 60/61,
+  незахваченный `}` в 59, CRLF/LF-нормализация через побайтовую перезапись с сохранением стиля файла).
+- Перекрёстные вызовы: ни один оставшийся JS не ссылается на удалённые функции/селекторы (grep по
+  `assets/js/**`, 0 совпадений кроме TOC — TOC вычищен).
+- `parallax.js`: 0 ссылок везде (файл удалён, 27 тегов вырезаны целыми строками).
+- main.js: 138 → **109 КБ** (−29 КБ, −787 строк нетто). HTML: −27 строк (теги parallax).
+- Смотреть глазами: мобильное меню/оверлеи, поиск, аккордеоны, слайдеры testimonials, countdown,
+  фильтры портфолио (initPortfolioFilter жив), cursor (at-cursor жив).
