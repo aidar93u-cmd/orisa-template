@@ -39,3 +39,62 @@ services-5.js 1; pricing-3.js 1; pricing-5.js 1 (2 КБ по ls — округл
 vendors/color-modes.js 2.
 
 ## 1. Этап 1а — удаление (журнал ниже)
+
+Карта ссылок: скрипт `C:\Temp\opencode\linkmap.py` (не в репозитории): 27 HTML (`src|href|poster|content|srcset|data-*`,
+`url()`), `url()` из всех CSS (с нормализацией `../` → `assets/`), строковые пути `assets|oldpages` из всех JS.
+Сопоставление с URL-декодированием и нижним регистром. По ходу найдены и исправлены 2 бага подсчёта
+(CSS-относительные пути, `srcset`) — проверялось позитивным контролем (`favicon-dark.svg` найден).
+
+### Удалено целиком
+- `oldpages/` — 61 файл, 7.5 МБ.
+- `graphify-out/` — 99 файлов, 8.6 МБ (диагностический артефакт, не шаблон; в git не трекался).
+- `README.md` шаблона (3 КБ).
+
+### Удалено по карте ссылок (0 ссылок с 27 страниц/CSS/JS): 664 файла, 114.9 МБ
+- CSS (9): `css/{agina-icons,bootstrap.min,leaflet,leaflet-gesture-handling,meanmenu,nice-select,sticky-cards,swiper.min,venobox}*.css`.
+- JS (40): agina-стек (`three.js`, `gsap*`×7, `meanmenu`, `swiper.min`, `magiccursor`, `venobox.min`,
+  `hover-effect.umd`, `webgl`, `preloader`, `window-shape-animation`, `vanilla-tilt.min`, `tj-img-distortion`,
+  `img-revel/index.js`, `jquery.min`, `bootstrap.bundle`, `isotope.pkgd.min`(корень — байт-дубль vendors),
+  `imagesloaded-pkgd.js`(корень), `jquery.nice-select.min`(байт-дубль)), `leaflet*.js`×2, `barba.min.js`,
+  `sticky-cards.js`, `slideshow-*.js`×7, `horizontal-scroll-gallery.js`, `cursor-trail.js`, `about-4.js`,
+  `team-2.js`, `services-5.js`, `services-details-2/3/5.js`, `pricing-5.js`.
+- Видео: `assets/videos/h1-hero*.mp4` (9.9 МБ).
+- Картинки: весь `assets/images/` (~225 файлов — ноль ссылок; включая `gpt-image*`, `error.webp`),
+  `assets/gif/*` (3), `assets/hero1.jpg`, `assets/images/hero1.jpg`, `assets/imgs/pages/{img-*.webp,home-6,home-8,home-10,home-11,home-12,home-15,product,slideshow,…}`,
+  `assets/imgs/icons/logo-*.svg,brand-7..9.webp,check.svg,cross-out.webp,badge-1.svg` и др. (полный список —
+  `git show --stat`), всего ~600 файлов.
+- Оставлено из `assets/imgs/`: `template/` (логотипы, hero, аватары, brand-logos), `icons/star-2.svg,title-arrow.svg`,
+  `zakroydolgi/{hero,icons,users}` (79 ссылок — используется), `video/` (live-bg.mov, video-1.mp4).
+
+### Шрифты: 210 → 70 файлов (17.9 → ~3.9 МБ)
+- Удалены: все `*@h2n5xr` (4), `demo.html`, `stylesheet.css`, все `.eot` (52), все `.ttf` с woff2/woff-парой (82),
+  целиком Bebas-italic семейства без `@font-face` (BookItalic, ExpandedLightIt, ExpandedThin, Italic,
+  SemiExp*Italic, Thin, ThinItalic — 44 файла).
+- Переписан `src` в `@font-face`: `main.css` (−123 url-сегмента + 39 пустых `src:;`), `font-awesome-pro.css`
+  (−19 сегментов; удалены 4 пустых `@font-face`: thin-100/duotone-900/v4compatibility — файлов не было).
+- Проверка: `fontverify.py` — 0 висячих `url()`, все `@font-face` с ≥1 src, баланс `{}`/`}`.
+- Реально используемые гарнитуры: Cera Pro (Regular/Medium/Bold/Black + italics, `.woff`), Bebas Neue Pro
+  (Regular/Book/Light/Middle/Bold + Expanded/SemiExp ширины, `.woff2+.woff`), FA 6 Pro light-300/solid-900
+  (+regular-400/brands-400 — файлы оставлены, используются ли — см. сомнительное; в HTML только `fa-xmark`,
+  в `main.js` — `fa-plus/fa-solid`).
+
+### Сомнительное — оставлено
+- `vendors/jquery.elevatezoom.js` (57 КБ): подключён на всех 27, но ни `main.js`, ни другие JS его не вызывают,
+  товарных страниц больше нет. Файл есть, тег есть. Кандидат на удаление в 1в/этапе 2 (исключить из enqueue).
+- `vendors/color-modes.js` + тумблер `.dark-light-switcher input#switch` (есть на всех 27 — **рабочий
+  переключатель найден**, вопреки допущению «только светлая»). НЕ удалён, сообщается по правилу.
+  Файлы/теги на месте; решение — вопрос №1 к заказчику.
+- `at-cursor.js` — на всех 27, оставлен (тумблер будет в Options на этапе 2).
+- FA `regular-400/brands-400` (4 файла, ~100 КБ): в HTML/JS прямых классов не видно; оставлены до 1б
+  (там чистятся `@font-face`).
+
+### Битые ссылки на удалённые страницы (не правились, по правилу; заменятся полями ACF)
+- 2009 ссылок `*.html` на 61 удалённую страницу (меню, футеры, карточки, пагинации): каждая home-демо
+  ~26 ссылок; лидеры: `team-details.html` 108, `portfolio-1.html`/`contact-1.html` 83,
+  `portfolio-details-1.html` 70, `pricing.html`/`archive-1.html` 58–59, `product-*` 26–48.
+- Плюс `services.html` (6 ссылок в index-13/14): такой страницы **не было и до чистки** — битая ссылка оригинала.
+
+### Итог 1а
+- Было: 1499 файлов / 207.2 МБ. Стало: **536 файлов / 68.0 МБ** (−963 файла, −139 МБ).
+- `assets/`: 1309 → 505 файлов. Шрифты 210 → 70. Видео: только `assets/imgs/video/` (2 файла).
+- Отклонение от PROMPT 1а.3: `color-modes.js` и переключатель НЕ удалены (переключатель существует).
