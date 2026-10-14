@@ -98,3 +98,50 @@ vendors/color-modes.js 2.
 - Было: 1499 файлов / 207.2 МБ. Стало: **536 файлов / 68.0 МБ** (−963 файла, −139 МБ).
 - `assets/`: 1309 → 505 файлов. Шрифты 210 → 70. Видео: только `assets/imgs/video/` (2 файла).
 - Отклонение от PROMPT 1а.3: `color-modes.js` и переключатель НЕ удалены (переключатель существует).
+
+## 2. Этап 1б — чистка CSS (PurgeCSS 8.0.0 через Node API; CLI и --config на Windows не грузятся — известный баг загрузчика)
+
+Контент: 27 HTML + все оставшиеся JS целиком. `fontFace:true, keyframes:true, variables:false`.
+Safelist standard: active/show/collapsing/collapse/collapsed/fade/open/opened/apply/focus(+visible)/
+disabled/selected/checked/is-active/is-menu-open/menu-open(+temp)/header-sticky/back-to-top-btn-show/
+cartmini-opened/with-blur/at-tab-hide/is-changing/no-csspointerevents/not-hide-cursor.
+Safelist deep: `/^at-/ /swiper-/ /mfp-/ /odometer-/ /nice-select/ /carouselTicker/ /accordion/ /ripples/`
+`/zoom/ /magnetic/ /ticker/ /border-white/ /border-dark/ /from-white/ /30%/ /20%/ /md\:/`.
+Убраны из deep по ходу: `/fa-/` (глушил чистку иконок FA), `/marquee/` (держал мёртвые sd2-правила),
+`/ticker/`-дубль (`/sticker-mule`!) — см. триаж.
+
+### Результат (проверено, применено)
+- `main.css`: 1049 → **533 КБ** (8766 → 4492 блоков `{}`).
+- `vendors/bootstrap.min.css`: 232 → **57 КБ**.
+- `vendors/font-awesome-pro.css`: 464 → **1.5 КБ** (остались fa-light/fa-solid/fa-xmark/fa-plus + их 3 @font-face; brands/regular-лица частично срезаны → удалён `fa-brands-400.woff2`).
+- `vendors/spacing.css`: 11.6 → **2.4 КБ**. swiper-bundle: 18.4 → 18.3 КБ. Остальные без изменений.
+- Итого CSS: ~1.76 МБ → ~0.62 МБ. Удалено правил: **9878** (все с виновником — `docs/css-removed.txt`).
+
+### Триаж по ходу (всё с доказательствами)
+1. PurgeCSS не видит классы со спецсимволами (`border-white/01`, `md:grid-cols-7` — 7 шт., все используются):
+   добавлены в safelist deep. Без этого удалялись живые правила (поймано инвариантом).
+2. Ловушка var(): правило kept, а определяющее правило dropped (кейс `var(--sd2-line-dark)` в kept
+   `.sd2-stack__marquee` при dropped `.sd2-page`). Закрыто удалением `/marquee/` + проверкой
+   «live-правило ⇒ все var()/keyframes/font-family определены» (livecheck.py) — чисто.
+3. Ловушка var() в Bootstrap (`--bs-btn-active-*`): использующие правила сами мёртвые (`.btn*` нет в разметке) — безвредно.
+4. PurgeCSS с `fontFace:true` снёс ВСЕ @font-face из main.css (шрифты подключаются через `var(--at-ff-*)` —
+   PurgeCSS var-индирекцию не резолвит). Перезапущено с `fontFace:false` для main.css; лица с файлами целы
+   (39 блоков, 0 висячих url). Файл `fa-brands-400.woff2` удалён как осиротевший.
+5. Мои же деформации 1а: `src:;` (39 шт., main.css) и `,\s*}` (10 шт., FA) — исправлены, проверены.
+6. `?safelist-miss?` (11 шт.): `abbr/kbd/samp` (тегов нет в 27 HTML), swiper `:host` (веб-компонентов нет),
+   FA `:host,:root` (переменные сохранены как `:root`) — удалены правомерно.
+7. 7 var() без определений (`--at-border-3` и др.) — сломаны уже в оригинале (проверено), не регрессия.
+8. FA `.fa-sticker-mule` держался safelist-ом `/ticker/` — убран вместе с дублем.
+
+### Проверки (все PASS, скрипты в C:\Temp\opencode — вне репозитория)
+- Инвариант (verify_purge.py): каждое правило оригинала, чьи классы/id целиком в токенах 27 HTML + JS,
+  присутствует в итоге — **missing=0** по всем 9 файлам.
+- livecheck.py: у живых правил все var()/keyframes/font-family определены (кроме кросс-файлового FA в
+  main.css — лица есть в итоговом FA; и шумов парсера `linear}`/цифр).
+- Парсинг всех 9 итоговых CSS без ошибок; баланс `{}`; 0 висячих `url()`; все @font-face с src.
+- Рабочее дерево побайтово равно проверенным purged-файлам (5 изменённых).
+- На что смотреть глазами (проверка только статическая!): hero-секции, pin/zoom (`section-fix`,
+  `at-panel-pin`), слайдеры (testimonials, about-me, portfolio-details), фильтры портфолио, иконки FA
+  (остались только xmark/plus), аккордеоны FAQ, countdown на coming-soon.
+- Опционально после 1в: второй проход CSS (модули main.js для удалённых страниц держат классы
+  `sec-1-home-12-slider` и т.п.) — только по решению заказчика.
