@@ -98,6 +98,4 @@ if (function_exists('get_field') && get_field('cursor_enabled', 'option')) :
     </div>
     <!-- End magic cursor -->
 <?php endif; ?>
-    <div id="smooth-wrapper">
-        <div id="smooth-content">
             <main class="bg-neutral-0">
