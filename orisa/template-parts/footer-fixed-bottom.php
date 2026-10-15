@@ -45,6 +45,7 @@ defined('ABSPATH') || exit;
                                         <?php endwhile; ?>
                                     </ul>
                                     <?php endif; ?>
+                                </div>
                                 <div class="alt-footer-link-item col-6">
                                     <?php if (function_exists('have_rows') && have_rows('footer_menu_2', 'option')) : ?>
                                     <ul>

@@ -193,7 +193,7 @@ $side_img_html = orisa_img($side_image_id, 'full', ['class' => 'w-100', 'data-sp
         </div>
     </div>
 </div>
-<?php endif; ?>
         </div>
     </div>
 </div>
+<?php endif; ?>
