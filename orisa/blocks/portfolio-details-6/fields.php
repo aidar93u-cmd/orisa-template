@@ -8,7 +8,9 @@ defined('ABSPATH') || exit;
  * - label/instructions по-русски; name/key — по-английски;
  * - картинки: return_format id; magazine-текст — wysiwyg без загрузок (media_upload => 0);
  * - галерея sec-3 — повторитель (классы swiper дословно в template.php);
- * - sec-4 (цифры), sec-6 (FAQ), marquee-лента — статичный декор, полей нет;
+ * - sec-4 (цифры) — повторитель stats (число + суффикс + подпись);
+ * - sec-6 (FAQ) — повторитель faq_items (вопрос + ответ, первый открыт);
+ * - marquee-лента — статичный декор, полей нет;
  * - пустые поля гасят свои теги (см. template.php).
  */
 return [
@@ -138,6 +140,36 @@ return [
             ],
         ],
         [
+            'key'          => 'field_orisa_portfolio_details_6_stats',
+            'label'        => 'Цифры',
+            'name'         => 'stats',
+            'type'         => 'repeater',
+            'layout'       => 'table',
+            'button_label' => 'Добавить цифру',
+            'sub_fields'   => [
+                [
+                    'key'          => 'field_orisa_portfolio_details_6_stat_number',
+                    'label'        => 'Число',
+                    'name'         => 'number',
+                    'type'         => 'text',
+                    'instructions' => 'Например: +240, 4, 98. Знак + входит в число.',
+                ],
+                [
+                    'key'          => 'field_orisa_portfolio_details_6_stat_suffix',
+                    'label'        => 'Суффикс',
+                    'name'         => 'suffix',
+                    'type'         => 'text',
+                    'instructions' => 'Текст сразу после числа, например %. Пусто — без суффикса.',
+                ],
+                [
+                    'key'   => 'field_orisa_portfolio_details_6_stat_caption',
+                    'label' => 'Подпись',
+                    'name'  => 'caption',
+                    'type'  => 'text',
+                ],
+            ],
+        ],
+        [
             'key'   => 'field_orisa_portfolio_details_6_quote',
             'label' => 'Цитата',
             'name'  => 'quote',
@@ -162,6 +194,30 @@ return [
             'name'          => 'quote_image',
             'type'          => 'image',
             'return_format' => 'id',
+        ],
+        [
+            'key'          => 'field_orisa_portfolio_details_6_faq_items',
+            'label'        => 'Вопросы',
+            'name'         => 'faq_items',
+            'type'         => 'repeater',
+            'layout'       => 'block',
+            'button_label' => 'Добавить вопрос',
+            'sub_fields'   => [
+                [
+                    'key'   => 'field_orisa_portfolio_details_6_faq_question',
+                    'label' => 'Вопрос',
+                    'name'  => 'question',
+                    'type'  => 'text',
+                ],
+                [
+                    'key'          => 'field_orisa_portfolio_details_6_faq_answer',
+                    'label'        => 'Ответ',
+                    'name'         => 'answer',
+                    'type'         => 'wysiwyg',
+                    'tabs'         => 'visual',
+                    'media_upload' => 0,
+                ],
+            ],
         ],
         [
             'key'   => 'field_orisa_portfolio_details_6_next_link',

@@ -6,7 +6,7 @@ defined('ABSPATH') || exit;
  * Разметка 1:1: классы sec-*-portfolio-details-6, swiper/slider/wrapper/slide, data-fade-from/data-delay,
  * вложенность — дословно (на них завязаны main.js и слайдер).
  * Пустые поля гасят свои теги; картинки через orisa_img(); весь вывод экранирован.
- * Статика без полей (marquee-лента, цифры sec-4, FAQ sec-6) — захардкожена 1:1 из оригинала.
+ * Статика без полей — только marquee-лента (декор 1:1 из оригинала).
  */
 $byline = get_sub_field('byline');
 $title = get_sub_field('title');
@@ -69,6 +69,34 @@ if (function_exists('have_rows') && have_rows('next_tags')) {
         $orisa_pd6_next_tags[] = $orisa_pd6_nt;
     }
 }
+
+$orisa_pd6_stats = [];
+if (function_exists('have_rows') && have_rows('stats')) {
+    while (have_rows('stats')) {
+        the_row();
+        $orisa_pd6_sn = get_sub_field('number');
+        $orisa_pd6_ss = get_sub_field('suffix');
+        $orisa_pd6_sc = get_sub_field('caption');
+        if (!$orisa_pd6_sn && !$orisa_pd6_ss && !$orisa_pd6_sc) {
+            continue;
+        }
+        $orisa_pd6_stats[] = ['number' => $orisa_pd6_sn, 'suffix' => $orisa_pd6_ss, 'caption' => $orisa_pd6_sc];
+    }
+}
+
+$orisa_pd6_faq = [];
+if (function_exists('have_rows') && have_rows('faq_items')) {
+    while (have_rows('faq_items')) {
+        the_row();
+        $orisa_pd6_fq = get_sub_field('question');
+        $orisa_pd6_fa = get_sub_field('answer');
+        if (!$orisa_pd6_fq && !$orisa_pd6_fa) {
+            continue;
+        }
+        $orisa_pd6_faq[] = ['question' => $orisa_pd6_fq, 'answer' => $orisa_pd6_fa];
+    }
+}
+$orisa_pd6_faq_uid = function_exists('orisa_block_uid') ? orisa_block_uid('pd6faq') : 'pd6faq';
 
 $orisa_pd6_alt = $title ? $title : get_bloginfo('name');
 $orisa_pd6_has_hero = ($byline || $title || $title_mark || $tagline || $orisa_pd6_credits !== []);
@@ -219,32 +247,37 @@ $orisa_pd6_next_alt = $next_name ? $next_name : get_bloginfo('name');
         <?php endif; ?>
     </section>
 <?php endif; ?>
-<section class="sec-4-portfolio-details-6 overflow-hidden pt-100 pb-100">
-    <div class="container">
-        <div class="text-center mb-60">
-            <span class="sec-4-portfolio-details-6__eyebrow fz-font-label text-uppercase fw-600 d-block mb-15 at_fade_anim" data-fade-from="bottom" data-delay=".05">By the numbers</span>
-            <h2 class="sec-4-portfolio-details-6__heading fw-500 neutral-950 mb-0 at_fade_anim" data-fade-from="bottom" data-delay=".1">Impact at a glance</h2>
+<?php if ($orisa_pd6_stats !== []) : ?>
+    <section class="sec-4-portfolio-details-6 overflow-hidden pt-100 pb-100">
+        <div class="container">
+            <div class="text-center mb-60">
+                <span class="sec-4-portfolio-details-6__eyebrow fz-font-label text-uppercase fw-600 d-block mb-15 at_fade_anim" data-fade-from="bottom" data-delay=".05">By the numbers</span>
+                <h2 class="sec-4-portfolio-details-6__heading fw-500 neutral-950 mb-0 at_fade_anim" data-fade-from="bottom" data-delay=".1">Impact at a glance</h2>
+            </div>
+            <ul class="sec-4-portfolio-details-6__stats list-unstyled mb-0">
+                <?php $orisa_pd6_stat_i = 0; ?>
+                <?php foreach ($orisa_pd6_stats as $orisa_pd6_s) : ?>
+                    <?php
+                    $orisa_pd6_stat_i++;
+                    $orisa_pd6_stat_num = (string) $orisa_pd6_s['number'] . (string) $orisa_pd6_s['suffix'];
+                    $orisa_pd6_stat_delay = rtrim(rtrim(number_format(0.1 * $orisa_pd6_stat_i, 2, '.', ''), '0'), '.');
+                    if (strpos($orisa_pd6_stat_delay, '0.') === 0) {
+                        $orisa_pd6_stat_delay = substr($orisa_pd6_stat_delay, 1);
+                    }
+                    ?>
+                    <li class="sec-4-portfolio-details-6__stat at_fade_anim" data-fade-from="bottom" data-delay="<?php echo esc_attr($orisa_pd6_stat_delay); ?>">
+                        <?php if ($orisa_pd6_stat_num !== '') : ?>
+                            <span class="sec-4-portfolio-details-6__stat-num d-block fw-500 lh-1"><?php echo esc_html($orisa_pd6_stat_num); ?></span>
+                        <?php endif; ?>
+                        <?php if ($orisa_pd6_s['caption']) : ?>
+                            <p class="sec-4-portfolio-details-6__stat-label fz-font-md neutral-500 mb-0"><?php echo esc_html($orisa_pd6_s['caption']); ?></p>
+                        <?php endif; ?>
+                    </li>
+                <?php endforeach; ?>
+            </ul>
         </div>
-        <ul class="sec-4-portfolio-details-6__stats list-unstyled mb-0">
-            <li class="sec-4-portfolio-details-6__stat at_fade_anim" data-fade-from="bottom" data-delay=".1">
-                <span class="sec-4-portfolio-details-6__stat-num d-block fw-500 lh-1">+240%</span>
-                <p class="sec-4-portfolio-details-6__stat-label fz-font-md neutral-500 mb-0">Brand engagement</p>
-            </li>
-            <li class="sec-4-portfolio-details-6__stat at_fade_anim" data-fade-from="bottom" data-delay=".2">
-                <span class="sec-4-portfolio-details-6__stat-num d-block fw-500 lh-1">4</span>
-                <p class="sec-4-portfolio-details-6__stat-label fz-font-md neutral-500 mb-0">Markets reached</p>
-            </li>
-            <li class="sec-4-portfolio-details-6__stat at_fade_anim" data-fade-from="bottom" data-delay=".3">
-                <span class="sec-4-portfolio-details-6__stat-num d-block fw-500 lh-1">12</span>
-                <p class="sec-4-portfolio-details-6__stat-label fz-font-md neutral-500 mb-0">Collections launched</p>
-            </li>
-            <li class="sec-4-portfolio-details-6__stat at_fade_anim" data-fade-from="bottom" data-delay=".4">
-                <span class="sec-4-portfolio-details-6__stat-num d-block fw-500 lh-1">98%</span>
-                <p class="sec-4-portfolio-details-6__stat-label fz-font-md neutral-500 mb-0">Brand recall score</p>
-            </li>
-        </ul>
-    </div>
-</section>
+    </section>
+<?php endif; ?>
 <?php if ($orisa_pd6_has_quote) : ?>
     <section class="sec-5-portfolio-details-6 overflow-hidden pt-100 pb-100">
         <div class="container">
@@ -277,88 +310,50 @@ $orisa_pd6_next_alt = $next_name ? $next_name : get_bloginfo('name');
         </div>
     </section>
 <?php endif; ?>
-<section class="sec-6-portfolio-details-6 overflow-hidden pt-100 pb-100">
-    <div class="container">
-        <div class="row mb-50">
-            <div class="col-12">
-                <span class="sec-6-portfolio-details-6__eyebrow fz-font-label text-uppercase fw-600 d-block mb-15 at_fade_anim" data-fade-from="left" data-delay=".05">Project details</span>
-                <h2 class="sec-6-portfolio-details-6__heading fw-500 neutral-950 mb-0 at_fade_anim" data-fade-from="bottom" data-delay=".1">Frequently asked</h2>
+<?php if ($orisa_pd6_faq !== []) : ?>
+    <section class="sec-6-portfolio-details-6 overflow-hidden pt-100 pb-100">
+        <div class="container">
+            <div class="row mb-50">
+                <div class="col-12">
+                    <span class="sec-6-portfolio-details-6__eyebrow fz-font-label text-uppercase fw-600 d-block mb-15 at_fade_anim" data-fade-from="left" data-delay=".05">Project details</span>
+                    <h2 class="sec-6-portfolio-details-6__heading fw-500 neutral-950 mb-0 at_fade_anim" data-fade-from="bottom" data-delay=".1">Frequently asked</h2>
+                </div>
             </div>
+            <ul class="sec-6-portfolio-details-6__list list-unstyled mb-0">
+                <?php $orisa_pd6_faq_i = 0; ?>
+                <?php foreach ($orisa_pd6_faq as $orisa_pd6_f) : ?>
+                    <?php
+                    $orisa_pd6_faq_i++;
+                    $orisa_pd6_faq_open = ($orisa_pd6_faq_i === 1);
+                    $orisa_pd6_faq_id = $orisa_pd6_faq_uid . '-' . $orisa_pd6_faq_i;
+                    $orisa_pd6_faq_delay = rtrim(rtrim(number_format(0.1 + 0.05 * ($orisa_pd6_faq_i - 1), 2, '.', ''), '0'), '.');
+                    if (strpos($orisa_pd6_faq_delay, '0.') === 0) {
+                        $orisa_pd6_faq_delay = substr($orisa_pd6_faq_delay, 1);
+                    }
+                    ?>
+                    <li class="sec-6-portfolio-details-6__row at_fade_anim" data-fade-from="bottom" data-delay="<?php echo esc_attr($orisa_pd6_faq_delay); ?>">
+                        <details class="sec-6-portfolio-details-6__item"<?php echo $orisa_pd6_faq_open ? ' open' : ''; ?> id="<?php echo esc_attr($orisa_pd6_faq_id); ?>">
+                            <summary class="sec-6-portfolio-details-6__head">
+                                <?php if ($orisa_pd6_f['question']) : ?>
+                                    <span class="sec-6-portfolio-details-6__q fw-500 neutral-950"><?php echo esc_html($orisa_pd6_f['question']); ?></span>
+                                <?php endif; ?>
+                                <span class="sec-6-portfolio-details-6__icon" aria-hidden="true">
+                                    <span class="sec-6-portfolio-details-6__icon-bar"></span>
+                                    <span class="sec-6-portfolio-details-6__icon-bar sec-6-portfolio-details-6__icon-bar--v"></span>
+                                </span>
+                            </summary>
+                            <?php if ($orisa_pd6_f['answer']) : ?>
+                                <div class="sec-6-portfolio-details-6__body">
+                                    <?php echo wp_kses_post($orisa_pd6_f['answer']); ?>
+                                </div>
+                            <?php endif; ?>
+                        </details>
+                    </li>
+                <?php endforeach; ?>
+            </ul>
         </div>
-        <ul class="sec-6-portfolio-details-6__list list-unstyled mb-0">
-            <li class="sec-6-portfolio-details-6__row at_fade_anim" data-fade-from="bottom" data-delay=".1">
-                <details class="sec-6-portfolio-details-6__item" open>
-                    <summary class="sec-6-portfolio-details-6__head">
-                        <span class="sec-6-portfolio-details-6__q fw-500 neutral-950">What was the project scope?</span>
-                        <span class="sec-6-portfolio-details-6__icon" aria-hidden="true">
-                            <span class="sec-6-portfolio-details-6__icon-bar"></span>
-                            <span class="sec-6-portfolio-details-6__icon-bar sec-6-portfolio-details-6__icon-bar--v"></span>
-                        </span>
-                    </summary>
-                    <div class="sec-6-portfolio-details-6__body">
-                        <p class="fz-font-md neutral-500 mb-0">A full brand identity system covering logotype, color palette, typography, packaging, and a responsive digital toolkit — designed to scale across editorial, retail, and digital touchpoints.</p>
-                    </div>
-                </details>
-            </li>
-            <li class="sec-6-portfolio-details-6__row at_fade_anim" data-fade-from="bottom" data-delay=".15">
-                <details class="sec-6-portfolio-details-6__item">
-                    <summary class="sec-6-portfolio-details-6__head">
-                        <span class="sec-6-portfolio-details-6__q fw-500 neutral-950">How long did the project take?</span>
-                        <span class="sec-6-portfolio-details-6__icon" aria-hidden="true">
-                            <span class="sec-6-portfolio-details-6__icon-bar"></span>
-                            <span class="sec-6-portfolio-details-6__icon-bar sec-6-portfolio-details-6__icon-bar--v"></span>
-                        </span>
-                    </summary>
-                    <div class="sec-6-portfolio-details-6__body">
-                        <p class="fz-font-md neutral-500 mb-0">Six weeks from discovery to delivery, with two intensive sprint phases: brand concept (weeks 1-3) and asset production (weeks 4-6).</p>
-                    </div>
-                </details>
-            </li>
-            <li class="sec-6-portfolio-details-6__row at_fade_anim" data-fade-from="bottom" data-delay=".2">
-                <details class="sec-6-portfolio-details-6__item">
-                    <summary class="sec-6-portfolio-details-6__head">
-                        <span class="sec-6-portfolio-details-6__q fw-500 neutral-950">What deliverables were included?</span>
-                        <span class="sec-6-portfolio-details-6__icon" aria-hidden="true">
-                            <span class="sec-6-portfolio-details-6__icon-bar"></span>
-                            <span class="sec-6-portfolio-details-6__icon-bar sec-6-portfolio-details-6__icon-bar--v"></span>
-                        </span>
-                    </summary>
-                    <div class="sec-6-portfolio-details-6__body">
-                        <p class="fz-font-md neutral-500 mb-0">Brand guidelines (60-page PDF), full asset library, packaging templates, editorial layouts, responsive web prototype, and a hand-off package for internal teams.</p>
-                    </div>
-                </details>
-            </li>
-            <li class="sec-6-portfolio-details-6__row at_fade_anim" data-fade-from="bottom" data-delay=".25">
-                <details class="sec-6-portfolio-details-6__item">
-                    <summary class="sec-6-portfolio-details-6__head">
-                        <span class="sec-6-portfolio-details-6__q fw-500 neutral-950">How is the system adapted across markets?</span>
-                        <span class="sec-6-portfolio-details-6__icon" aria-hidden="true">
-                            <span class="sec-6-portfolio-details-6__icon-bar"></span>
-                            <span class="sec-6-portfolio-details-6__icon-bar sec-6-portfolio-details-6__icon-bar--v"></span>
-                        </span>
-                    </summary>
-                    <div class="sec-6-portfolio-details-6__body">
-                        <p class="fz-font-md neutral-500 mb-0">The wordmark stays consistent across markets while editorial tone shifts subtly: more muted in European editorial, more vibrant in North American campaigns. Typography and layout grids remain identical.</p>
-                    </div>
-                </details>
-            </li>
-            <li class="sec-6-portfolio-details-6__row at_fade_anim" data-fade-from="bottom" data-delay=".3">
-                <details class="sec-6-portfolio-details-6__item">
-                    <summary class="sec-6-portfolio-details-6__head">
-                        <span class="sec-6-portfolio-details-6__q fw-500 neutral-950">What was the biggest design challenge?</span>
-                        <span class="sec-6-portfolio-details-6__icon" aria-hidden="true">
-                            <span class="sec-6-portfolio-details-6__icon-bar"></span>
-                            <span class="sec-6-portfolio-details-6__icon-bar sec-6-portfolio-details-6__icon-bar--v"></span>
-                        </span>
-                    </summary>
-                    <div class="sec-6-portfolio-details-6__body">
-                        <p class="fz-font-md neutral-500 mb-0">Balancing avant-garde editorial expression with commercial accessibility — a system bold enough to stand out, refined enough to scale across packaging, retail, and digital without losing voice.</p>
-                    </div>
-                </details>
-            </li>
-        </ul>
-    </div>
-</section>
+    </section>
+<?php endif; ?>
 <?php if ($orisa_pd6_has_next) : ?>
     <section class="sec-7-portfolio-details-6 overflow-hidden pt-100 pb-100">
         <div class="container">
