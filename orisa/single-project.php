@@ -15,6 +15,10 @@ $debt_amount = function_exists('get_field') ? get_field('debt_amount', $p_id) : 
 $amount = function_exists('get_field') ? get_field('amount', $p_id) : '';
 $duration = function_exists('get_field') ? (string) get_field('duration', $p_id) : '';
 $situation = function_exists('get_field') ? (string) get_field('situation', $p_id) : '';
+$sit_images = function_exists('get_field') ? get_field('situation_images', $p_id) : '';
+if (!is_array($sit_images)) {
+    $sit_images = [];
+}
 $result = function_exists('get_field') ? (string) get_field('result', $p_id) : '';
 $result_text = function_exists('get_field') ? (string) get_field('result_text', $p_id) : '';
 $nuance = function_exists('get_field') ? (string) get_field('nuance', $p_id) : '';
@@ -160,6 +164,15 @@ if (is_array($orisa_pt_terms) && $orisa_pt_terms !== []) {
                                         </div>
                                         <h2 class="sec-2-portfolio-details-4__chapter-title fw-500 neutral-950 at_fade_anim" data-fade-from="bottom" data-delay=".1">С какой проблемой обратился клиент</h2>
                                         <p class="sec-2-portfolio-details-4__chapter-body fz-font-md neutral-500 at_fade_anim" data-fade-from="bottom" data-delay=".15"><?php echo esc_html($situation); ?></p>
+                                        <?php if ($sit_images !== []) : ?>
+                                            <div class="sec-2-portfolio-details-4__inline-grid">
+                                                <?php foreach (array_slice($sit_images, 0, 2) as $orisa_si) : ?>
+                                                    <figure class="sec-2-portfolio-details-4__inline-fig">
+                                                        <?php echo orisa_img((int) $orisa_si, 'full', ['class' => 'anim-zoomin', 'alt' => 'Иллюстрация к делу', 'loading' => 'lazy']); ?>
+                                                    </figure>
+                                                <?php endforeach; ?>
+                                            </div>
+                                        <?php endif; ?>
                                     </article>
                                 <?php endif; ?>
 
@@ -285,6 +298,112 @@ if (is_array($orisa_pt_terms) && $orisa_pt_terms !== []) {
                 <?php endif; ?>
 
                 <?php
+                $orisa_cta_form = function_exists('get_field') ? (string) get_field('project_cta_form', 'option') : '';
+                $orisa_cta_phone = function_exists('get_field') ? (string) get_field('phone', 'option') : '';
+                $orisa_cta_phone_href = function_exists('get_field') ? (string) get_field('phone_href', 'option') : '';
+                $orisa_cta_addr = function_exists('get_field') ? (string) get_field('address', 'option') : '';
+                $orisa_cta_email = '';
+                $orisa_cta_emails = function_exists('get_field') ? get_field('emails', 'option') : '';
+                if (is_array($orisa_cta_emails)) {
+                    foreach ($orisa_cta_emails as $orisa_cta_em) {
+                        if (is_array($orisa_cta_em) && !empty($orisa_cta_em['email'])) {
+                            $orisa_cta_email = (string) $orisa_cta_em['email'];
+                            break;
+                        }
+                    }
+                }
+                $orisa_cta_soc = [
+                    ['soc_whatsapp', 'WhatsApp', 'whatsapp'],
+                    ['soc_telegram', 'Telegram', 'telegram'],
+                    ['soc_max', 'MAX', 'max'],
+                    ['soc_vk', 'ВКонтакте', 'vk'],
+                ];
+                ?>
+                <div class="sec-4-about bg-neutral-0 pt-120 pb-120" id="project-cta">
+                    <div class="container">
+                        <div class="row g-4 align-items-end mb-50">
+                            <div class="col-lg-6">
+                                <span class="at-btn common-black bg-transparent mb-10 rounded-0 p-0">
+                                    <span class="text-uppercase">
+                                        <span class="text-1">Свяжитесь с нами</span>
+                                        <span class="text-2">Свяжитесь с нами</span>
+                                    </span>
+                                    <i>
+                                        <svg width="11" height="11" viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M0.21967 9.40717C-0.0732232 9.70006 -0.0732232 10.1749 0.21967 10.4678C0.512563 10.7607 0.987437 10.7607 1.28033 10.4678L0.21967 9.40717ZM10.6875 0.75C10.6875 0.335786 10.3517 2.97145e-09 9.9375 1.50485e-07L3.1875 -2.70983e-07C2.77329 -2.70983e-07 2.4375 0.335786 2.4375 0.75C2.4375 1.16421 2.77329 1.5 3.1875 1.5H9.1875V7.5C9.1875 7.91421 9.52329 8.25 9.9375 8.25C10.3517 8.25 10.6875 7.91421 10.6875 7.5L10.6875 0.75ZM0.75 9.9375L1.28033 10.4678L10.4678 1.28033L9.9375 0.75L9.40717 0.21967L0.21967 9.40717L0.75 9.9375Z" fill="currentColor" />
+                                        </svg>
+                                        <svg width="11" height="11" viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M0.21967 9.40717C-0.0732232 9.70006 -0.0732232 10.1749 0.21967 10.4678C0.512563 10.7607 0.987437 10.7607 1.28033 10.4678L0.21967 9.40717ZM10.6875 0.75C10.6875 0.335786 10.3517 2.97145e-09 9.9375 1.50485e-07L3.1875 -2.70983e-07C2.77329 -2.70983e-07 2.4375 0.335786 2.4375 0.75C2.4375 1.16421 2.77329 1.5 3.1875 1.5H9.1875V7.5C9.1875 7.91421 9.52329 8.25 9.9375 8.25C10.3517 8.25 10.6875 7.91421 10.6875 7.5L10.6875 0.75ZM0.75 9.9375L1.28033 10.4678L10.4678 1.28033L9.9375 0.75L9.40717 0.21967L0.21967 9.40717L0.75 9.9375Z" fill="currentColor" />
+                                        </svg>
+                                    </i>
+                                </span>
+                                <h2 class="h1 alt-section-title fz-ds-1 lh-1 fw-500 mb-30 reveal-text mb-0">Есть похожая ситуация?</h2>
+                            </div>
+                            <div class="col-xxl-4 col-lg-6 col-md-8 ms-lg-auto text-lg-end">
+                                <p class="fz-font-lg pt-lg-4 mb-0">Расскажите о своей ситуации. <br>
+                                    Ответим в течение 1–2 рабочих дней.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xxl-4 col-lg-5">
+                                <div class="row g-4">
+                                    <div class="col-lg-12 col-md-6">
+                                        <div class="d-flex gap-4">
+                                            <div class="icon">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40" fill="none">
+                                                    <path d="M20 40V20H0L20 0L40 20V40H20Z" fill="currentColor" />
+                                                    <path d="M0 20L20 40H0V20Z" fill="currentColor" />
+                                                </svg>
+                                            </div>
+                                            <div>
+                                                <h3 class="h6 fw-600">Контакты</h3>
+                                                <div class="d-flex flex-wrap gap-md-5 gap-4">
+                                                    <span class="fz-font-md neutral-500">
+                                                        <?php if ($orisa_cta_phone !== '') : ?>
+                                                            Телефон: <span class="neutral-900"><a href="<?php echo esc_attr($orisa_cta_phone_href !== '' ? $orisa_cta_phone_href : 'tel:' . preg_replace('/[^+\d]/', '', $orisa_cta_phone)); ?>"><?php echo esc_html($orisa_cta_phone); ?></a></span>
+                                                            <br class="d-block">
+                                                        <?php endif; ?>
+                                                        <?php if ($orisa_cta_email !== '') : ?>
+                                                            Почта: <span class="neutral-900"><a href="<?php echo esc_attr('mailto:' . $orisa_cta_email); ?>"><?php echo esc_html($orisa_cta_email); ?></a></span>
+                                                        <?php endif; ?>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xxl-6 col-lg-8 mx-auto">
+                                        <ul class="at-social-list list-unstyled d-flex flex-wrap gap-md-4 gap-3 pt-50">
+                                            <?php foreach ($orisa_cta_soc as $orisa_cta_s) : ?>
+                                                <?php $orisa_cta_url = function_exists('get_field') ? (string) get_field($orisa_cta_s[0], 'option') : ''; ?>
+                                                <?php if ($orisa_cta_url !== '') : ?>
+                                                    <li>
+                                                        <a href="<?php echo esc_url($orisa_cta_url); ?>" target="_blank" rel="noopener" class="at-social__link d-flex align-items-center gap-2" aria-label="<?php echo esc_attr($orisa_cta_s[1]); ?>">
+                                                            <?php echo orisa_soc_icon($orisa_cta_s[2]); ?>
+                                                            <span class="fw-500"><?php echo esc_html($orisa_cta_s[1]); ?></span>
+                                                        </a>
+                                                    </li>
+                                                <?php endif; ?>
+                                            <?php endforeach; ?>
+                                        </ul>
+                                    </div>
+                                    <div class="col-lg-3 col-md-4"></div>
+                                </div>
+                            </div>
+                            <div class="col-xxl-8 col-lg-7 ms-auto pt-lg-0 pt-30">
+                                <?php if ($orisa_cta_form !== '') : ?>
+                                    <?php echo do_shortcode($orisa_cta_form); ?>
+                                <?php elseif ($orisa_cta_phone !== '') : ?>
+                                    <a class="at-btn" href="<?php echo esc_attr($orisa_cta_phone_href !== '' ? $orisa_cta_phone_href : 'tel:' . preg_replace('/[^+\d]/', '', $orisa_cta_phone)); ?>"><?php echo esc_html($orisa_cta_phone); ?></a>
+                                <?php endif; ?>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <?php
                 $orisa_rel_args = [
                     'post_type'      => 'project',
                     'posts_per_page' => 3,
@@ -332,39 +451,6 @@ if (is_array($orisa_pt_terms) && $orisa_pt_terms !== []) {
                         </div>
                     </section>
                 <?php endif; ?>
-
-                <?php
-                $orisa_cta_form = function_exists('get_field') ? (string) get_field('project_cta_form', 'option') : '';
-                $orisa_cta_phone = function_exists('get_field') ? (string) get_field('phone', 'option') : '';
-                $orisa_cta_wa = function_exists('get_field') ? (string) get_field('whatsapp_url', 'option') : '';
-                $orisa_cta_tg = function_exists('get_field') ? (string) get_field('soc_telegram', 'option') : '';
-                ?>
-                <section id="project-cta" class="sec-6-home-1 mx-lg-3 mx-2 bg-black pt-100 pb-100 rounded-5 changeless overflow-hidden">
-                    <div class="container">
-                        <div class="row g-4 align-items-start">
-                            <div class="col-lg-6">
-                                <h2 class="alt-section-title lh-1 mb-10 reveal-text text-white">Есть похожая ситуация?</h2>
-                                <p class="mg-portfolio-dec mb-50 text-white mb-0">Разберём вашу ситуацию, оценим документы и объясним, какие законные варианты решения доступны в вашем случае.</p>
-                                <div class="d-flex flex-wrap gap-3">
-                                    <?php if ($orisa_cta_phone !== '') : ?>
-                                        <a class="at-btn" href="<?php echo esc_attr(str_starts_with($orisa_cta_phone, 'tel:') ? $orisa_cta_phone : 'tel:' . preg_replace('/[^+\d]/', '', $orisa_cta_phone)); ?>"><?php echo esc_html($orisa_cta_phone); ?></a>
-                                    <?php endif; ?>
-                                    <?php if ($orisa_cta_wa !== '') : ?>
-                                        <a class="at-btn" href="<?php echo esc_url($orisa_cta_wa); ?>" target="_blank" rel="noopener">WhatsApp <?php echo orisa_soc_icon('whatsapp', 16); ?></a>
-                                    <?php endif; ?>
-                                    <?php if ($orisa_cta_tg !== '') : ?>
-                                        <a class="at-btn" href="<?php echo esc_url($orisa_cta_tg); ?>" target="_blank" rel="noopener">Telegram <?php echo orisa_soc_icon('telegram', 16); ?></a>
-                                    <?php endif; ?>
-                                </div>
-                            </div>
-                            <?php if ($orisa_cta_form !== '') : ?>
-                                <div class="col-lg-6">
-                                    <?php echo do_shortcode($orisa_cta_form); ?>
-                                </div>
-                            <?php endif; ?>
-                        </div>
-                    </div>
-                </section>
 
 <?php
 get_footer();

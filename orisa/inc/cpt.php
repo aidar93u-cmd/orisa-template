@@ -139,6 +139,15 @@ function orisa_cpt_fields() {
                 'rows'  => 4,
             ],
             [
+                'key'           => 'field_orisa_project_situation_images',
+                'label'         => 'Иллюстрации к ситуации (до 2)',
+                'name'          => 'situation_images',
+                'type'          => 'gallery',
+                'return_format' => 'id',
+                'max'           => 2,
+                'instructions'  => 'Нейтральные предметные фото. Не портреты клиентов.',
+            ],
+            [
                 'key'          => 'field_orisa_project_debt_items',
                 'label'        => 'Состав долга',
                 'name'         => 'debt_items',
@@ -170,7 +179,7 @@ function orisa_cpt_fields() {
                 'layout'       => 'table',
                 'button_label' => 'Добавить этап',
                 'sub_fields'   => [
-                    ['key' => 'field_orisa_project_tl_month', 'label' => 'Месяц', 'name' => 'month', 'type' => 'text'],
+                    ['key' => 'field_orisa_project_tl_month', 'label' => 'Месяц и год', 'name' => 'month', 'type' => 'text'],
                     ['key' => 'field_orisa_project_tl_event', 'label' => 'Событие', 'name' => 'event', 'type' => 'text'],
                 ],
             ],
