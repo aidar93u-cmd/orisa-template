@@ -3,7 +3,6 @@ defined('ABSPATH') || exit;
 ?>
             <!-- Footer placeholder to maintain scroll height -->
             <div class="footer-placeholder"></div>
-        </div>
         <!-- Footer 2 -->
         <footer class="footer-fixed-bottom bg-neutral-950 changeless">
             <div class="at-footer-area mp-footer-style mp-footer-style-2 pt-120 pb-0">
