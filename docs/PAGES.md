@@ -6,14 +6,14 @@ hide_*. Шаблон: page.php (Flexible), front-page.php, home/archive/single/s
 
 ## Главные (front-page.php)
 
-- `index` → hero-vr, logo-marquee, [ДОБОР: sec-4-home-5], [ДОБОР: sec-6-home-1], [ДОБОР: at-sec7], [ДОБОР: at-sec8], posts-preview. header: transparent; footer: standard.
-- `index-3` → hero-proof, logo-marquee, [ДОБОР: section-fix ×2, home-3-section-10, pt-120 подборки]. header: default; footer: fixed-bottom (в оригинале `<footer>` без класса — отрисуется fixed-bottom; сверить визуально).
-- `index-4` → hero-brand, [ДОБОР: sec-3/4/5-home-4 + 3 контейнера]. header: default; footer: standard.
-- `index-5` → hero-photos, portfolio-grid, [ДОБОР: sec-4-home-5 + 5 контейнеров]. header: default; footer: standard.
-- `index-7` → hero-vr (matter_fx вкл), [ДОБОР: about-me-slider, sec-7/9-home-7, контейнеры]. header: header-7→default; footer: footer-7 (фолбэк fixed-bottom + комментарий).
-- `index-9` → hero-brands, stats, portfolio-grid, [ДОБОР: sec-5/6/7-home-9, row, контейнеры], logo-marquee. footer: footer-9 (фолбэк).
-- `index-13` → hero-slider, stats-wide, [ДОБОР: sec-3/4/5/6-home-13], testimonials, [ДОБОР: sec-8 + mg-gallery]. footer: footer-13 (фолбэк).
-- `index-14` → hero-counter, [ДОБОР: sec-2/3/4(masonry+tabs)/5/6/8/9-home-14], testimonials. footer: footer-14 (фолбэк).
+- `index` → vr, logo-marquee, [ДОБОР: sec-4-home-5], [ДОБОР: sec-6-home-1], [ДОБОР: at-sec7], [ДОБОР: at-sec8], posts-preview. header: transparent; footer: standard.
+- `index-3` → review, logo-marquee, [ДОБОР: section-fix ×2, home-3-section-10, pt-120 подборки]. header: default; footer: fixed-bottom (в оригинале `<footer>` без класса — отрисуется fixed-bottom; сверить визуально).
+- `index-4` → brand, [ДОБОР: sec-3/4/5-home-4 + 3 контейнера]. header: default; footer: standard.
+- `index-5` → photos, portfolio-grid, [ДОБОР: sec-4-home-5 + 5 контейнеров]. header: default; footer: standard.
+- `index-7` → vr (matter_fx вкл), [ДОБОР: about-me-slider, sec-7/9-home-7, контейнеры]. header: header-7→default; footer: footer-7 (фолбэк fixed-bottom + комментарий).
+- `index-9` → brands, stats, portfolio-grid, [ДОБОР: sec-5/6/7-home-9, row, контейнеры], logo-marquee. footer: footer-9 (фолбэк).
+- `index-13` → slider, stats-wide, [ДОБОР: sec-3/4/5/6-home-13], testimonials, [ДОБОР: sec-8 + mg-gallery]. footer: footer-13 (фолбэк).
+- `index-14` → counter, [ДОБОР: sec-2/3/4(masonry+tabs)/5/6/8/9-home-14], testimonials. footer: footer-14 (фолбэк).
 
 ## Внутренние (page.php)
 

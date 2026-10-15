@@ -8,13 +8,13 @@
 
 | Слаг | Русское название | Секции оригинала | Страницы (27) | Варианты и почему допустимо | JS / плагины | Тип |
 |---|---|---|---|---|---|---|
-| `hero-proof` | Герой с отзывом | `.sec-1-home-3` + декор | index-3 | без вариантов | M16,39,48–50 | блок |
-| `hero-brand` | Герой с брендом | `.sec-1-home-4` | index-4 | без вариантов | M16,39 | блок |
-| `hero-photos` | Герой с фото | `.sec-1-home-5` | index-5 | без вариантов | M16 | блок |
-| `hero-vr` | Герой VR | `.sec-1-home-7__*` | index, index-7 | без вариантов; тумблер «интерактив matter» (только index-7) | M16 + matter/throwable условно | блок |
-| `hero-brands` | Герой с брендами | `.sec-1-home-9__row*` | index-9 | без вариантов | M16 + divider (M59) | блок |
-| `hero-slider` | Герой-слайдер | `.sec-1-home-13__*` | index-13 | без вариантов | M16 | блок |
-| `hero-counter` | Герой со счётчиком | `.sec-1-home-14__*` | index-14 | без вариантов | M16 + tabs/masonry (M57b) | блок |
+| `review` | Герой с отзывом | `.sec-1-home-3` + декор | index-3 | без вариантов | M16,39,48–50 | блок |
+| `brand` | Герой с брендом | `.sec-1-home-4` | index-4 | без вариантов | M16,39 | блок |
+| `photos` | Герой с фото | `.sec-1-home-5` | index-5 | без вариантов | M16 | блок |
+| `vr` | Герой VR | `.sec-1-home-7__*` | index, index-7 | без вариантов; тумблер «интерактив matter» (только index-7) | M16 + matter/throwable условно | блок |
+| `brands` | Герой с брендами | `.sec-1-home-9__row*` | index-9 | без вариантов | M16 + divider (M59) | блок |
+| `slider` | Герой-слайдер | `.sec-1-home-13__*` | index-13 | без вариантов | M16 | блок |
+| `counter` | Герой со счётчиком | `.sec-1-home-14__*` | index-14 | без вариантов | M16 + tabs/masonry (M57b) | блок |
 | `page-hero` | Шапка внутренней страницы | `container + .sec-1-{404,blog-details,contact,faqs,services,portfolio…}` | все внутр. | variant: набор классов шапки по типу страницы (структура одна: container + заголовок + крошки) | — | блок |
 | `logo-marquee` | Бегущая строка | `.carouselTicker`, `.moving-gallery`, `.at-brand-scroll`, `at-brand-item` ряды | почти все home, about-1, product→(нет) | variant: лента/галерея/бренды — один механизм тикера, differs модификаторами | M46 + carouselTicker | блок |
 | `portfolio-grid` | Портфолио | `.sec-4-home-9.filter-portfolio`, `.sec-2-home-5.portfolio-area`, сетки portfolio-2/3 | index-9, index-5, portfolio-2/3 | variant: с фильтром / сетка (каркас filter+grid один, фильтр скрывается полем) | M55 initPortfolioFilter + isotope | блок |
@@ -38,7 +38,7 @@
 Options); блог-архив/статья/поиск (нативные home/archive/single/search, этап 5); 404 (шаблон + Options,
 matter-флаг ставит сам шаблон); магазин (удалён); слайдшоу-портфолио (удалены в 1а).
 
-Флаги условных скриптов ставят блоки: `hero-vr` (matter), `pricing` (pricing-3), `services-list`
+Флаги условных скриптов ставят блоки: `vr` (matter), `pricing` (pricing-3), `services-list`
 (services-4), `service-details` (services-details-4), `coming-soon` (matter). Остальное — общий набор.
 
 Открытое к созданию: точные `variant`-списки сверю с разметкой при создании каждого блока; спорные
