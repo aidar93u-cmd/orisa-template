@@ -26,3 +26,11 @@
 - `cta-band`: только sd4-cta; `sd4-next` исключён (межстраничная навигация — вотчина service-details).
 - `contact`: обёртка формы — div (CF7 рендерит свой form); кнопка — raw button (тег [submit] не держит спаны); соцсети — generic-стрелка (сети из Options, западные глифы не маппятся); VK исключён (в Options «только подвал»).
 - CF7-шаблон зафиксирован в docs/CF7-FORMS.md.
+
+## Партия 5
+- `coming-soon`: формы в оригинале нет (только поиск в шапке) — поле CF7 выводится после ряда только если заполнено; throwable-логотипы сцены — декор через ORISA_URI (прецедент hero-home-7).
+- `posts-preview`: карточки из WP_Query; `data-category="@@category"` опущен (плейсхолдер сборщика); `id="blog"` — через orisa_anchor().
+- `media-text`: построен по services-3 process-card; about-1 journey (block-journey + journey-list) несовместим — отдельным блоком позже.
+- `services-3`: только сетка sec-2-services; вариант раскладки карточки — по позиции (1–4 по кругу, в оригинале 4 раскладки без выбора); третья карточка делит один Image ID на верх+низ.
+- `portfolio-details-6`: sec-4 (цифры) и sec-6 (FAQ) оставлены статикой — ДОЛГ: вынести в поля/повторители в партии 6.
+- `services-details-base`: home-3-section-12 и футер из диапазона исключены (чужие блоки).
