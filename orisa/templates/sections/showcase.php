@@ -42,6 +42,23 @@ if (function_exists('have_rows') && have_rows('items')) {
         ];
     }
 }
+if ($orisa_s_items === [] && function_exists('orisa_project_posts')) {
+    // Фолбэк: проекты как истории успеха (результат — цитата, клиент — автор).
+    foreach (orisa_project_posts(6) as $orisa_s_pr) {
+        $orisa_s_pq = $orisa_s_pr['description'] !== '' ? $orisa_s_pr['description'] : $orisa_s_pr['title'];
+        if ($orisa_s_pq === '' && $orisa_s_pr['image'] <= 0) {
+            continue;
+        }
+        $orisa_s_items[] = [
+            'quote'    => $orisa_s_pq,
+            'author'   => $orisa_s_pr['client'] !== '' ? $orisa_s_pr['client'] : 'Клиент',
+            'position' => '',
+            'company'  => $orisa_s_pr['service'],
+            'avatar'   => orisa_img($orisa_s_pr['image'], 'full', ['alt' => $orisa_s_pr['title'], 'loading' => 'lazy', 'decoding' => 'async']),
+            'logo'     => '',
+        ];
+    }
+}
 $orisa_s_has_button = (is_array($orisa_s_button) && !empty($orisa_s_button['url']));
 if ($orisa_s_title === '' && $orisa_s_subtitle === '' && !$orisa_s_has_button && $orisa_s_items === []) {
     return;

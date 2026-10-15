@@ -220,6 +220,8 @@ function orisa_project_posts($limit = 4) {
             'title'        => get_the_title($p->ID),
             'description'  => function_exists('get_field') ? (string) get_field('result', $p->ID) : '',
             'link'         => ['url' => get_permalink($p->ID)],
+            'client'       => function_exists('get_field') ? (string) get_field('client', $p->ID) : '',
+            'service'      => is_string($g) ? $g : '',
         ];
     }
     wp_reset_postdata();
