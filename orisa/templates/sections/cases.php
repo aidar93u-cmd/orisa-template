@@ -17,7 +17,10 @@ $button_url = is_array($button_link) && !empty($button_link['url']) ? $button_li
 $button_title = is_array($button_link) && !empty($button_link['title']) ? $button_link['title'] : 'Смотреть все кейсы';
 
 $orisa_cases_rows = [];
-if (function_exists('have_rows') && have_rows('cases')) {
+if (function_exists('orisa_project_posts')) {
+    $orisa_cases_rows = orisa_project_posts(4);
+}
+if ($orisa_cases_rows === [] && function_exists('have_rows') && have_rows('cases')) {
     while (have_rows('cases')) {
         the_row();
         $orisa_cases_img = get_sub_field('image');
@@ -47,9 +50,6 @@ if (function_exists('have_rows') && have_rows('cases')) {
             'link'         => get_sub_field('link'),
         ];
     }
-}
-if ($orisa_cases_rows === []) {
-    $orisa_cases_rows = orisa_project_posts(4);
 }
 ?>
 <?php if ($badge || $title || $subtitle || $button_url || $orisa_cases_rows !== []) : ?>
