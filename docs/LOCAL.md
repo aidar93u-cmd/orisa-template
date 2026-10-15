@@ -13,10 +13,12 @@ npx --yes @wp-playground/cli@latest server --port=9400 --blueprint=./playground/
   установка ACF free, активация темы, русский язык, базовые опции.
 - Остановка: убить процессы node.
 
-## Что уже засеяно (одноразовый сид, файлы сида удалены)
+## Что уже засеяно (одноразовые сиды, файлы удалены)
 
 - Страницы «Главная» (front) и «Блог» (posts); 3 демо-записи с миниатюрами.
-- Главная: hero (vr), marquee (6 логотипов), posts-preview — контент из index.html.
+- Главная: 14 секций в порядке index.html — vr, about-preview, logo-marquee,
+  services-preview, cases, showcase, media-gallery, stats(compact), team-grid,
+  posts-alt, logo-marquee(stena), faq(alt), banner, posts-preview.
 - Все Options: контакты, меню (8), соцсети, футер, offcanvas, блог, 404.
 - Медиатека: ~21 файл (логотипы SVG, hero, аватары, бренды).
 
