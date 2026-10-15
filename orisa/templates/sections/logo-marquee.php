@@ -68,25 +68,6 @@ if ($orisa_marquee_variant !== 'lenta' && $orisa_marquee_variant !== 'galereya' 
             </div>
         </div>
     <?php endif; ?>
-<?php else : ?>
-    <?php if (have_rows('items')) : ?>
-        <div class="at-brand-area at_fade_anim container-2200"<?php echo orisa_anchor(); ?>>
-            <div class="carouselTicker carouselTicker-right position-relative z-1">
-                <ul class="carouselTicker__list scroll-move-right">
-                    <?php while (have_rows('items')) : the_row(); ?>
-                        <?php
-                        $orisa_marquee_img = orisa_img(get_sub_field('image'), 'full', ['alt' => 'logo-brand']);
-                        if ($orisa_marquee_img === '') {
-                            continue;
-                        }
-                        $orisa_marquee_link = get_sub_field('link');
-                        $orisa_marquee_url = (is_array($orisa_marquee_link) && !empty($orisa_marquee_link['url'])) ? $orisa_marquee_link['url'] : '';
-                        $orisa_marquee_target = (is_array($orisa_marquee_link) && !empty($orisa_marquee_link['target'])) ? ' target="' . esc_attr($orisa_marquee_link['target']) . '" rel="noopener"' : '';
-                        ?>
-                        <li class="carouselTicker__item">
-                            <div class="brand-item dark-mode-invert">
-                                <?php if ($orisa_marquee_url !== '') : ?>
-                                    <a href="<?php echo esc_url($orisa_marquee_url); ?>"<?php echo $orisa_marquee_target; ?>><?php echo $orisa_marquee_img; ?></a>
 <?php elseif ($orisa_marquee_variant === 'stena') : ?>
     <?php if (have_rows('items')) : ?>
         <div class="at-brand-area container-2200 border-top-0"<?php echo orisa_anchor(); ?>>
@@ -110,6 +91,25 @@ if ($orisa_marquee_variant !== 'lenta' && $orisa_marquee_variant !== 'galereya' 
             </div>
         </div>
     <?php endif; ?>
+<?php else : ?>
+    <?php if (have_rows('items')) : ?>
+        <div class="at-brand-area at_fade_anim container-2200"<?php echo orisa_anchor(); ?>>
+            <div class="carouselTicker carouselTicker-right position-relative z-1">
+                <ul class="carouselTicker__list scroll-move-right">
+                    <?php while (have_rows('items')) : the_row(); ?>
+                        <?php
+                        $orisa_marquee_img = orisa_img(get_sub_field('image'), 'full', ['alt' => 'logo-brand']);
+                        if ($orisa_marquee_img === '') {
+                            continue;
+                        }
+                        $orisa_marquee_link = get_sub_field('link');
+                        $orisa_marquee_url = (is_array($orisa_marquee_link) && !empty($orisa_marquee_link['url'])) ? $orisa_marquee_link['url'] : '';
+                        $orisa_marquee_target = (is_array($orisa_marquee_link) && !empty($orisa_marquee_link['target'])) ? ' target="' . esc_attr($orisa_marquee_link['target']) . '" rel="noopener"' : '';
+                        ?>
+                        <li class="carouselTicker__item">
+                            <div class="brand-item dark-mode-invert">
+                                <?php if ($orisa_marquee_url !== '') : ?>
+                                    <a href="<?php echo esc_url($orisa_marquee_url); ?>"<?php echo $orisa_marquee_target; ?>><?php echo $orisa_marquee_img; ?></a>
 <?php else : ?>
                                     <?php echo $orisa_marquee_img; ?>
                                 <?php endif; ?>

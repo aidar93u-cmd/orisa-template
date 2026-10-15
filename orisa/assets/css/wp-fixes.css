@@ -1,1 +1,19 @@
-/* Orisa WP fixes: ��������� � WP-����� �������� ����� (���� 4+). ���� �����. */
+/* Orisa WP fixes: конфликты с WP и поведение без gsap.
+   1. footer-fixed-bottom задуман под GSAP ScrollSmoother reveal (main.js §07),
+      которого нет в стеке (gsap только на удалённой agina-странице).
+      Без него footer висит fixed-оверлеем поверх контента — делаем обычный flow-футер. */
+.footer-fixed-bottom {
+    position: static;
+}
+.footer-placeholder {
+    display: none;
+}
+/* Админ-бар поверх фиксированной шапки для залогиненных. */
+body.admin-bar .at-header-area {
+    top: 32px;
+}
+@media (max-width: 782px) {
+    body.admin-bar .at-header-area {
+        top: 46px;
+    }
+}

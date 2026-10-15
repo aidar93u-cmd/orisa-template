@@ -15,10 +15,12 @@ $button = get_sub_field('button');
 $button_url = is_array($button) && !empty($button['url']) ? $button['url'] : '';
 $button_title = is_array($button) && !empty($button['title']) ? $button['title'] : '';
 $title_agency = get_sub_field('title_agency');
-$has_thumbs = have_rows('thumbs');
 $brands_title = get_sub_field('brands_title');
-$has_brands = have_rows('brands');
 $star_image = get_sub_field('star_image');
+// ВАЖНО: have_rows() нельзя вызывать ДО чтения скаляров — ломает контекст get_sub_field.
+// Поэтому все проверки repeater-рядов — только после чтения всех скалярных полей.
+$has_thumbs = have_rows('thumbs');
+$has_brands = have_rows('brands');
 $has_services = have_rows('services');
 $has_bottom = $brands_title || $has_brands || $star_image || $has_services;
 ?>

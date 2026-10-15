@@ -11,6 +11,7 @@ defined('ABSPATH') || exit;
 $coords = get_sub_field('coords');
 $title = get_sub_field('title');
 $subtitle = get_sub_field('subtitle');
+$hero_image = get_sub_field('hero_image');
 $cta = get_sub_field('cta_button');
 $cta_url = is_array($cta) && !empty($cta['url']) ? $cta['url'] : '';
 $cta_title = is_array($cta) && !empty($cta['title']) ? $cta['title'] : '';
@@ -36,7 +37,7 @@ if (get_sub_field('matter_fx')) {
 
     <div class="sec-1-home-7__img-wrap">
         <div class="anim-zoomin">
-            <?php echo orisa_img(get_sub_field('hero_image'), 'full', ['class' => 'sec-1-home-7__img']); ?>
+            <?php echo orisa_img($hero_image, 'full', ['class' => 'sec-1-home-7__img']); ?>
         </div>
     </div>
 
