@@ -92,6 +92,13 @@ function orisa_options_contacts() {
                     ['key' => 'field_orisa_opt_email_val', 'label' => 'Почта', 'name' => 'email', 'type' => 'email'],
                 ],
             ],
+            [
+                'key'          => 'field_orisa_opt_project_form',
+                'label'        => 'Форма для страниц дел (шорткод CF7)',
+                'name'         => 'project_cta_form',
+                'type'         => 'text',
+                'instructions' => 'Например: [contact-form-7 id="123" title="Разбор ситуации"]. Пусто — форма не выводится, останутся телефон и мессенджеры.',
+            ],
         ],
         'location' => [
             [

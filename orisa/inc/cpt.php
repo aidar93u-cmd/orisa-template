@@ -89,14 +89,14 @@ function orisa_cpt_fields() {
                 'type'  => 'text',
             ],
             [
-                'key'   => 'field_orisa_project_client',
-                'label' => 'Клиент',
-                'name'  => 'client',
-                'type'  => 'text',
+                'key'           => 'field_orisa_project_debt',
+                'label'         => 'Сумма долга (число)',
+                'name'          => 'debt_amount',
+                'type'          => 'number',
             ],
             [
                 'key'           => 'field_orisa_project_amount',
-                'label'         => 'Сумма списания (число)',
+                'label'         => 'Списано (число)',
                 'name'          => 'amount',
                 'type'          => 'number',
                 'instructions'  => 'Число для data-count (анимация — main.js, Odometer counter).',
@@ -108,11 +108,81 @@ function orisa_cpt_fields() {
                 'type'  => 'text',
             ],
             [
+                'key'   => 'field_orisa_project_situation',
+                'label' => 'Ситуация клиента',
+                'name'  => 'situation',
+                'type'  => 'textarea',
+                'rows'  => 4,
+            ],
+            [
+                'key'          => 'field_orisa_project_debt_items',
+                'label'        => 'Состав долга',
+                'name'         => 'debt_items',
+                'type'         => 'repeater',
+                'layout'       => 'table',
+                'button_label' => 'Добавить строку',
+                'sub_fields'   => [
+                    ['key' => 'field_orisa_project_debt_label', 'label' => 'Статья', 'name' => 'label', 'type' => 'text'],
+                    ['key' => 'field_orisa_project_debt_sum', 'label' => 'Сумма (число)', 'name' => 'sum', 'type' => 'number'],
+                ],
+            ],
+            [
+                'key'          => 'field_orisa_project_work_steps',
+                'label'        => 'Работа юристов (шаги)',
+                'name'         => 'work_steps',
+                'type'         => 'repeater',
+                'layout'       => 'block',
+                'button_label' => 'Добавить шаг',
+                'sub_fields'   => [
+                    ['key' => 'field_orisa_project_step_title', 'label' => 'Шаг', 'name' => 'title', 'type' => 'text'],
+                    ['key' => 'field_orisa_project_step_text', 'label' => 'Что сделали', 'name' => 'text', 'type' => 'textarea', 'rows' => 2],
+                ],
+            ],
+            [
+                'key'          => 'field_orisa_project_timeline',
+                'label'        => 'Этапы процедуры (месяцы без года)',
+                'name'         => 'timeline',
+                'type'         => 'repeater',
+                'layout'       => 'table',
+                'button_label' => 'Добавить этап',
+                'sub_fields'   => [
+                    ['key' => 'field_orisa_project_tl_month', 'label' => 'Месяц', 'name' => 'month', 'type' => 'text'],
+                    ['key' => 'field_orisa_project_tl_event', 'label' => 'Событие', 'name' => 'event', 'type' => 'text'],
+                ],
+            ],
+            [
                 'key'   => 'field_orisa_project_result',
-                'label' => 'Результат (строка деталей)',
+                'label' => 'Результат (коротко, для карточек)',
                 'name'  => 'result',
                 'type'  => 'textarea',
                 'rows'  => 2,
+            ],
+            [
+                'key'   => 'field_orisa_project_result_text',
+                'label' => 'Итог дела (текст для страницы)',
+                'name'  => 'result_text',
+                'type'  => 'textarea',
+                'rows'  => 4,
+            ],
+            [
+                'key'   => 'field_orisa_project_nuance',
+                'label'  => 'Особенность дела (необязательно)',
+                'name'  => 'nuance',
+                'type'  => 'textarea',
+                'rows'  => 3,
+            ],
+            [
+                'key'   => 'field_orisa_project_quote',
+                'label' => 'Отзыв клиента (только настоящий, необязательно)',
+                'name'  => 'quote',
+                'type'  => 'textarea',
+                'rows'  => 3,
+            ],
+            [
+                'key'   => 'field_orisa_project_quote_author',
+                'label' => 'Автор отзыва (как подписан, необязательно)',
+                'name'  => 'quote_author',
+                'type'  => 'text',
             ],
         ],
         'location' => [
@@ -121,4 +191,87 @@ function orisa_cpt_fields() {
             ],
         ],
     ]);
+    // Служебные поля: только админка, на фронт НЕ выводить (непубличная информация).
+    acf_add_local_field_group([
+        'key'    => 'group_orisa_cpt_project_private',
+        'title'  => 'Служебное (не публикуется)',
+        'fields' => [
+            [
+                'key'           => 'field_orisa_project_case_no',
+                'label'         => 'Номер дела',
+                'name'          => 'case_number',
+                'type'          => 'text',
+                'instructions'  => 'Только для поиска в админке. Не выводится на сайте.',
+            ],
+            [
+                'key'           => 'field_orisa_project_client_name',
+                'label'         => 'ФИО клиента',
+                'name'          => 'client_name',
+                'type'          => 'text',
+                'instructions'  => 'Только для поиска в админке. Не выводится на сайте.',
+            ],
+            [
+                'key'          => 'field_orisa_project_files',
+                'label'        => 'Документы по делу',
+                'name'         => 'case_files',
+                'type'         => 'repeater',
+                'layout'       => 'table',
+                'button_label' => 'Добавить документ',
+                'instructions' => 'Хранение для работы. Не выводится на сайте.',
+                'sub_fields'   => [
+                    ['key' => 'field_orisa_project_file_title', 'label' => 'Название', 'name' => 'title', 'type' => 'text'],
+                    ['key' => 'field_orisa_project_file_val', 'label' => 'Файл', 'name' => 'file', 'type' => 'file', 'return_format' => 'id'],
+                ],
+            ],
+        ],
+        'location' => [
+            [
+                ['param' => 'post_type', 'operator' => '==', 'value' => 'project'],
+            ],
+        ],
+    ]);
+}
+
+/**
+ * Админка «Проекты»: колонки «Дело №» и «Клиент» + поиск по ним.
+ */
+add_filter('manage_project_posts_columns', 'orisa_project_columns');
+function orisa_project_columns($cols) {
+    $out = [];
+    foreach ($cols as $k => $v) {
+        $out[$k] = $v;
+        if ($k === 'title') {
+            $out['orisa_case_no'] = 'Дело №';
+            $out['orisa_client'] = 'Клиент';
+        }
+    }
+    return $out;
+}
+
+add_action('manage_project_posts_custom_column', 'orisa_project_column_value', 10, 2);
+function orisa_project_column_value($col, $post_id) {
+    if (!function_exists('get_field')) {
+        return;
+    }
+    if ($col === 'orisa_case_no') {
+        echo esc_html((string) get_field('case_number', $post_id));
+    }
+    if ($col === 'orisa_client') {
+        echo esc_html((string) get_field('client_name', $post_id));
+    }
+}
+
+add_filter('posts_search', 'orisa_project_admin_meta_search', 10, 2);
+function orisa_project_admin_meta_search($search, $wp_query) {
+    if (!is_admin() || $wp_query->get('post_type') !== 'project' || $wp_query->get('s') === '') {
+        return $search;
+    }
+    global $wpdb;
+    $s = '%' . $wpdb->esc_like($wp_query->get('s')) . '%';
+    $like = $wpdb->prepare(
+        " OR EXISTS (SELECT 1 FROM {$wpdb->postmeta} WHERE post_id = {$wpdb->posts}.ID AND meta_key IN ('case_number','client_name') AND meta_value LIKE %s)",
+        $s
+    );
+    $patched = preg_replace('/\)\)\)\s*$/', $like . ')))', $search, 1);
+    return $patched !== null && $patched !== $search ? $patched : $search;
 }
