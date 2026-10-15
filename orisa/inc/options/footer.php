@@ -61,6 +61,36 @@ function orisa_options_footer() {
                 ],
             ],
             [
+                'key'           => 'field_orisa_opt_f2_socials',
+                'label'         => 'Соцсети (подвал fixed-bottom)',
+                'name'          => 'footer2_socials',
+                'type'          => 'repeater',
+                'layout'       => 'table',
+                'button_label' => 'Добавить соцсеть',
+                'sub_fields'   => [
+                    ['key' => 'field_orisa_opt_f2soc_name', 'label' => 'Название', 'name' => 'name', 'type' => 'text'],
+                    ['key' => 'field_orisa_opt_f2soc_link', 'label' => 'Ссылка', 'name' => 'link', 'type' => 'link'],
+                ],
+            ],
+            [
+                'key'   => 'field_orisa_opt_f2_connect',
+                'label' => 'Заголовок fixed-bottom (Let’s Connect)',
+                'name'  => 'footer2_connect_title',
+                'type'  => 'text',
+            ],
+            [
+                'key'   => 'field_orisa_opt_f2_days',
+                'label' => 'Часы: дни',
+                'name'  => 'footer2_hours_days',
+                'type'  => 'text',
+            ],
+            [
+                'key'   => 'field_orisa_opt_f2_time',
+                'label' => 'Часы: время',
+                'name'  => 'footer2_hours_time',
+                'type'  => 'text',
+            ],
+            [
                 'key'           => 'field_orisa_opt_copyright',
                 'label'         => 'Копирайт',
                 'name'          => 'copyright',
