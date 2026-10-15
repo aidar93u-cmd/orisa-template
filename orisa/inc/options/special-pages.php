@@ -20,11 +20,25 @@ function orisa_options_special() {
                 'type'  => 'text',
             ],
             [
+                'key'           => 'field_orisa_opt_404_badge',
+                'label'         => '404: плашка',
+                'name'          => 'not_found_badge',
+                'type'          => 'text',
+                'default_value' => 'Ошибка 404',
+            ],
+            [
                 'key'   => 'field_orisa_opt_404_text',
                 'label' => '404: текст',
                 'name'  => 'not_found_text',
                 'type'  => 'textarea',
                 'rows'  => 3,
+            ],
+            [
+                'key'           => 'field_orisa_opt_404_image',
+                'label'         => '404: картинка справа',
+                'name'          => 'not_found_image',
+                'type'          => 'image',
+                'return_format' => 'id',
             ],
             [
                 'key'   => 'field_orisa_opt_soon_date',
