@@ -8,7 +8,7 @@ defined('ABSPATH') || exit;
 return [
     'key'     => 'layout_orisa_team_grid',
     'name'    => 'team-grid',
-    'label'   => 'Команда сеткой',
+    'label' => 'Команда 2',
     'display' => 'block',
     'sub_fields' => [
         [

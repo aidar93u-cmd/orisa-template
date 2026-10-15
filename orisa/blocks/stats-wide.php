@@ -8,7 +8,7 @@ defined('ABSPATH') || exit;
 return [
     'key'     => 'layout_orisa_stats_wide',
     'name'    => 'stats-wide',
-    'label'   => 'Цифры широкие',
+    'label' => 'Цифры 2',
     'display' => 'block',
     'sub_fields' => [
         [

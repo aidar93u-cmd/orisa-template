@@ -8,7 +8,7 @@ defined('ABSPATH') || exit;
 return [
     'key'     => 'layout_orisa_counter',
     'name'    => 'counter',
-    'label'   => 'Счётчик',
+    'label' => 'Цифры 3',
     'display' => 'block',
     'sub_fields' => [
         [

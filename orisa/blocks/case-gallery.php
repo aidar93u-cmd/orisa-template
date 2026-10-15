@@ -8,7 +8,7 @@ defined('ABSPATH') || exit;
 return [
     'key'     => 'layout_orisa_case_gallery',
     'name'    => 'case-gallery',
-    'label'   => 'Кейс-галерея',
+    'label' => 'Кейсы 2',
     'display' => 'block',
     'sub_fields' => [
         [

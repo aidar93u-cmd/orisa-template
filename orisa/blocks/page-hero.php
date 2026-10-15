@@ -8,7 +8,7 @@ defined('ABSPATH') || exit;
 return [
     'key'     => 'layout_orisa_page_hero',
     'name'    => 'page-hero',
-    'label'   => 'Шапка внутренней страницы',
+    'label' => 'Главный экран 4',
     'display' => 'block',
     'sub_fields' => [
         [

@@ -8,7 +8,7 @@ defined('ABSPATH') || exit;
 return [
     'key'     => 'layout_orisa_media_gallery',
     'name'    => 'media-gallery',
-    'label'   => 'Медиагалерея',
+    'label' => 'Галерея 2',
     'display' => 'block',
     'sub_fields' => [
         [

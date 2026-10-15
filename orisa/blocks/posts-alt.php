@@ -8,7 +8,7 @@ defined('ABSPATH') || exit;
 return [
     'key'     => 'layout_orisa_posts_alt',
     'name'    => 'posts-alt',
-    'label'   => 'Статьи alt',
+    'label' => 'Статьи 2',
     'display' => 'block',
     'sub_fields' => [
         [

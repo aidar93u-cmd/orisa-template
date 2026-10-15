@@ -8,7 +8,7 @@ defined('ABSPATH') || exit;
 return [
     'key'     => 'layout_orisa_vr',
     'name'    => 'vr',
-    'label'   => 'VR',
+    'label' => 'Главный экран 1',
     'display' => 'block',
     'sub_fields' => [
         ['key' => 'field_orisa_vr_brackets', 'label' => 'Плашка', 'name' => 'brackets', 'type' => 'repeater', 'layout' => 'table', 'button_label' => 'Добавить пункт',

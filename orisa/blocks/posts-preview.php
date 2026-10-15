@@ -8,7 +8,7 @@ defined('ABSPATH') || exit;
 return [
     'key'     => 'layout_orisa_posts_preview',
     'name'    => 'posts-preview',
-    'label'   => 'Последние статьи',
+    'label' => 'Статьи 1',
     'display' => 'block',
     'sub_fields' => [
         [

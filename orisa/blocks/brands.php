@@ -8,7 +8,7 @@ defined('ABSPATH') || exit;
 return [
     'key'     => 'layout_orisa_brands',
     'name'    => 'brands',
-    'label'   => 'Бренды',
+    'label' => 'Бренды 2',
     'display' => 'block',
     'sub_fields' => [
         ['key' => 'field_orisa_brands_title_modern', 'label' => 'Заголовок «Modern»', 'name' => 'title_modern', 'type' => 'text', 'default_value' => 'Современный'],

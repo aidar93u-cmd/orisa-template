@@ -8,7 +8,7 @@ defined('ABSPATH') || exit;
 return [
     'key'     => 'layout_orisa_banner',
     'name'    => 'banner',
-    'label'   => 'Баннер',
+    'label' => 'Главный экран 3',
     'display' => 'block',
     'sub_fields' => [
         [

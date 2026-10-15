@@ -8,7 +8,7 @@ defined('ABSPATH') || exit;
 return [
     'key'     => 'layout_orisa_about_journey',
     'name'    => 'about-journey',
-    'label'   => 'Путь компании',
+    'label' => 'О компании 2',
     'display' => 'block',
     'sub_fields' => [
         [

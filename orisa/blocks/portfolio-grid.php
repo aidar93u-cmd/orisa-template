@@ -8,7 +8,7 @@ defined('ABSPATH') || exit;
 return [
     'key'     => 'layout_orisa_portfolio_grid',
     'name'    => 'portfolio-grid',
-    'label'   => 'Портфолио',
+    'label' => 'Кейсы 3',
     'display' => 'block',
     'sub_fields' => [
         [

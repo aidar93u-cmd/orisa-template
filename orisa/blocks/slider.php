@@ -8,7 +8,7 @@ defined('ABSPATH') || exit;
 return [
     'key'     => 'layout_orisa_slider',
     'name'    => 'slider',
-    'label'   => 'Слайдер',
+    'label' => 'Главный экран 2',
     'display' => 'block',
     'sub_fields' => [
         [

@@ -8,7 +8,7 @@ defined('ABSPATH') || exit;
 return [
     'key'     => 'layout_orisa_portfolio_details',
     'name'    => 'portfolio-details',
-    'label'   => 'Кейс',
+    'label' => 'Кейсы 4',
     'display' => 'block',
     'sub_fields' => [
         [

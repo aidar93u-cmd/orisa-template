@@ -8,7 +8,7 @@ defined('ABSPATH') || exit;
 return [
     'key'     => 'layout_orisa_services_list',
     'name'    => 'services-list',
-    'label'   => 'Услуги',
+    'label' => 'Услуги 2',
     'display' => 'block',
     'sub_fields' => [
         [
