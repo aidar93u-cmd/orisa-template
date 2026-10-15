@@ -1,0 +1,20 @@
+{
+  "$schema": "https://playground.wordpress.net/blueprint-schema.json",
+  "landingPage": "/",
+  "preferredVersions": { "php": "8.3", "wp": "latest" },
+  "constants": { "WP_DEBUG": true, "WP_DEBUG_LOG": true, "WP_DEBUG_DISPLAY": false },
+  "steps": [
+    { "step": "login" },
+    {
+      "step": "installPlugin",
+      "pluginData": { "resource": "wordpress.org/plugins", "slug": "advanced-custom-fields" },
+      "options": { "activate": true }
+    },
+    { "step": "activateTheme", "themeFolderName": "orisa" },
+    { "step": "setSiteLanguage", "language": "ru_RU" },
+    {
+      "step": "setSiteOptions",
+      "options": { "blogname": "Orisa — локальная проверка", "blogdescription": "" }
+    }
+  ]
+}
