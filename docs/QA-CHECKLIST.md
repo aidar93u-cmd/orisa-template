@@ -12,9 +12,9 @@ WP Playground (по желанию): заказчик поднимает сам,
 
 ## Анимации и хрупкое (тестировать первыми)
 - [ ] Pin/zoom: `section-fix`, `at-panel-pin`, `anim-zoomin`, `text-scramble`, `reveal-text`, `at_fade_anim`.
-- [ ] Слайдеры: testimonials (оба variant), about-me (index-7), portfolio-details-6, sec-7-home-13.
+- [ ] Слайдеры: testimonials (оба variant), about-me (index-7), case-gallery, sec-7-home-13.
 - [ ] Фильтры: portfolio-grid (Isotope), архив блога (data-filter ↔ data-category).
-- [ ] Счётчики odometer (stats, stats-13, hero-3); countdown на coming-soon (формат даты!).
+- [ ] Счётчики odometer (stats, stats-wide, review); countdown на coming-soon (формат даты!).
 - [ ] Matter/throwable декор: 404, coming-soon, index-7 (флаг matter_fx).
 - [ ] Тикеры logo-marquee (все 3 variant), hover-превью карточек (M13).
 

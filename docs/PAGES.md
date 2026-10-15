@@ -2,9 +2,9 @@
 
 Легенда: блоки — слаги `orisa/blocks/*`; `[ДОБОР]` — секция оригинала без блока (собрать нечем,
 добор отдельными блоками после аудита заказчика). Настройки страницы: header_style / footer_style /
-hide_*. Шаблон: page.php (Flexible), front-page.php, home/archive/single/search/404.php.
+hide_*. Шаблон: page.php (Flexible, единый общий шаблон страниц), home/archive/single/search/404.php.
 
-## Главные (front-page.php)
+## Главные (page.php — главная тоже обычная страница с секциями)
 
 - `index` → vr, logo-marquee, [ДОБОР: sec-4-home-5], [ДОБОР: sec-6-home-1], [ДОБОР: at-sec7], [ДОБОР: at-sec8], posts-preview. header: transparent; footer: standard.
 - `index-3` → review, logo-marquee, [ДОБОР: section-fix ×2, home-3-section-10, pt-120 подборки]. header: default; footer: fixed-bottom (в оригинале `<footer>` без класса — отрисуется fixed-bottom; сверить визуально).

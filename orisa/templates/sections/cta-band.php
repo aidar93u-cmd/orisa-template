@@ -4,7 +4,7 @@ defined('ABSPATH') || exit;
 /**
  * Призыв к действию (services-details-4.html, SD4 — CTA, строки 730-751).
  * Разметка 1:1 (.sd4-cta, .sd4-cta__band: классы, data-*, вложенность, SVG — дословно).
- * Динамика: заголовок, текст, кнопка (Link), фон (Image ID → data-background, приём из hero-home-4).
+ * Динамика: заголовок, текст, кнопка (Link), фон (Image ID → data-background, приём из review).
  * Пустые поля гасят свои теги; обёртки section/container/band остаются (стили + data-хуки JS).
  * .sd4-next здесь нет: это межстраничная навигация, она принадлежит блоку service-details (см. BLOCKS.md).
  */
