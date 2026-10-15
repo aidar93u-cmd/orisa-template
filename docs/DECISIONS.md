@@ -18,3 +18,11 @@
 - `team`: нижний ряд тегов — декор без поля; соцсети карточки сведены к одному link (в оригинале одна ссылка).
 - `pricing`: переключателя мес/год В ОРИГИНАЛЕ НЕТ (проверено grep по html и pricing-3.js) — вопреки карте BLOCKS.md; построен pricing-3; pricing-4 — отдельным блоком позже.
 - `services-list`: БЕЗ variant, только services-4 (s3 — другая структура без collapse); services-3 — отдельным блоком позже. Фиксированный `id="svc4-engage"` заменён `orisa_anchor()` (в CSS/JS не используется — проверено).
+
+## Партия 4
+- `service-details`: БЕЗ variant, только SD4 (base несовместим: swiper/swiperless, section-fix vs sd4-flow); services-details.html — отдельным блоком позже.
+- `stats`: только index-9 (index-13 — другой каркас с head/префиксами); декор-линия через URI темы (прецедент hero-home-9).
+- `steps`: только index-13 timeline; svc4/pricing-4 шаги несовместимы.
+- `cta-band`: только sd4-cta; `sd4-next` исключён (межстраничная навигация — вотчина service-details).
+- `contact`: обёртка формы — div (CF7 рендерит свой form); кнопка — raw button (тег [submit] не держит спаны); соцсети — generic-стрелка (сети из Options, западные глифы не маппятся); VK исключён (в Options «только подвал»).
+- CF7-шаблон зафиксирован в docs/CF7-FORMS.md.
