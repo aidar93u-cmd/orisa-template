@@ -12,7 +12,17 @@ defined('ABSPATH') || exit;
  * и подпись гасят только свой вывод. Декор-линия — захардкожена URI темы
  * (aria-hidden, как в оригинале; прецедент — brands: декор хардкодится,
  * контент — через orisa_img).
+ * Вариант «compact» — index.html 1559-1592 (div.container-2200 >
+ * div.at-sec8-area.pt-90.pb-90.bg-neutral-50.rounded-5.mx-lg-3.mx-2.mt-10 >
+ * div.container > div.row > div.col-12 > div.d-flex.flex-wrap.
+ * justify-content-lg-between.justify-content-around.align-items-center.gap-4 >
+ * div > h1 > span.odometer.text-nowrap[data-count] + суффикс (+/%), p — подпись.
+ * Классы дословно, те же поля items (number/suffix/caption), картинок нет.
  */
+$orisa_stats_variant = get_sub_field('variant');
+if ($orisa_stats_variant !== 'compact') {
+    $orisa_stats_variant = 'lines';
+}
 $orisa_stats_rows = [];
 if (have_rows('items')) {
     while (have_rows('items')) {
@@ -32,6 +42,28 @@ if (have_rows('items')) {
 }
 ?>
 <?php if ($orisa_stats_rows !== []) : ?>
+<?php if ($orisa_stats_variant === 'compact') : ?>
+    <div class="container-2200">
+        <div class="at-sec8-area pt-90 pb-90 bg-neutral-50 rounded-5 mx-lg-3 mx-2 mt-10"<?php echo orisa_anchor(); ?>>
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="d-flex flex-wrap justify-content-lg-between justify-content-around align-items-center gap-4">
+                            <?php foreach ($orisa_stats_rows as $orisa_stats_row) : ?>
+                                <div>
+                                    <h1><span class="odometer text-nowrap" data-count="<?php echo esc_attr($orisa_stats_row['number']); ?>"></span><?php echo esc_html($orisa_stats_row['suffix']); ?></h1>
+                                    <?php if ($orisa_stats_row['caption'] !== '') : ?>
+                                        <p><?php echo esc_html($orisa_stats_row['caption']); ?></p>
+                                    <?php endif; ?>
+                                </div>
+                            <?php endforeach; ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<?php else : ?>
     <section class="sec-2-home-9 bg-neutral-0"<?php echo orisa_anchor(); ?>>
         <div class="sec-2-home-9__container">
             <div class="sec-2-home-9__stats">
@@ -52,4 +84,5 @@ if (have_rows('items')) {
             </div>
         </div>
     </section>
+<?php endif; ?>
 <?php endif; ?>

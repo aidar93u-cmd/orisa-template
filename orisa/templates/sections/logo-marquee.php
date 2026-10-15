@@ -6,14 +6,15 @@ defined('ABSPATH') || exit;
  * .at-brand-area > .carouselTicker.carouselTicker-right > ul.carouselTicker__list.scroll-move-right
  * > li.carouselTicker__item > .brand-item > img (22 li, div сбалансированы: ul закрыт в 733,
  * тикер в 734, секция в 735).
- * Тот же механизм в index-3.html (sec-2-home-3: текст + звезда) и about-2.html (sec-4-about,
- * .moving-gallery: фото): .carouselTicker > ul.carouselTicker__list > li, запуск — main.js §46
+ * Тот же механизм в index-3.html (sec-2-home-3: текст + звезда), about-2.html (sec-4-about,
+ * .moving-gallery: фото) и index.html 1840-1913 (at-brand-area #2, variant stena: светлая
+ * строка h3 + серая звезда #B7B7B7, .carouselTicker-left): .carouselTicker > ul.carouselTicker__list > li, запуск — main.js §46
  * carauselScroll (.carouselTicker-left → prev, .carouselTicker-right → next).
  * Variant меняет только обёртки-модификаторы и содержимое li. Пустые элементы пропускаются,
  * картинки — через orisa_img(ID), ссылка оборачивает картинку в <a>.
  */
 $orisa_marquee_variant = get_sub_field('variant');
-if ($orisa_marquee_variant !== 'lenta' && $orisa_marquee_variant !== 'galereya') {
+if ($orisa_marquee_variant !== 'lenta' && $orisa_marquee_variant !== 'galereya' && $orisa_marquee_variant !== 'stena') {
     $orisa_marquee_variant = 'brendy';
 }
 ?>
@@ -86,7 +87,30 @@ if ($orisa_marquee_variant !== 'lenta' && $orisa_marquee_variant !== 'galereya')
                             <div class="brand-item dark-mode-invert">
                                 <?php if ($orisa_marquee_url !== '') : ?>
                                     <a href="<?php echo esc_url($orisa_marquee_url); ?>"<?php echo $orisa_marquee_target; ?>><?php echo $orisa_marquee_img; ?></a>
-                                <?php else : ?>
+<?php elseif ($orisa_marquee_variant === 'stena') : ?>
+    <?php if (have_rows('items')) : ?>
+        <div class="at-brand-area container-2200 border-top-0"<?php echo orisa_anchor(); ?>>
+            <div class="carouselTicker carouselTicker-left">
+                <ul class="d-flex align-items-center justify-content-center gap-4 carouselTicker__list scroll-move-left">
+                    <?php while (have_rows('items')) : the_row(); ?>
+                        <?php
+                        $orisa_marquee_text = get_sub_field('text');
+                        if (!is_string($orisa_marquee_text) || $orisa_marquee_text === '') {
+                            continue;
+                        }
+                        ?>
+                        <li class="d-flex align-items-center gap-4 carouselTicker__item mx-0">
+                            <h3 class="h5 mb-0 text-nowrap"><?php echo esc_html($orisa_marquee_text); ?></h3>
+                            <svg class="scroll-rotate" xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40" fill="none">
+                                <path d="M20 0C20.3015 10.9184 29.0816 19.6985 40 20C29.0816 20.3015 20.3015 29.0816 20 40C19.6985 29.0816 10.9184 20.3015 0 20C10.9184 19.6985 19.6985 10.9184 20 0Z" fill="#B7B7B7" />
+                            </svg>
+                        </li>
+                    <?php endwhile; ?>
+                </ul>
+            </div>
+        </div>
+    <?php endif; ?>
+<?php else : ?>
                                     <?php echo $orisa_marquee_img; ?>
                                 <?php endif; ?>
                             </div>
