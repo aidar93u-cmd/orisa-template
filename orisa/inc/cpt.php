@@ -93,6 +93,13 @@ function orisa_cpt_fields() {
         'title'  => 'Карточка проекта',
         'fields' => [
             [
+                'key'       => 'field_orisa_project_tab_main',
+                'label'     => 'Основное',
+                'name'      => '',
+                'type'      => 'tab',
+                'placement' => 'top',
+            ],
+            [
                 'key'   => 'field_orisa_project_service',
                 'label' => 'Сфера (тег)',
                 'name'  => 'service',
@@ -116,6 +123,13 @@ function orisa_cpt_fields() {
                 'label' => 'Срок (тег)',
                 'name'  => 'duration',
                 'type'  => 'text',
+            ],
+            [
+                'key'       => 'field_orisa_project_tab_case',
+                'label'     => 'Разбор дела',
+                'name'      => '',
+                'type'      => 'tab',
+                'placement' => 'top',
             ],
             [
                 'key'   => 'field_orisa_project_situation',
@@ -161,6 +175,13 @@ function orisa_cpt_fields() {
                 ],
             ],
             [
+                'key'       => 'field_orisa_project_tab_result',
+                'label'     => 'Результат',
+                'name'      => '',
+                'type'      => 'tab',
+                'placement' => 'top',
+            ],
+            [
                 'key'   => 'field_orisa_project_result',
                 'label' => 'Результат (коротко, для карточек)',
                 'name'  => 'result',
@@ -180,6 +201,13 @@ function orisa_cpt_fields() {
                 'name'  => 'nuance',
                 'type'  => 'textarea',
                 'rows'  => 3,
+            ],
+            [
+                'key'       => 'field_orisa_project_tab_quote',
+                'label'     => 'Отзыв',
+                'name'      => '',
+                'type'      => 'tab',
+                'placement' => 'top',
             ],
             [
                 'key'   => 'field_orisa_project_quote',

@@ -22,6 +22,13 @@ return [
          'sub_fields' => [
             ['key' => 'field_orisa_vr_bracket_text', 'label' => 'Пункт', 'name' => 'text', 'type' => 'text'],
          ]],
+        [
+            'key'       => 'field_orisa_vr_tab_content',
+            'label'     => 'Содержимое',
+            'name'      => '',
+            'type'      => 'tab',
+            'placement' => 'top',
+        ],
         ['key' => 'field_orisa_vr_hero_image', 'label' => 'Фото VR', 'name' => 'hero_image', 'type' => 'image', 'return_format' => 'id'],
         ['key' => 'field_orisa_vr_coords', 'label' => 'Координаты', 'name' => 'coords', 'type' => 'text', 'default_value' => '27.1127° S, 109.3497° W'],
         ['key' => 'field_orisa_vr_tags', 'label' => 'Теги', 'name' => 'tags', 'type' => 'repeater', 'layout' => 'table', 'button_label' => 'Добавить тег',
