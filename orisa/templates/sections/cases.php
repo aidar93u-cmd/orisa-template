@@ -48,6 +48,9 @@ if (function_exists('have_rows') && have_rows('cases')) {
         ];
     }
 }
+if ($orisa_cases_rows === []) {
+    $orisa_cases_rows = orisa_project_posts(4);
+}
 ?>
 <?php if ($badge || $title || $subtitle || $button_url || $orisa_cases_rows !== []) : ?>
     <div id="portfolio" class="container-2200">

@@ -95,19 +95,40 @@ $btn_title = is_array($button) && isset($button['title']) ? $button['title'] : '
                     <?php endif; ?>
                 </div>
             </div>
-            <?php if (have_rows('members')) : ?>
+            <?php
+            $orisa_team_members = [];
+            if (function_exists('have_rows') && have_rows('members')) {
+                while (have_rows('members')) {
+                    the_row();
+                    $r_photo = get_sub_field('photo');
+                    $r_name = get_sub_field('name');
+                    $r_role = get_sub_field('role');
+                    $r_link = get_sub_field('link');
+                    $r_url = is_array($r_link) && !empty($r_link['url']) ? $r_link['url'] : '';
+                    if (empty($r_photo) && !$r_name && !$r_role && !$r_url) {
+                        continue;
+                    }
+                    $orisa_team_members[] = [
+                        'photo' => $r_photo,
+                        'name'  => $r_name,
+                        'role'  => $r_role,
+                        'url'   => $r_url,
+                    ];
+                }
+            }
+            if ($orisa_team_members === []) {
+                $orisa_team_members = orisa_team_posts(8);
+            }
+            ?>
+            <?php if ($orisa_team_members !== []) : ?>
                 <div class="row pt-80 g-4">
                     <?php $orisa_team_i = 0; ?>
-                    <?php while (have_rows('members')) : the_row(); ?>
+                    <?php foreach ($orisa_team_members as $orisa_team_m) : ?>
                         <?php
-                        $m_photo = get_sub_field('photo');
-                        $m_name = get_sub_field('name');
-                        $m_role = get_sub_field('role');
-                        $m_link = get_sub_field('link');
-                        $m_url = is_array($m_link) && !empty($m_link['url']) ? $m_link['url'] : '';
-                        if (empty($m_photo) && !$m_name && !$m_role && !$m_url) {
-                            continue;
-                        }
+                        $m_photo = $orisa_team_m['photo'];
+                        $m_name = $orisa_team_m['name'];
+                        $m_role = $orisa_team_m['role'];
+                        $m_url = $orisa_team_m['url'];
                         $orisa_team_i++;
                         $orisa_team_col = ($orisa_team_i % 2 === 1) ? 'col-lg-3 col-md-6 pt-md-5 changeless' : 'col-lg-3 col-md-6 changeless';
                         $m_alt = $m_name ? $m_name : get_bloginfo('name');
@@ -146,7 +167,7 @@ $btn_title = is_array($button) && isset($button['title']) ? $button['title'] : '
                                 </div>
                             </div>
                         </div>
-                    <?php endwhile; ?>
+                    <?php endforeach; ?>
                 </div>
             <?php endif; ?>
             <div class="row">

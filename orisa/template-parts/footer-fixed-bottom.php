@@ -34,7 +34,9 @@ defined('ABSPATH') || exit;
                         <div class="col-lg-4 col-md-6 mx-auto">
                             <div class="at-footer-widget alt-footer-link-item-wrap row">
                                 <div class="alt-footer-link-item col-6">
-                                    <?php if (function_exists('have_rows') && have_rows('footer_menu_1', 'option')) : ?>
+                                    <?php if (has_nav_menu('orisa-footer-1')) : ?>
+                                        <?php wp_nav_menu(['theme_location' => 'orisa-footer-1', 'container' => false, 'items_wrap' => '<ul>%3$s</ul>', 'walker' => new Orisa_Plain_Walker('mb-15'), 'fallback_cb' => false]); ?>
+                                    <?php elseif (function_exists('have_rows') && have_rows('footer_menu_1', 'option')) : ?>
                                     <ul>
                                         <?php while (have_rows('footer_menu_1', 'option')) : the_row(); ?>
                                             <?php $l1 = get_sub_field('link'); ?>
@@ -46,7 +48,9 @@ defined('ABSPATH') || exit;
                                     <?php endif; ?>
                                 </div>
                                 <div class="alt-footer-link-item col-6">
-                                    <?php if (function_exists('have_rows') && have_rows('footer_menu_2', 'option')) : ?>
+                                    <?php if (has_nav_menu('orisa-footer-2')) : ?>
+                                        <?php wp_nav_menu(['theme_location' => 'orisa-footer-2', 'container' => false, 'items_wrap' => '<ul>%3$s</ul>', 'walker' => new Orisa_Plain_Walker('mb-15'), 'fallback_cb' => false]); ?>
+                                    <?php elseif (function_exists('have_rows') && have_rows('footer_menu_2', 'option')) : ?>
                                     <ul>
                                         <?php while (have_rows('footer_menu_2', 'option')) : the_row(); ?>
                                             <?php $l2 = get_sub_field('link'); ?>
@@ -68,9 +72,7 @@ defined('ABSPATH') || exit;
                                         <?php if (is_array($sl) && !empty($sl['url'])) : ?>
                                     <a href="<?php echo esc_url($sl['url']); ?>">
                                         <?php echo esc_html($sn !== '' ? $sn : ($sl['title'] !== '' ? $sl['title'] : $sl['url'])); ?>
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="9" height="10" viewBox="0 0 9 10" fill="none">
-                                            <path d="M5.62494 9.99994L0.562517 10L0.5625 8.75003L4.49994 8.74996L4.5 2.39273L2.27828 4.86124L1.48278 3.97739L5.0625 0L8.64225 3.97739L7.84676 4.86124L5.625 2.3927L5.62494 9.99994Z" fill="currentColor" />
-                                        </svg>
+                                        <?php echo orisa_soc_icon(orisa_soc_detect($sn, $sl['url']), 14); ?>
                                     </a>
                                         <?php endif; ?>
                                     <?php endwhile; ?>

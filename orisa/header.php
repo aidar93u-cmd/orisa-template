@@ -37,8 +37,10 @@ get_template_part('template-parts/search-overlay');
                     <div class="col-xl-8 mx-auto d-none d-xl-flex justify-content-center">
                         <div class="at-main-menu <?php echo esc_attr(function_exists('get_field') ? (string) get_field('menu_style', 'option') : 'menu-light d-inline-flex justify-content-center style-1'); ?>">
                             <nav class="at-mobile-menu-active">
+                                <?php if (has_nav_menu('orisa-header')) : ?>
+                                    <?php wp_nav_menu(['theme_location' => 'orisa-header', 'container' => false, 'items_wrap' => '<ul>%3$s</ul>', 'walker' => new Orisa_Plain_Walker(), 'fallback_cb' => false]); ?>
+                                <?php elseif (function_exists('have_rows') && have_rows('menu_items', 'option')) : ?>
                                 <ul>
-                                    <?php if (function_exists('have_rows') && have_rows('menu_items', 'option')) : ?>
                                         <?php while (have_rows('menu_items', 'option')) : the_row(); ?>
                                             <?php $link = get_sub_field('link'); ?>
                                             <?php if (is_array($link) && !empty($link['url'])) : ?>
@@ -57,8 +59,8 @@ get_template_part('template-parts/search-overlay');
                                                 </li>
                                             <?php endif; ?>
                                         <?php endwhile; ?>
-                                    <?php endif; ?>
                                 </ul>
+                                <?php endif; ?>
                             </nav>
                         </div>
                     </div>

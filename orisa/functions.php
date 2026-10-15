@@ -10,6 +10,8 @@ define('ORISA_DIR', get_template_directory());
 define('ORISA_URI', get_template_directory_uri());
 
 require_once ORISA_DIR . '/inc/setup.php';
+require_once ORISA_DIR . '/inc/menus.php';
+require_once ORISA_DIR . '/inc/cpt.php';
 require_once ORISA_DIR . '/inc/helpers.php';
 require_once ORISA_DIR . '/inc/assets.php';
 require_once ORISA_DIR . '/inc/sections.php';

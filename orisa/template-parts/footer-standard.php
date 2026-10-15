@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 defined('ABSPATH') || exit;
 
 if (is_page() && function_exists('get_field') && get_field('hide_footer')) {
@@ -38,44 +38,32 @@ $footer_style = function_exists('get_field') && is_page() ? (string) get_field('
                                             <?php $u_herosoc = function_exists('get_field') ? get_field('soc_whatsapp', 'option') : ''; ?>
                                             <a href="<?php echo $u_herosoc ? esc_url($u_herosoc) : '#'; ?>">
                                             WhatsApp
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="9" height="10" viewBox="0 0 9 10" fill="none">
-                                                    <path d="M5.62494 9.99994L0.562517 10L0.5625 8.75003L4.49994 8.74996L4.5 2.39273L2.27828 4.86124L1.48278 3.97739L5.0625 0L8.64225 3.97739L7.84676 4.86124L5.625 2.3927L5.62494 9.99994Z" fill="currentColor" />
-                                                </svg>
+                                                <?php echo orisa_soc_icon('whatsapp'); ?>
                                             </a>
                                             <?php $u_herosoc = function_exists('get_field') ? get_field('soc_telegram', 'option') : ''; ?>
                                             <a href="<?php echo $u_herosoc ? esc_url($u_herosoc) : '#'; ?>">
                                             Telegram
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="9" height="10" viewBox="0 0 9 10" fill="none">
-                                                    <path d="M5.62494 9.99994L0.562517 10L0.5625 8.75003L4.49994 8.74996L4.5 2.39273L2.27828 4.86124L1.48278 3.97739L5.0625 0L8.64225 3.97739L7.84676 4.86124L5.625 2.3927L5.62494 9.99994Z" fill="currentColor" />
-                                                </svg>
+                                                <?php echo orisa_soc_icon('telegram'); ?>
                                             </a>
                                             <?php $u_herosoc = function_exists('get_field') ? get_field('soc_max', 'option') : ''; ?>
                                             <a href="<?php echo $u_herosoc ? esc_url($u_herosoc) : '#'; ?>">
                                             MAX
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="9" height="10" viewBox="0 0 9 10" fill="none">
-                                                    <path d="M5.62494 9.99994L0.562517 10L0.5625 8.75003L4.49994 8.74996L4.5 2.39273L2.27828 4.86124L1.48278 3.97739L5.0625 0L8.64225 3.97739L7.84676 4.86124L5.625 2.3927L5.62494 9.99994Z" fill="currentColor" />
-                                                </svg>
+                                                <?php echo orisa_soc_icon('max'); ?>
                                             </a>
                                             <?php $u_herosoc = function_exists('get_field') ? get_field('soc_2gis', 'option') : ''; ?>
                                             <a href="<?php echo $u_herosoc ? esc_url($u_herosoc) : '#'; ?>">
                                             2ГИС
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="9" height="10" viewBox="0 0 9 10" fill="none">
-                                                    <path d="M5.62494 9.99994L0.562517 10L0.5625 8.75003L4.49994 8.74996L4.5 2.39273L2.27828 4.86124L1.48278 3.97739L5.0625 0L8.64225 3.97739L7.84676 4.86124L5.625 2.3927L5.62494 9.99994Z" fill="currentColor" />
-                                                </svg>
+                                                <?php echo orisa_soc_icon('doublegis'); ?>
                                             </a>
                                             <?php $u_herosoc = function_exists('get_field') ? get_field('soc_yandex', 'option') : ''; ?>
                                             <a href="<?php echo $u_herosoc ? esc_url($u_herosoc) : '#'; ?>">
                                             Яндекс Карты
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="9" height="10" viewBox="0 0 9 10" fill="none">
-                                                    <path d="M5.62494 9.99994L0.562517 10L0.5625 8.75003L4.49994 8.74996L4.5 2.39273L2.27828 4.86124L1.48278 3.97739L5.0625 0L8.64225 3.97739L7.84676 4.86124L5.625 2.3927L5.62494 9.99994Z" fill="currentColor" />
-                                                </svg>
+                                                <?php echo orisa_soc_icon('yandex'); ?>
                                             </a>
                                             <?php $u_herosoc = function_exists('get_field') ? get_field('soc_vk', 'option') : ''; ?>
                                             <a href="<?php echo $u_herosoc ? esc_url($u_herosoc) : '#'; ?>">
                                             ВКонтакте
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="9" height="10" viewBox="0 0 9 10" fill="none">
-                                                    <path d="M5.62494 9.99994L0.562517 10L0.5625 8.75003L4.49994 8.74996L4.5 2.39273L2.27828 4.86124L1.48278 3.97739L5.0625 0L8.64225 3.97739L7.84676 4.86124L5.625 2.3927L5.62494 9.99994Z" fill="currentColor" />
-                                                </svg>
+                                                <?php echo orisa_soc_icon('vk'); ?>
                                             </a>
                                         </div>
                                     </div>
@@ -87,7 +75,11 @@ $footer_style = function_exists('get_field') && is_page() ? (string) get_field('
                                 <div class="col-xxl-3 col-lg-4 col-md-6">
                                     <div class="at-footer-widget alt-footer-link-item-wrap row">
                                         <span class="d-block fz-font-label neutral-0 opacity-50 text-uppercase mb-3">Меню</span>
-                                        <?php if (function_exists('have_rows') && have_rows('footer_menu_1', 'option')) : ?>
+                                        <?php if (has_nav_menu('orisa-footer-1')) : ?>
+                                        <div class="alt-footer-link-item col-6">
+                                            <?php wp_nav_menu(['theme_location' => 'orisa-footer-1', 'container' => false, 'items_wrap' => '<ul>%3$s</ul>', 'walker' => new Orisa_Plain_Walker('mb-15'), 'fallback_cb' => false]); ?>
+                                        </div>
+                                        <?php elseif (function_exists('have_rows') && have_rows('footer_menu_1', 'option')) : ?>
                                         <div class="alt-footer-link-item col-6">
                                             <ul>
                                                 <?php while (have_rows('footer_menu_1', 'option')) : the_row(); ?>
@@ -99,7 +91,11 @@ $footer_style = function_exists('get_field') && is_page() ? (string) get_field('
                                             </ul>
                                         </div>
                                         <?php endif; ?>
-                                        <?php if (function_exists('have_rows') && have_rows('footer_menu_2', 'option')) : ?>
+                                        <?php if (has_nav_menu('orisa-footer-2')) : ?>
+                                        <div class="alt-footer-link-item col-6">
+                                            <?php wp_nav_menu(['theme_location' => 'orisa-footer-2', 'container' => false, 'items_wrap' => '<ul>%3$s</ul>', 'walker' => new Orisa_Plain_Walker('mb-15'), 'fallback_cb' => false]); ?>
+                                        </div>
+                                        <?php elseif (function_exists('have_rows') && have_rows('footer_menu_2', 'option')) : ?>
                                         <div class="alt-footer-link-item col-6">
                                             <ul>
                                                 <?php while (have_rows('footer_menu_2', 'option')) : the_row(); ?>

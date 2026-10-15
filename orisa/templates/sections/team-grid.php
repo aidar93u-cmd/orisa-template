@@ -38,6 +38,9 @@ if (function_exists('have_rows') && have_rows('members')) {
         ];
     }
 }
+if ($orisa_tg_members === []) {
+    $orisa_tg_members = orisa_team_posts(8);
+}
 $orisa_tg_half = (int) ceil(count($orisa_tg_members) / 2);
 $orisa_tg_col1 = array_slice($orisa_tg_members, 0, $orisa_tg_half);
 $orisa_tg_col2 = array_slice($orisa_tg_members, $orisa_tg_half);
