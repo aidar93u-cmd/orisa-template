@@ -2,19 +2,9 @@
 defined('ABSPATH') || exit;
 
 /**
- * Команда (база: team.html, строки 583-748: .at-banner-thumb + .home-3-section-9).
- * Шапка .sec-1-services (строки 567-582) не дублируется — её покрывает блок page-hero.
- * Отзывы .home-5-section-7 (строки 750+) и подвал — не часть блока.
- * - label/instructions по-русски; name/key — по-английски;
- * - повторитель: layout block + button_label по-русски;
- * - картинки: return_format id.
+ * Поля секции (возвращает sub_fields; настройки — в config.php).
  */
 return [
-    'key'     => 'layout_orisa_team',
-    'name'    => 'team',
-    'label'   => 'Команда',
-    'display' => 'block',
-    'sub_fields' => [
         [
             'key'           => 'field_orisa_team_badge',
             'label'         => 'Плашка',
@@ -87,5 +77,5 @@ return [
                 ],
             ],
         ],
-    ],
+    
 ];

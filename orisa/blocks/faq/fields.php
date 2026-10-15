@@ -2,18 +2,9 @@
 defined('ABSPATH') || exit;
 
 /**
- * ЭТАЛОННЫЙ БЛОК (этап 3). Образец для всех остальных блоков:
- * - label/instructions только по-русски; name/key — по-английски;
- * - повторители: layout block + button_label по-русски;
- * - картинки: return_format id; wysiwyg без загрузок (media_upload => 0);
- * - уникальность раскрыта в template.php (id аккордеона через orisa_block_uid()).
+ * Поля секции (возвращает sub_fields; настройки — в config.php).
  */
 return [
-    'key'     => 'layout_orisa_faq',
-    'name'    => 'faq',
-    'label'   => 'Вопросы и ответы',
-    'display' => 'block',
-    'sub_fields' => [
         [
             'key'          => 'field_orisa_faq_badge',
             'label'        => 'Плашка-номер',
@@ -60,5 +51,5 @@ return [
                 ],
             ],
         ],
-    ],
+    
 ];

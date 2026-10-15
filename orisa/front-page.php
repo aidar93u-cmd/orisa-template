@@ -15,7 +15,7 @@ if (have_posts()) :
                 if (!is_string($layout) || $layout === '') {
                     continue;
                 }
-                get_template_part('blocks/' . sanitize_key($layout) . '/template');
+                orisa_render_section($layout);
             endwhile;
         elseif (current_user_can('edit_pages')) :
             echo '<div class="container"><p>';

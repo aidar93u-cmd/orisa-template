@@ -2,19 +2,9 @@
 defined('ABSPATH') || exit;
 
 /**
- * Портфолио — Главная 9 (index-9.html, строки 774-964: section.sec-4-home-9).
- * Каркас карточек portfolio-2.html (sec-1-portfolio-2, .alt-portfolio-item) сильно
- * отличается — variant не заведён, блок строится строго по index-9.
- * Фильтры: повторитель «подпись + значение data-filter» (первый активен);
- * карточки: повторитель (фото ID, категория, тег, метрика, описание, плашка,
- * название, ссылка). Картинки: return_format id; пустые поля гасят свои теги.
+ * Поля секции (возвращает sub_fields; настройки — в config.php).
  */
 return [
-    'key'     => 'layout_orisa_portfolio_grid',
-    'name'    => 'portfolio-grid',
-    'label'   => 'Портфолио',
-    'display' => 'block',
-    'sub_fields' => [
         [
             'key'           => 'field_orisa_portfolio_grid_title',
             'label'         => 'Заголовок',
@@ -120,5 +110,5 @@ return [
             'name'  => 'cta_link',
             'type'  => 'link',
         ],
-    ],
+    
 ];

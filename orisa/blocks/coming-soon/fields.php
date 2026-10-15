@@ -2,17 +2,9 @@
 defined('ABSPATH') || exit;
 
 /**
- * Скоро (база: coming-soon.html, <main>: баннер, data-countdown, throwable-сцена).
- * - label/instructions только по-русски; name/key — по-английски;
- * - дата — text (формат main.js, гл. 34); картинка — return_format id;
- * - форма — шорткод CF7 (поле «Форма CF7»).
+ * Поля секции (возвращает sub_fields; настройки — в config.php).
  */
 return [
-    'key'     => 'layout_orisa_coming_soon',
-    'name'    => 'coming-soon',
-    'label'   => 'Скоро',
-    'display' => 'block',
-    'sub_fields' => [
         [
             'key'           => 'field_orisa_coming_soon_title',
             'label'         => 'Заголовок',
@@ -50,5 +42,5 @@ return [
             'type'         => 'text',
             'instructions' => 'Шорткод Contact Form 7, например [contact-form-7 id="123" title="Скоро"]. Разметка полей — в шаблоне формы.',
         ],
-    ],
+    
 ];

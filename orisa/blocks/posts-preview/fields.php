@@ -2,16 +2,9 @@
 defined('ABSPATH') || exit;
 
 /**
- * Последние статьи (база: index.html, строки 2080-2178, зона at-sec13).
- * - label/instructions по-русски; name/key — по-английски;
- * - картинки: return_format id (в шаблоне не используется — там миниатюры постов).
+ * Поля секции (возвращает sub_fields; настройки — в config.php).
  */
 return [
-    'key'     => 'layout_orisa_posts_preview',
-    'name'    => 'posts-preview',
-    'label'   => 'Последние статьи',
-    'display' => 'block',
-    'sub_fields' => [
         [
             'key'           => 'field_orisa_posts_preview_title',
             'label'         => 'Заголовок',
@@ -30,5 +23,5 @@ return [
             'step'          => 1,
             'instructions'  => 'Сколько последних записей вывести в блоке.',
         ],
-    ],
+    
 ];

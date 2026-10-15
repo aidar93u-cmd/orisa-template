@@ -14,8 +14,8 @@ if (have_posts()) :
                 if (!is_string($layout) || $layout === '') {
                     continue;
                 }
-                // Флаги условных скриптов выставляют сами шаблоны блоков через orisa_flag_script().
-                get_template_part('blocks/' . sanitize_key($layout) . '/template');
+                // Флаги условных скриптов выставляют сами шаблоны секций через orisa_flag_script().
+                orisa_render_section($layout);
             endwhile;
         elseif (current_user_can('edit_pages')) :
             echo '<div class="container"><p>';

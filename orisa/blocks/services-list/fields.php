@@ -2,19 +2,9 @@
 defined('ABSPATH') || exit;
 
 /**
- * Услуги (база: services-4.html, строки 614-943: .svc4-index аккордеон + .svc4-engage процесс/контакты).
- * - label/instructions только по-русски; name/key — по-английски;
- * - ключи field_orisa_services_list_*, layout key layout_orisa_services_list;
- * - картинки: return_format id (миниатюра и большой кадр — один ID);
- * - повторители: layout block + button_label по-русски;
- * - состав услуги — textarea построчно (каждая строка = <li>), без вложенного повторителя.
+ * Поля секции (возвращает sub_fields; настройки — в config.php).
  */
 return [
-    'key'     => 'layout_orisa_services_list',
-    'name'    => 'services-list',
-    'label'   => 'Услуги',
-    'display' => 'block',
-    'sub_fields' => [
         [
             'key'           => 'field_orisa_services_list_index_badge',
             'label'         => 'Плашка списка',
@@ -179,5 +169,5 @@ return [
             'name'  => 'contact_address',
             'type'  => 'text',
         ],
-    ],
+    
 ];

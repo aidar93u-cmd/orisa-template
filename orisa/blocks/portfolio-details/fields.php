@@ -2,20 +2,9 @@
 defined('ABSPATH') || exit;
 
 /**
- * Кейс (база: portfolio-details-4.html, <main>: sec-1…sec-5-portfolio-details-4).
- * details-6 несовместим с details-4 (другая шапка, magazine-описание, swiper-галерея,
- * цитата с портретом, FAQ-аккордеон, тёмный next-блок) — variant не заведён, блок строго по details-4.
- * - label/instructions по-русски; name/key — по-английски;
- * - картинки: return_format id; галерея sec-4 — повторитель (первые 6 фото → ряды 2/1/3);
- * - главы sec-2 — повторитель с вложенными повторителями (картинки, шаги, цифры; номера шагов авто);
- * - пустые поля гасят свои теги (см. template.php).
+ * Поля секции (возвращает sub_fields; настройки — в config.php).
  */
 return [
-    'key'     => 'layout_orisa_portfolio_details',
-    'name'    => 'portfolio-details',
-    'label'   => 'Кейс',
-    'display' => 'block',
-    'sub_fields' => [
         [
             'key'          => 'field_orisa_portfolio_details_crumbs',
             'label'        => 'Хлебные крошки',
@@ -280,5 +269,5 @@ return [
             'name'  => 'next_link',
             'type'  => 'link',
         ],
-    ],
+    
 ];

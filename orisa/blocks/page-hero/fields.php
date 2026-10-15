@@ -2,16 +2,9 @@
 defined('ABSPATH') || exit;
 
 /**
- * Шапка внутренней страницы (база: 404, строки 567-629, .sec-1-404).
- * - label по-русски; name/key — по-английски;
- * - картинка: return_format id.
+ * Поля секции (возвращает sub_fields; настройки — в config.php).
  */
 return [
-    'key'     => 'layout_orisa_page_hero',
-    'name'    => 'page-hero',
-    'label'   => 'Шапка внутренней страницы',
-    'display' => 'block',
-    'sub_fields' => [
         [
             'key'   => 'field_orisa_page_hero_badge',
             'label' => 'Плашка',
@@ -44,5 +37,5 @@ return [
             'type'          => 'image',
             'return_format' => 'id',
         ],
-    ],
+    
 ];

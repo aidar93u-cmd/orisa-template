@@ -2,16 +2,9 @@
 defined('ABSPATH') || exit;
 
 /**
- * Призыв к действию (services-details-4.html, SD4 — CTA, .sd4-cta__band).
- * label/instructions по-русски; name/key по-английски;
- * кнопка — Link; фон — Image ID (вывод через data-background, приём из hero-home-4).
+ * Поля секции (возвращает sub_fields; настройки — в config.php).
  */
 return [
-    'key'     => 'layout_orisa_cta_band',
-    'name'    => 'cta-band',
-    'label'   => 'Призыв к действию',
-    'display' => 'block',
-    'sub_fields' => [
         [
             'key'   => 'field_orisa_cta_band_title',
             'label' => 'Заголовок',
@@ -39,5 +32,5 @@ return [
             'return_format' => 'id',
             'instructions'  => 'Фон полосы (в оригинале фона нет, подложка — var(--at-neutral-50)).',
         ],
-    ],
+    
 ];

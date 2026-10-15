@@ -2,20 +2,9 @@
 defined('ABSPATH') || exit;
 
 /**
- * Контакты (база: contact-2.html, .sec-1-contact — без page-hero и moving-gallery,
- * это отдельные блоки page-hero и logo-marquee):
- * - label/instructions только по-русски; name/key — по-английски;
- * - повторители: layout block/table + button_label по-русски;
- * - телефон/почта/адрес офиса: пустое поле подтягивается из настроек «Контакты» (Options);
- * - соцсети: ссылки из Options; форма: шорткод CF7 (поле «Форма CF7»);
- * - картинки аватаров: return_format id.
+ * Поля секции (возвращает sub_fields; настройки — в config.php).
  */
 return [
-    'key'     => 'layout_orisa_contact',
-    'name'    => 'contact',
-    'label'   => 'Контакты',
-    'display' => 'block',
-    'sub_fields' => [
         [
             'key'           => 'field_orisa_contact_badge',
             'label'         => 'Плашка',
@@ -114,5 +103,5 @@ return [
             'type'          => 'text',
             'default_value' => 'Follow Us',
         ],
-    ],
+    
 ];

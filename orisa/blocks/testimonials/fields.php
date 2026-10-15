@@ -2,21 +2,9 @@
 defined('ABSPATH') || exit;
 
 /**
- * Отзывы. База — index-13.html 1346-1492 (section.sec-7-home-13):
- * синхронизированная пара swiper-слайдеров — медиа и цитаты (main.js §47b-4),
- * шапка (плашка, заголовок, лид), слайд — blockquote + quote-foot.
- * Общий каркас с index.html 1112-1429 (.slider-testimonial + .testimonial-cart-wrap,
- * main.js §47 customSwiper) — второй вариант того же блока.
- * Слайды — один повторитель на обе версии, чтобы парные слайдеры (медиа + цитаты)
- * не рассинхронизировались. Звёзды — статичный декор (как стрелки at-btn в эталоне).
- * Картинки: return_format id.
+ * Поля секции (возвращает sub_fields; настройки — в config.php).
  */
 return [
-    'key'     => 'layout_orisa_testimonials',
-    'name'    => 'testimonials',
-    'label'   => 'Отзывы',
-    'display' => 'block',
-    'sub_fields' => [
         [
             'key'           => 'field_orisa_testimonials_variant',
             'label'         => 'Вариант',
@@ -100,5 +88,5 @@ return [
                 ],
             ],
         ],
-    ],
+    
 ];

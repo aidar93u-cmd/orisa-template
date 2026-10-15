@@ -2,21 +2,9 @@
 defined('ABSPATH') || exit;
 
 /**
- * Услуга детально (база: services-details-4.html, <main>: sd4-hero/practice/flow/deliver/cta/next).
- * services-details.html несовместим с services-details-4.html (другой каркас: section-fix/swiper/
- * scroll-section/at-service-card против sd4-классов и data-sd4-атрибутов со своим services-details-4.js) —
- * variant не заведён, блок строго по services-details-4.
- * - label/instructions по-русски; name/key — по-английски;
- * - картинки: return_format id; номера модулей и шагов подставляются автоматически по порядку;
- * - счётчик deliver: число — поле (попадёт в data-to), стартовый «0» рисует JS;
- * - пустые поля гасят свои теги (см. template.php).
+ * Поля секции (возвращает sub_fields; настройки — в config.php).
  */
 return [
-    'key'     => 'layout_orisa_service_details',
-    'name'    => 'service-details',
-    'label'   => 'Услуга детально',
-    'display' => 'block',
-    'sub_fields' => [
         [
             'key'   => 'field_orisa_service_details_crumb_link',
             'label' => 'Хлебные крошки (родитель)',
@@ -265,5 +253,5 @@ return [
                 ],
             ],
         ],
-    ],
+    
 ];

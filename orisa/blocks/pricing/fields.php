@@ -2,19 +2,9 @@
 defined('ABSPATH') || exit;
 
 /**
- * Тарифы (база: pricing-3.html, строки 566-665 сетка + 667-824 отзывы).
- * - label по-русски; name/key — по-английски;
- * - повторители: layout block + button_label по-русски;
- * - картинки: return_format id; кнопка тарифа — Link.
- * Без variant: каркас pricing-4 (сингл-план + проект + шаги) общий только
- * словом «тарифы», переключателя мес/год нет ни в одном из файлов.
+ * Поля секции (возвращает sub_fields; настройки — в config.php).
  */
 return [
-    'key'     => 'layout_orisa_pricing',
-    'name'    => 'pricing',
-    'label'   => 'Тарифы',
-    'display' => 'block',
-    'sub_fields' => [
         [
             'key'          => 'field_orisa_pricing_plans',
             'label'        => 'Тарифы',
@@ -159,5 +149,5 @@ return [
                 ],
             ],
         ],
-    ],
+    
 ];

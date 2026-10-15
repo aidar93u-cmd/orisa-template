@@ -2,19 +2,9 @@
 defined('ABSPATH') || exit;
 
 /**
- * Путь компании (about-1.html, строки 658-773: .sec-2-about.block-journey).
- * Разметка 1:1 с оригиналом (шапка, карточка, ul.journey-list — классы дословно).
- * Динамика: плашка, заголовок, подзаголовок, кнопка (Link),
- * фото карточки (Image ID — вывод через orisa_img()),
- * годы-повторитель (дата, заголовок, текст, ссылка).
- * Пустые поля гасят свои теги (см. template.php).
+ * Поля секции (возвращает sub_fields; настройки — в config.php).
  */
 return [
-    'key'     => 'layout_orisa_about_journey',
-    'name'    => 'about-journey',
-    'label'   => 'Путь компании',
-    'display' => 'block',
-    'sub_fields' => [
         [
             'key'           => 'field_orisa_about_journey_badge',
             'label'         => 'Плашка',
@@ -87,5 +77,5 @@ return [
                 ],
             ],
         ],
-    ],
+    
 ];
