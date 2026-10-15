@@ -12,6 +12,13 @@ return [
     'display' => 'block',
     'sub_fields' => [
         [
+            'key'       => 'field_orisa_cases_tab_content',
+            'label'     => 'Содержимое',
+            'name'      => '',
+            'type'      => 'tab',
+            'placement' => 'top',
+        ],
+        [
             'key'           => 'field_orisa_cases_badge',
             'label'         => 'Плашка',
             'name'          => 'badge',
@@ -36,6 +43,13 @@ return [
             'label' => 'Кнопка «Смотреть все кейсы»',
             'name'  => 'button_link',
             'type'  => 'link',
+        ],
+        [
+            'key'       => 'field_orisa_cases_tab_items',
+            'label'     => 'Элементы',
+            'name'      => '',
+            'type'      => 'tab',
+            'placement' => 'top',
         ],
         [
             'key'          => 'field_orisa_cases_items',

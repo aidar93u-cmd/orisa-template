@@ -12,6 +12,13 @@ return [
     'display' => 'block',
     'sub_fields' => [
         [
+            'key'       => 'field_orisa_pricing_tab_items',
+            'label'     => 'Элементы',
+            'name'      => '',
+            'type'      => 'tab',
+            'placement' => 'top',
+        ],
+        [
             'key'          => 'field_orisa_pricing_plans',
             'label'        => 'Тарифы',
             'name'         => 'plans',

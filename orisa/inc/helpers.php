@@ -206,7 +206,12 @@ function orisa_project_posts($limit = 4) {
         $g = function_exists('get_field') ? get_field('service', $p->ID) : '';
         $d = function_exists('get_field') ? get_field('duration', $p->ID) : '';
         $tags = [];
-        if (is_string($g) && $g !== '') {
+        $terms = function_exists('get_the_terms') ? get_the_terms($p->ID, 'project_type') : false;
+        if (is_array($terms) && $terms !== []) {
+            foreach ($terms as $t) {
+                $tags[] = $t->name;
+            }
+        } elseif (is_string($g) && $g !== '') {
             $tags[] = $g;
         }
         if (is_string($d) && $d !== '') {

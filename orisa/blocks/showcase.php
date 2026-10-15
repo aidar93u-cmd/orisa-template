@@ -12,6 +12,13 @@ return [
     'display' => 'block',
     'sub_fields' => [
         [
+            'key'       => 'field_orisa_showcase_tab_content',
+            'label'     => 'Содержимое',
+            'name'      => '',
+            'type'      => 'tab',
+            'placement' => 'top',
+        ],
+        [
             'key'   => 'field_orisa_showcase_title',
             'label' => 'Заголовок',
             'name'  => 'title',
@@ -36,6 +43,13 @@ return [
             'name'          => 'badge_image',
             'type'          => 'image',
             'return_format' => 'id',
+        ],
+        [
+            'key'       => 'field_orisa_showcase_tab_items',
+            'label'     => 'Элементы',
+            'name'      => '',
+            'type'      => 'tab',
+            'placement' => 'top',
         ],
         [
             'key'          => 'field_orisa_showcase_items',

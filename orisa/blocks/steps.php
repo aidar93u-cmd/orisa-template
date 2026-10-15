@@ -12,6 +12,13 @@ return [
     'display' => 'block',
     'sub_fields' => [
         [
+            'key'       => 'field_orisa_steps_tab_content',
+            'label'     => 'Содержимое',
+            'name'      => '',
+            'type'      => 'tab',
+            'placement' => 'top',
+        ],
+        [
             'key'           => 'field_orisa_steps_badge',
             'label'         => 'Плашка',
             'name'          => 'badge',
@@ -31,6 +38,13 @@ return [
             'name'  => 'subtitle',
             'type'  => 'textarea',
             'rows'  => 2,
+        ],
+        [
+            'key'       => 'field_orisa_steps_tab_items',
+            'label'     => 'Элементы',
+            'name'      => '',
+            'type'      => 'tab',
+            'placement' => 'top',
         ],
         [
             'key'          => 'field_orisa_steps_metrics',

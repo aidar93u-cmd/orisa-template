@@ -36,6 +36,16 @@ function orisa_register_cpt() {
         'menu_icon'    => 'dashicons-portfolio',
         'supports'     => ['title', 'editor', 'thumbnail', 'excerpt'],
     ]);
+    register_taxonomy('project_type', ['project'], [
+        'labels'            => [
+            'name'          => 'Сферы',
+            'singular_name' => 'Сфера',
+        ],
+        'hierarchical'      => true,
+        'public'            => true,
+        'show_in_rest'      => true,
+        'show_admin_column' => true,
+    ]);
 }
 
 add_action('acf/init', 'orisa_cpt_fields');

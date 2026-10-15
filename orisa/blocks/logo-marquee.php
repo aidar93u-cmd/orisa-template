@@ -12,6 +12,13 @@ return [
     'display' => 'block',
     'sub_fields' => [
         [
+            'key'       => 'field_orisa_logo_marquee_tab_content',
+            'label'     => 'Содержимое',
+            'name'      => '',
+            'type'      => 'tab',
+            'placement' => 'top',
+        ],
+        [
             'key'           => 'field_orisa_logo_marquee_variant',
             'label'         => 'Вариант',
             'name'          => 'variant',
@@ -24,6 +31,13 @@ return [
             ],
             'default_value' => 'brendy',
             'instructions'  => 'Бренды — ряд логотипов (главная). Лента — тёмная строка с текстом. Стена брендов — светлая строка с текстом (index.html 1840-1913). Галерея — ряд фото.',
+        ],
+        [
+            'key'       => 'field_orisa_logo_marquee_tab_items',
+            'label'     => 'Элементы',
+            'name'      => '',
+            'type'      => 'tab',
+            'placement' => 'top',
         ],
         [
             'key'          => 'field_orisa_logo_marquee_items',

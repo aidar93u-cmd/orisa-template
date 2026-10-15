@@ -12,6 +12,13 @@ return [
     'display' => 'block',
     'sub_fields' => [
         [
+            'key'       => 'field_orisa_service_details_tab_content',
+            'label'     => 'Содержимое',
+            'name'      => '',
+            'type'      => 'tab',
+            'placement' => 'top',
+        ],
+        [
             'key'   => 'field_orisa_service_details_crumb_link',
             'label' => 'Хлебные крошки (родитель)',
             'name'  => 'crumb_link',
@@ -62,6 +69,13 @@ return [
             'type'          => 'text',
             'default_value' => 'Процесс дизайна',
             'instructions'  => 'Ведёт на якорь шагов (#sd4-flow).',
+        ],
+        [
+            'key'       => 'field_orisa_service_details_tab_items',
+            'label'     => 'Элементы',
+            'name'      => '',
+            'type'      => 'tab',
+            'placement' => 'top',
         ],
         [
             'key'          => 'field_orisa_service_details_gallery',

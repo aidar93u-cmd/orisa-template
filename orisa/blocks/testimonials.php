@@ -12,6 +12,13 @@ return [
     'display' => 'block',
     'sub_fields' => [
         [
+            'key'       => 'field_orisa_testimonials_tab_content',
+            'label'     => 'Содержимое',
+            'name'      => '',
+            'type'      => 'tab',
+            'placement' => 'top',
+        ],
+        [
             'key'           => 'field_orisa_testimonials_variant',
             'label'         => 'Вариант',
             'name'          => 'variant',
@@ -42,6 +49,13 @@ return [
             'name'  => 'subtitle',
             'type'  => 'textarea',
             'rows'  => 2,
+        ],
+        [
+            'key'       => 'field_orisa_testimonials_tab_items',
+            'label'     => 'Элементы',
+            'name'      => '',
+            'type'      => 'tab',
+            'placement' => 'top',
         ],
         [
             'key'          => 'field_orisa_testimonials_items',

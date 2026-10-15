@@ -11,6 +11,13 @@ return [
     'label' => 'Отзывы 3',
     'display' => 'block',
     'sub_fields' => [
+        [
+            'key'       => 'field_orisa_review_tab_content',
+            'label'     => 'Содержимое',
+            'name'      => '',
+            'type'      => 'tab',
+            'placement' => 'top',
+        ],
         ['key' => 'field_orisa_h3_badge', 'label' => 'Плашка', 'name' => 'badge', 'type' => 'text'],
         ['key' => 'field_orisa_h3_title', 'label' => 'Заголовок', 'name' => 'title', 'type' => 'wysiwyg', 'tabs' => 'visual', 'media_upload' => 0],
         ['key' => 'field_orisa_h3_subtitle', 'label' => 'Подзаголовок', 'name' => 'subtitle', 'type' => 'textarea', 'rows' => 2],
@@ -24,6 +31,13 @@ return [
         ['key' => 'field_orisa_h3_main_img', 'label' => 'Главное фото', 'name' => 'main_image', 'type' => 'image', 'return_format' => 'id'],
         ['key' => 'field_orisa_h3_counter', 'label' => 'Счётчик: число', 'name' => 'counter_number', 'type' => 'number'],
         ['key' => 'field_orisa_h3_counter_lb', 'label' => 'Счётчик: подпись', 'name' => 'counter_label', 'type' => 'text'],
+        [
+            'key'       => 'field_orisa_review_tab_items',
+            'label'     => 'Элементы',
+            'name'      => '',
+            'type'      => 'tab',
+            'placement' => 'top',
+        ],
         ['key' => 'field_orisa_h3_avatars', 'label' => 'Аватары', 'name' => 'avatars', 'type' => 'repeater', 'layout' => 'table', 'button_label' => 'Добавить аватар',
          'sub_fields' => [
             ['key' => 'field_orisa_h3_av_img', 'label' => 'Аватар', 'name' => 'avatar', 'type' => 'image', 'return_format' => 'id'],

@@ -12,6 +12,13 @@ return [
     'display' => 'block',
     'sub_fields' => [
         [
+            'key'       => 'field_orisa_brand_tab_content',
+            'label'     => 'Содержимое',
+            'name'      => '',
+            'type'      => 'tab',
+            'placement' => 'top',
+        ],
+        [
             'key'   => 'field_orisa_brand_badge',
             'label' => 'Плашка',
             'name'  => 'badge',
@@ -44,6 +51,13 @@ return [
             'type'          => 'image',
             'return_format' => 'id',
             'instructions'  => 'Фон секции (в оригинале bg-img-4.webp).',
+        ],
+        [
+            'key'       => 'field_orisa_brand_tab_items',
+            'label'     => 'Элементы',
+            'name'      => '',
+            'type'      => 'tab',
+            'placement' => 'top',
         ],
         [
             'key'          => 'field_orisa_brand_cards',

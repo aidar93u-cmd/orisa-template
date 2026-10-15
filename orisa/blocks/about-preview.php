@@ -12,6 +12,13 @@ return [
     'display' => 'block',
     'sub_fields' => [
         [
+            'key'       => 'field_orisa_about_preview_tab_content',
+            'label'     => 'Содержимое',
+            'name'      => '',
+            'type'      => 'tab',
+            'placement' => 'top',
+        ],
+        [
             'key'           => 'field_orisa_about_preview_badge',
             'label'         => 'Плашка',
             'name'          => 'badge',
@@ -38,6 +45,13 @@ return [
             'name'          => 'button',
             'type'          => 'link',
             'return_format' => 'array',
+        ],
+        [
+            'key'       => 'field_orisa_about_preview_tab_items',
+            'label'     => 'Элементы',
+            'name'      => '',
+            'type'      => 'tab',
+            'placement' => 'top',
         ],
         [
             'key'          => 'field_orisa_about_preview_avatars',

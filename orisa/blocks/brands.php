@@ -11,11 +11,25 @@ return [
     'label' => 'Бренды 2',
     'display' => 'block',
     'sub_fields' => [
+        [
+            'key'       => 'field_orisa_brands_tab_content',
+            'label'     => 'Содержимое',
+            'name'      => '',
+            'type'      => 'tab',
+            'placement' => 'top',
+        ],
         ['key' => 'field_orisa_brands_title_modern', 'label' => 'Заголовок «Modern»', 'name' => 'title_modern', 'type' => 'text', 'default_value' => 'Современный'],
         ['key' => 'field_orisa_brands_intro', 'label' => 'Текст справа от «Modern»', 'name' => 'intro', 'type' => 'wysiwyg', 'tabs' => 'visual', 'media_upload' => 0, 'default_value' => 'Базируемся в Канаде, <span class="text-theme text-scramble">Orisa</span> — креативное агентство: инновационные бренд-решения для клиентов по всему миру.'],
         ['key' => 'field_orisa_brands_kicker', 'label' => 'Подзаголовок-кикер', 'name' => 'kicker', 'type' => 'wysiwyg', 'tabs' => 'visual', 'media_upload' => 0, 'default_value' => '<span class="text-theme text-scramble">Креативные</span> решения <br>для <span class="text-theme text-scramble">современных</span> брендов'],
         ['key' => 'field_orisa_brands_button', 'label' => 'Кнопка', 'name' => 'button', 'type' => 'link'],
         ['key' => 'field_orisa_brands_title_agency', 'label' => 'Заголовок «Agency»', 'name' => 'title_agency', 'type' => 'text', 'default_value' => 'Агентство'],
+        [
+            'key'       => 'field_orisa_brands_tab_items',
+            'label'     => 'Элементы',
+            'name'      => '',
+            'type'      => 'tab',
+            'placement' => 'top',
+        ],
         ['key' => 'field_orisa_brands_thumbs', 'label' => 'Фото справа', 'name' => 'thumbs', 'type' => 'repeater', 'layout' => 'table', 'button_label' => 'Добавить фото', 'min' => 0,
          'sub_fields' => [
             ['key' => 'field_orisa_brands_thumb_image', 'label' => 'Фото', 'name' => 'image', 'type' => 'image', 'return_format' => 'id'],

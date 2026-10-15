@@ -11,6 +11,13 @@ return [
     'label' => 'Главный экран 1',
     'display' => 'block',
     'sub_fields' => [
+        [
+            'key'       => 'field_orisa_vr_tab_items',
+            'label'     => 'Элементы',
+            'name'      => '',
+            'type'      => 'tab',
+            'placement' => 'top',
+        ],
         ['key' => 'field_orisa_vr_brackets', 'label' => 'Плашка', 'name' => 'brackets', 'type' => 'repeater', 'layout' => 'table', 'button_label' => 'Добавить пункт',
          'sub_fields' => [
             ['key' => 'field_orisa_vr_bracket_text', 'label' => 'Пункт', 'name' => 'text', 'type' => 'text'],

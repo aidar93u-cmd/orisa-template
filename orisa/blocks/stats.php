@@ -12,6 +12,13 @@ return [
     'display' => 'block',
     'sub_fields' => [
         [
+            'key'       => 'field_orisa_stats_tab_content',
+            'label'     => 'Содержимое',
+            'name'      => '',
+            'type'      => 'tab',
+            'placement' => 'top',
+        ],
+        [
             'key'           => 'field_orisa_stats_variant',
             'label'         => 'Вариант',
             'name'          => 'variant',
@@ -22,6 +29,13 @@ return [
             ],
             'default_value' => 'lines',
             'instructions'  => 'Линии — Главная 9 (sec-2-home-9 с декор-линией). Компактные счётчики — index.html 1559-1592 (at-sec8-area: h1 + odometer).',
+        ],
+        [
+            'key'       => 'field_orisa_stats_tab_items',
+            'label'     => 'Элементы',
+            'name'      => '',
+            'type'      => 'tab',
+            'placement' => 'top',
         ],
         [
             'key'          => 'field_orisa_stats_items',

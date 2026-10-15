@@ -12,6 +12,13 @@ return [
     'display' => 'block',
     'sub_fields' => [
         [
+            'key'       => 'field_orisa_counter_tab_content',
+            'label'     => 'Содержимое',
+            'name'      => '',
+            'type'      => 'tab',
+            'placement' => 'top',
+        ],
+        [
             'key'           => 'field_orisa_counter_tagline',
             'label'         => 'Слоган сверху',
             'name'          => 'tagline',
@@ -91,6 +98,13 @@ return [
             'name'          => 'scroll_label',
             'type'          => 'text',
             'default_value' => 'ЛИСТАЙТЕ',
+        ],
+        [
+            'key'       => 'field_orisa_counter_tab_items',
+            'label'     => 'Элементы',
+            'name'      => '',
+            'type'      => 'tab',
+            'placement' => 'top',
         ],
         [
             'key'          => 'field_orisa_counter_tags',

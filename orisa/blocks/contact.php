@@ -12,6 +12,13 @@ return [
     'display' => 'block',
     'sub_fields' => [
         [
+            'key'       => 'field_orisa_contact_tab_content',
+            'label'     => 'Содержимое',
+            'name'      => '',
+            'type'      => 'tab',
+            'placement' => 'top',
+        ],
+        [
             'key'           => 'field_orisa_contact_badge',
             'label'         => 'Плашка',
             'name'          => 'badge',
@@ -24,6 +31,13 @@ return [
             'label' => 'Заголовок',
             'name'  => 'title',
             'type'  => 'text',
+        ],
+        [
+            'key'       => 'field_orisa_contact_tab_items',
+            'label'     => 'Элементы',
+            'name'      => '',
+            'type'      => 'tab',
+            'placement' => 'top',
         ],
         [
             'key'          => 'field_orisa_contact_offices',

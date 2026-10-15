@@ -63,6 +63,15 @@ $fmt = function ($n) {
 };
 $h1 = $amount !== '' && $amount !== null ? 'Списано ' . $fmt($amount) . ' долгов через процедуру банкротства' : get_the_title();
 $ch = 0;
+$orisa_pt_terms = function_exists('get_the_terms') ? get_the_terms($p_id, 'project_type') : false;
+$orisa_pt_names = [];
+if (is_array($orisa_pt_terms) && $orisa_pt_terms !== []) {
+    foreach ($orisa_pt_terms as $orisa_pt_t) {
+        $orisa_pt_names[] = $orisa_pt_t->name;
+    }
+} elseif ($service !== '') {
+    $orisa_pt_names[] = $service;
+}
 ?>
                 <!-- sec-1: первый экран — результат дела -->
                 <section class="sec-1-portfolio-details-4 overflow-hidden pt-150 pb-60">
@@ -83,7 +92,7 @@ $ch = 0;
                         <div class="row align-items-center sec-1-portfolio-details-4__bottom">
                             <div class="col-md-9">
                                 <ul class="sec-1-portfolio-details-4__tags list-unstyled mb-0 d-flex flex-wrap gap-2 at_fade_anim" data-fade-from="bottom" data-delay=".3">
-                                    <?php if ($service !== '') : ?><li class="sec-1-portfolio-details-4__tag fz-font-label text-uppercase fw-600"><?php echo esc_html($service); ?></li><?php endif; ?>
+                                    <?php foreach ($orisa_pt_names as $orisa_pt_n) : ?><li class="sec-1-portfolio-details-4__tag fz-font-label text-uppercase fw-600"><?php echo esc_html($orisa_pt_n); ?></li><?php endforeach; ?>
                                     <?php if ($duration !== '') : ?><li class="sec-1-portfolio-details-4__tag fz-font-label text-uppercase fw-600"><?php echo esc_html($duration); ?></li><?php endif; ?>
                                     <li class="sec-1-portfolio-details-4__tag fz-font-label text-uppercase fw-600">Завершённое дело</li>
                                 </ul>
@@ -276,14 +285,19 @@ $ch = 0;
                 <?php endif; ?>
 
                 <?php
-                $orisa_rel = new WP_Query([
+                $orisa_rel_args = [
                     'post_type'      => 'project',
                     'posts_per_page' => 3,
                     'post__not_in'   => [$p_id],
                     'orderby'        => 'date',
                     'order'          => 'DESC',
                     'no_found_rows'  => true,
-                ]);
+                ];
+                $orisa_rel_ids = function_exists('wp_get_post_terms') ? wp_get_post_terms($p_id, 'project_type', ['fields' => 'ids']) : [];
+                if (is_array($orisa_rel_ids) && $orisa_rel_ids !== []) {
+                    $orisa_rel_args['tax_query'] = [['taxonomy' => 'project_type', 'terms' => $orisa_rel_ids]];
+                }
+                $orisa_rel = new WP_Query($orisa_rel_args);
                 ?>
                 <?php if ($orisa_rel->have_posts()) : ?>
                     <section class="sec-4-portfolio-details-4 overflow-hidden pt-80 pb-80">

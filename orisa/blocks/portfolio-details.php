@@ -12,6 +12,13 @@ return [
     'display' => 'block',
     'sub_fields' => [
         [
+            'key'       => 'field_orisa_portfolio_details_tab_content',
+            'label'     => 'Содержимое',
+            'name'      => '',
+            'type'      => 'tab',
+            'placement' => 'top',
+        ],
+        [
             'key'          => 'field_orisa_portfolio_details_crumbs',
             'label'        => 'Хлебные крошки',
             'name'         => 'crumbs',
@@ -37,6 +44,13 @@ return [
             'name'  => 'tagline',
             'type'  => 'textarea',
             'rows'  => 2,
+        ],
+        [
+            'key'       => 'field_orisa_portfolio_details_tab_items',
+            'label'     => 'Элементы',
+            'name'      => '',
+            'type'      => 'tab',
+            'placement' => 'top',
         ],
         [
             'key'          => 'field_orisa_portfolio_details_tags',

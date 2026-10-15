@@ -12,6 +12,13 @@ return [
     'display' => 'block',
     'sub_fields' => [
         [
+            'key'       => 'field_orisa_service_base_tab_content',
+            'label'     => 'Содержимое',
+            'name'      => '',
+            'type'      => 'tab',
+            'placement' => 'top',
+        ],
+        [
             'key'   => 'field_orisa_service_base_crumb_link',
             'label' => 'Хлебные крошки (родитель)',
             'name'  => 'crumb_link',
@@ -28,6 +35,13 @@ return [
             'label' => 'Заголовок hero',
             'name'  => 'hero_title',
             'type'  => 'text',
+        ],
+        [
+            'key'       => 'field_orisa_service_base_tab_items',
+            'label'     => 'Элементы',
+            'name'      => '',
+            'type'      => 'tab',
+            'placement' => 'top',
         ],
         [
             'key'          => 'field_orisa_service_base_hero_tags',

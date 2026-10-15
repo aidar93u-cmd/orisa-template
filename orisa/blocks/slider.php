@@ -12,6 +12,13 @@ return [
     'display' => 'block',
     'sub_fields' => [
         [
+            'key'       => 'field_orisa_slider_tab_content',
+            'label'     => 'Содержимое',
+            'name'      => '',
+            'type'      => 'tab',
+            'placement' => 'top',
+        ],
+        [
             'key'            => 'field_orisa_slider_brand_title',
             'label'          => 'Заголовок-бренд',
             'name'           => 'brand_title',
@@ -26,6 +33,13 @@ return [
             'label' => 'Ссылка «Since»',
             'name'  => 'since_link',
             'type'  => 'link',
+        ],
+        [
+            'key'       => 'field_orisa_slider_tab_items',
+            'label'     => 'Элементы',
+            'name'      => '',
+            'type'      => 'tab',
+            'placement' => 'top',
         ],
         [
             'key'          => 'field_orisa_slider_slides',

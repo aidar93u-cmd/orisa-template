@@ -12,6 +12,13 @@ return [
     'display' => 'block',
     'sub_fields' => [
         [
+            'key'       => 'field_orisa_faq_tab_content',
+            'label'     => 'Содержимое',
+            'name'      => '',
+            'type'      => 'tab',
+            'placement' => 'top',
+        ],
+        [
             'key'           => 'field_orisa_faq_variant',
             'label'         => 'Вариант',
             'name'          => 'variant',
@@ -68,6 +75,13 @@ return [
             'label' => 'Кнопка слева (только «Alt»)',
             'name'  => 'side_button',
             'type'  => 'link',
+        ],
+        [
+            'key'       => 'field_orisa_faq_tab_items',
+            'label'     => 'Элементы',
+            'name'      => '',
+            'type'      => 'tab',
+            'placement' => 'top',
         ],
         [
             'key'          => 'field_orisa_faq_items',

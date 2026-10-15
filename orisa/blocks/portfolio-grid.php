@@ -12,11 +12,25 @@ return [
     'display' => 'block',
     'sub_fields' => [
         [
+            'key'       => 'field_orisa_portfolio_grid_tab_content',
+            'label'     => 'Содержимое',
+            'name'      => '',
+            'type'      => 'tab',
+            'placement' => 'top',
+        ],
+        [
             'key'           => 'field_orisa_portfolio_grid_title',
             'label'         => 'Заголовок',
             'name'          => 'title',
             'type'          => 'text',
             'default_value' => 'Выбранные работы',
+        ],
+        [
+            'key'       => 'field_orisa_portfolio_grid_tab_items',
+            'label'     => 'Элементы',
+            'name'      => '',
+            'type'      => 'tab',
+            'placement' => 'top',
         ],
         [
             'key'          => 'field_orisa_portfolio_grid_filters',

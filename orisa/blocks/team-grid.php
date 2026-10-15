@@ -12,6 +12,13 @@ return [
     'display' => 'block',
     'sub_fields' => [
         [
+            'key'       => 'field_orisa_team_grid_tab_content',
+            'label'     => 'Содержимое',
+            'name'      => '',
+            'type'      => 'tab',
+            'placement' => 'top',
+        ],
+        [
             'key'           => 'field_orisa_team_grid_eyebrow',
             'label'         => 'Плашка',
             'name'          => 'eyebrow',
@@ -38,6 +45,13 @@ return [
             'label' => 'Кнопка',
             'name'  => 'button',
             'type'  => 'link',
+        ],
+        [
+            'key'       => 'field_orisa_team_grid_tab_items',
+            'label'     => 'Элементы',
+            'name'      => '',
+            'type'      => 'tab',
+            'placement' => 'top',
         ],
         [
             'key'          => 'field_orisa_team_grid_members',

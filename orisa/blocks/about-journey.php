@@ -12,6 +12,13 @@ return [
     'display' => 'block',
     'sub_fields' => [
         [
+            'key'       => 'field_orisa_about_journey_tab_content',
+            'label'     => 'Содержимое',
+            'name'      => '',
+            'type'      => 'tab',
+            'placement' => 'top',
+        ],
+        [
             'key'           => 'field_orisa_about_journey_badge',
             'label'         => 'Плашка',
             'name'          => 'badge',
@@ -46,6 +53,13 @@ return [
             'type'          => 'image',
             'return_format' => 'id',
             'instructions'  => 'Фото слева (в оригинале img-121.webp).',
+        ],
+        [
+            'key'       => 'field_orisa_about_journey_tab_items',
+            'label'     => 'Элементы',
+            'name'      => '',
+            'type'      => 'tab',
+            'placement' => 'top',
         ],
         [
             'key'          => 'field_orisa_about_journey_items',

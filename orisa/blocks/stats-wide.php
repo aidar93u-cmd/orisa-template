@@ -12,12 +12,26 @@ return [
     'display' => 'block',
     'sub_fields' => [
         [
+            'key'       => 'field_orisa_stats_wide_tab_content',
+            'label'     => 'Содержимое',
+            'name'      => '',
+            'type'      => 'tab',
+            'placement' => 'top',
+        ],
+        [
             'key'           => 'field_orisa_stats_wide_title',
             'label'         => 'Заголовок',
             'name'          => 'title',
             'type'          => 'text',
             'default_value' => 'О нас',
             'instructions'  => 'Только для aria-label секции — видимого заголовка у ряда статов нет.',
+        ],
+        [
+            'key'       => 'field_orisa_stats_wide_tab_items',
+            'label'     => 'Элементы',
+            'name'      => '',
+            'type'      => 'tab',
+            'placement' => 'top',
         ],
         [
             'key'          => 'field_orisa_stats_wide_items',

@@ -12,6 +12,13 @@ return [
     'display' => 'block',
     'sub_fields' => [
         [
+            'key'       => 'field_orisa_services_preview_tab_content',
+            'label'     => 'Содержимое',
+            'name'      => '',
+            'type'      => 'tab',
+            'placement' => 'top',
+        ],
+        [
             'key'           => 'field_orisa_services_preview_subtitle',
             'label'         => 'Подзаголовок',
             'name'          => 'subtitle',
@@ -33,6 +40,13 @@ return [
             'type'          => 'text',
             'default_value' => 'Завершённых дел',
             'instructions'  => 'Подпись под счётчиком слева.',
+        ],
+        [
+            'key'       => 'field_orisa_services_preview_tab_items',
+            'label'     => 'Элементы',
+            'name'      => '',
+            'type'      => 'tab',
+            'placement' => 'top',
         ],
         [
             'key'          => 'field_orisa_services_preview_services',

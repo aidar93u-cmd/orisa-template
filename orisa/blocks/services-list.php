@@ -12,6 +12,13 @@ return [
     'display' => 'block',
     'sub_fields' => [
         [
+            'key'       => 'field_orisa_services_list_tab_content',
+            'label'     => 'Содержимое',
+            'name'      => '',
+            'type'      => 'tab',
+            'placement' => 'top',
+        ],
+        [
             'key'           => 'field_orisa_services_list_index_badge',
             'label'         => 'Плашка списка',
             'name'          => 'index_badge',
@@ -30,6 +37,13 @@ return [
             'label' => 'Подсказка списка',
             'name'  => 'index_hint',
             'type'  => 'text',
+        ],
+        [
+            'key'       => 'field_orisa_services_list_tab_items',
+            'label'     => 'Элементы',
+            'name'      => '',
+            'type'      => 'tab',
+            'placement' => 'top',
         ],
         [
             'key'          => 'field_orisa_services_list_services',

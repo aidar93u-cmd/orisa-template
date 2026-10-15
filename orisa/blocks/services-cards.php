@@ -12,11 +12,25 @@ return [
     'display' => 'block',
     'sub_fields' => [
         [
+            'key'       => 'field_orisa_services_cards_tab_content',
+            'label'     => 'Содержимое',
+            'name'      => '',
+            'type'      => 'tab',
+            'placement' => 'top',
+        ],
+        [
             'key'          => 'field_orisa_services_cards_title',
             'label'        => 'Заголовок',
             'name'         => 'title',
             'type'         => 'text',
             'instructions' => 'Необязательно. Пусто — без заголовка, как в оригинале.',
+        ],
+        [
+            'key'       => 'field_orisa_services_cards_tab_items',
+            'label'     => 'Элементы',
+            'name'      => '',
+            'type'      => 'tab',
+            'placement' => 'top',
         ],
         [
             'key'          => 'field_orisa_services_cards_cards',
