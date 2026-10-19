@@ -165,6 +165,68 @@ function orisa_soc_detect($name, $url) {
 }
 
 /**
+ * tel:-ссылка из человекочитаемого телефона. Пусто → ''.
+ */
+function orisa_phone_href($phone) {
+    $phone = (string) $phone;
+    if ($phone === '') {
+        return '';
+    }
+    $digits = preg_replace('/[^+0-9]/', '', $phone);
+    return $digits !== '' ? 'tel:' . $digits : '';
+}
+
+/**
+ * Соцсети из настроек «Контакты» (soc_*) единым списком: url/slug/label.
+ * $exclude — слаги, которые не выводить (например ['vk']).
+ */
+function orisa_socials($exclude = []) {
+    $all = [
+        ['key' => 'soc_whatsapp', 'slug' => 'whatsapp',  'label' => 'WhatsApp'],
+        ['key' => 'soc_telegram', 'slug' => 'telegram',  'label' => 'Telegram'],
+        ['key' => 'soc_max',      'slug' => 'max',       'label' => 'MAX'],
+        ['key' => 'soc_2gis',     'slug' => 'doublegis', 'label' => '2ГИС'],
+        ['key' => 'soc_yandex',   'slug' => 'yandex',    'label' => 'Яндекс Карты'],
+        ['key' => 'soc_vk',       'slug' => 'vk',        'label' => 'ВКонтакте'],
+    ];
+    $out = [];
+    if (!function_exists('get_field')) {
+        return $out;
+    }
+    $exclude = (array) $exclude;
+    foreach ($all as $s) {
+        if (in_array($s['slug'], $exclude, true)) {
+            continue;
+        }
+        $url = (string) get_field($s['key'], 'option');
+        if ($url === '') {
+            continue;
+        }
+        $out[] = ['url' => $url, 'slug' => $s['slug'], 'label' => $s['label']];
+    }
+    return $out;
+}
+
+/**
+ * Первая почта из повторителя «Почты» в настройках «Контакты». Пусто → ''.
+ */
+function orisa_first_email() {
+    if (!function_exists('get_field')) {
+        return '';
+    }
+    $rows = get_field('emails', 'option');
+    if (!is_array($rows)) {
+        return '';
+    }
+    foreach ($rows as $r) {
+        if (is_array($r) && !empty($r['email'])) {
+            return (string) $r['email'];
+        }
+    }
+    return '';
+}
+
+/**
  * Сотрудники из CPT team (фолбэк повторителя): photo, name, role, url, dark.
  */
 function orisa_team_posts($limit = 8) {
@@ -182,7 +244,7 @@ function orisa_team_posts($limit = 8) {
             'name'  => get_the_title($p->ID),
             'role'  => function_exists('get_field') ? (string) get_field('role', $p->ID) : '',
             'url'   => get_permalink($p->ID),
-            'dark'  => false,
+            'dark'  => function_exists('get_field') ? (bool) get_field('dark', $p->ID) : false,
         ];
     }
     wp_reset_postdata();

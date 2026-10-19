@@ -78,24 +78,6 @@ $img_404 = function_exists('get_field') ? (int) get_field('not_found_image', 'op
         </div>
     </div>
 </div>
-<div class="sec-2-404 pb-20">
-    <div class="container">
-        <div class="client-capsule-wrapper-box" data-t-throwable-scene="true" style="translate: none; rotate: none; scale: none; transform: translate(0px); opacity: 1; cursor: none;">
-            <div class="client-capsule-wrapper">
-                <?php
-                $orisa_404_logos = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '02', '05', '07', '03'];
-                $orisa_404_gray = [0, 4, 9, 10];
-                foreach ($orisa_404_logos as $orisa_404_i => $orisa_404_n) :
-                ?>
-                    <p data-t-throwable-el="">
-                        <span class="client-box<?php echo in_array($orisa_404_i, $orisa_404_gray, true) ? ' bg-neutral-500' : ''; ?>">
-                            <img class="invert-1" src="<?php echo esc_url(ORISA_URI . '/assets/imgs/template/logo/logo-brand-' . $orisa_404_n . '.webp'); ?>" alt="image">
-                        </span>
-                    </p>
-                <?php endforeach; ?>
-            </div>
-        </div>
-    </div>
-</div>
+
 <?php
 get_footer();

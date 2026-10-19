@@ -92,6 +92,7 @@ return [
             'type'         => 'repeater',
             'layout'       => 'table',
             'button_label' => 'Добавить фото',
+            'instructions' => 'Пусто — фото подтянутся из команды автоматически.',
             'sub_fields'   => [
                 [
                     'key'           => 'field_orisa_contact_avatar_image',

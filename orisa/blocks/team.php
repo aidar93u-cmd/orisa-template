@@ -54,48 +54,12 @@ return [
             'return_format' => 'id',
         ],
         [
-            'key'       => 'field_orisa_team_tab_items',
-            'label'     => 'Элементы',
-            'name'      => '',
-            'type'      => 'tab',
-            'placement' => 'top',
-        ],
-        [
-            'key'          => 'field_orisa_team_members',
+            'key'          => 'field_orisa_team_members_note',
             'label'        => 'Сотрудники',
-            'name'         => 'members',
-            'type'         => 'repeater',
-            'layout'       => 'block',
-            'button_label' => 'Добавить сотрудника',
-            'min'          => 1,
-            'sub_fields'   => [
-                [
-                    'key'           => 'field_orisa_team_member_photo',
-                    'label'         => 'Фото',
-                    'name'          => 'photo',
-                    'type'          => 'image',
-                    'return_format' => 'id',
-                ],
-                [
-                    'key'   => 'field_orisa_team_member_name',
-                    'label' => 'Имя',
-                    'name'  => 'name',
-                    'type'  => 'text',
-                ],
-                [
-                    'key'   => 'field_orisa_team_member_role',
-                    'label' => 'Роль',
-                    'name'  => 'role',
-                    'type'  => 'text',
-                ],
-                [
-                    'key'          => 'field_orisa_team_member_link',
-                    'label'        => 'Ссылка (профиль / соцсети)',
-                    'name'         => 'link',
-                    'type'         => 'link',
-                    'instructions' => 'В оригинале иконка и имя ведут на один адрес (team-details.html). Отдельных иконок соцсетей в карточке нет.',
-                ],
-            ],
+            'name'         => '',
+            'type'         => 'message',
+            'message'      => 'Сотрудники выводятся из записей «Сотрудники» автоматически. Добавлять вручную здесь не нужно.',
+            'new_lines'    => 'br',
         ],
     
 

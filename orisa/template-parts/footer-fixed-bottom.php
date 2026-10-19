@@ -7,27 +7,32 @@ defined('ABSPATH') || exit;
         <footer class="footer-fixed-bottom bg-neutral-950 changeless">
             <div class="at-footer-area mp-footer-style mp-footer-style-2 pt-120 pb-0">
                 <div class="container">
-                    <!-- Top section: Logo + Contact | Nav | Follow Us + Social -->
+                    <!-- Top section: Logo + Contact + Hours | Nav -->
                     <div class="row g-5 pb-md-5 pb-2">
                         <div class="col-lg-4">
-                            <div class="d-flex flex-wrap align-items-start gap-5">
-                                <div class="at-header-logo">
-                                    <a href="<?php echo esc_url(home_url('/')); ?>">
-                                        <?php echo orisa_img(function_exists('get_field') ? get_field('logo_dark', 'option') : 0, 'full', ['data-width' => '30', 'alt' => get_bloginfo('name')]); ?>
-                                        <p class="h6 fw-700 text-white mb-0 fz-24"><?php echo orisa_text(function_exists('get_field') ? get_field('site_name_text', 'option') : ''); ?></p>
+                            <div class="d-flex flex-column align-items-start gap-4">
+                                <div class="at-header-logo at-header-logo--wide">
+                                    <a href="<?php echo esc_url(home_url('/')); ?>" aria-label="<?php echo esc_attr(get_bloginfo('name')); ?>">
+                                        <?php echo orisa_img(function_exists('get_field') ? get_field('logo_dark', 'option') : 0, 'full', ['alt' => get_bloginfo('name')]); ?>
                                     </a>
                                 </div>
                                 <div class="d-flex flex-column gap-3">
-                                    <?php $ph2 = function_exists('get_field') ? get_field('phone_secondary', 'option') : ''; ?>
-                                     <?php if ($ph2) : ?><p class="h6 text-white mb-2 fw-medium"><?php echo esc_html($ph2); ?></p><?php endif; ?>
+                                    <?php $ph = function_exists('get_field') ? get_field('phone', 'option') : ''; ?>
+                                     <?php if ($ph) : ?><p class="h6 text-white mb-2 fw-medium"><?php echo esc_html($ph); ?></p><?php endif; ?>
                                     <p class="h6 text-white mb-2">
-                                        <?php $em = function_exists('get_field') ? get_field('emails', 'option') : ''; $em0 = (is_array($em) && isset($em[0]['email'])) ? $em[0]['email'] : ''; ?>
+                                        <?php $em0 = function_exists('orisa_first_email') ? orisa_first_email() : ''; ?>
                                          <?php if ($em0) : ?><a href="<?php echo esc_attr('mailto:' . $em0); ?>" class="text-white text-decoration-none"><?php echo esc_html($em0); ?></a><?php endif; ?>
                                     </p>
-                                    <?php $fa = function_exists('get_field') ? get_field('footer_address', 'option') : ''; ?>
+                                    <?php $fa = function_exists('get_field') ? get_field('address', 'option') : ''; ?>
                                     <?php if ($fa) : ?><p class="h6 text-white mb-0">
                                         <?php echo nl2br(esc_html($fa)); ?>
                                     </p><?php endif; ?>
+                                    <div class="footer-2-hours text-white">
+                                        <?php $hd = function_exists('get_field') ? get_field('footer2_hours_days', 'option') : ''; if (!$hd) $hd = 'Пн — Сб'; ?>
+                                        <span class="d-block fz-font-md opacity-50"><?php echo esc_html($hd); ?></span>
+                                        <?php $ht = function_exists('get_field') ? get_field('footer2_hours_time', 'option') : ''; if (!$ht) $ht = '9:00 — 18:00'; ?>
+                                        <h3 class="h5 fw-400 common-white mb-0"><?php echo esc_html($ht); ?></h3>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -36,72 +41,40 @@ defined('ABSPATH') || exit;
                                 <div class="alt-footer-link-item col-6">
                                     <?php if (has_nav_menu('orisa-footer-1')) : ?>
                                         <?php wp_nav_menu(['theme_location' => 'orisa-footer-1', 'container' => false, 'items_wrap' => '<ul>%3$s</ul>', 'walker' => new Orisa_Plain_Walker('mb-15'), 'fallback_cb' => false]); ?>
-                                    <?php elseif (function_exists('have_rows') && have_rows('footer_menu_1', 'option')) : ?>
-                                    <ul>
-                                        <?php while (have_rows('footer_menu_1', 'option')) : the_row(); ?>
-                                            <?php $l1 = get_sub_field('link'); ?>
-                                            <?php if (is_array($l1) && !empty($l1['url'])) : ?>
-                                                <li class="mb-15"><a href="<?php echo esc_url($l1['url']); ?>"><?php echo esc_html($l1['title'] !== '' ? $l1['title'] : $l1['url']); ?></a></li>
-                                            <?php endif; ?>
-                                        <?php endwhile; ?>
-                                    </ul>
                                     <?php endif; ?>
                                 </div>
                                 <div class="alt-footer-link-item col-6">
                                     <?php if (has_nav_menu('orisa-footer-2')) : ?>
                                         <?php wp_nav_menu(['theme_location' => 'orisa-footer-2', 'container' => false, 'items_wrap' => '<ul>%3$s</ul>', 'walker' => new Orisa_Plain_Walker('mb-15'), 'fallback_cb' => false]); ?>
-                                    <?php elseif (function_exists('have_rows') && have_rows('footer_menu_2', 'option')) : ?>
-                                    <ul>
-                                        <?php while (have_rows('footer_menu_2', 'option')) : the_row(); ?>
-                                            <?php $l2 = get_sub_field('link'); ?>
-                                            <?php if (is_array($l2) && !empty($l2['url'])) : ?>
-                                                <li class="mb-15"><a href="<?php echo esc_url($l2['url']); ?>"><?php echo esc_html($l2['title'] !== '' ? $l2['title'] : $l2['url']); ?></a></li>
-                                            <?php endif; ?>
-                                        <?php endwhile; ?>
-                                    </ul>
                                     <?php endif; ?>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-md-6 flex-column justify-content-lg-end d-none d-md-flex">
-                            <p class="footer-2-follow-label text-white opacity-50 text-uppercase small mb-3">Follow Us</p>
-                            <div class="at-footer-widget at-footer-link">
-                                <?php if (function_exists('have_rows') && have_rows('footer2_socials', 'option')) : ?>
-                                <div class="at-hero-social">
-                                    <?php while (have_rows('footer2_socials', 'option')) : the_row(); ?>
-                                        <?php $sl = get_sub_field('link'); $sn = get_sub_field('name'); ?>
-                                        <?php if (is_array($sl) && !empty($sl['url'])) : ?>
-                                    <a href="<?php echo esc_url($sl['url']); ?>">
-                                        <?php echo esc_html($sn !== '' ? $sn : ($sl['title'] !== '' ? $sl['title'] : $sl['url'])); ?>
-                                        <?php echo orisa_soc_icon(orisa_soc_detect($sn, $sl['url']), 14); ?>
-                                    </a>
-                                        <?php endif; ?>
-                                    <?php endwhile; ?>
                                 </div>
-                                <?php endif; ?>
                             </div>
                         </div>
                     </div>
 
                     <!-- Divider -->
                     <div class="footer-2-border pt-40 pb-40">
-                        <!-- Bottom section: Copyright | Let's Connect + Hours | Service tags -->
+                        <!-- Bottom section: Title | Social icons + Copyright -->
                         <div class="row align-items-end g-4">
-                            <div class="col-lg-10 col-md-8">
-                                <span class="at-footer-copyright"><?php echo orisa_copyright(function_exists('get_field') ? (string) get_field('copyright', 'option') : ''); ?></span>
+                            <div class="col-lg-9 col-md-8">
                                 <div class="at-title-anim overflow-hidden">
-                                    <?php $ct = function_exists('get_field') ? get_field('footer2_connect_title', 'option') : ''; ?>
-                                     <?php if ($ct) : ?><h2 class="footer-2-connect-title text-white mb-0 at-title-text text-scale-anim"><?php echo esc_html($ct); ?></h2><?php endif; ?>
+                                     <h2 class="footer-2-connect-title text-white mb-0 at-title-text text-scale-anim">ЗАКРОЙДОЛГИ.РФ</h2>
                                 </div>
                             </div>
-                            <div class="col-lg-2 col-md-4 text-end">
-                                <div class="d-flex flex-wrap align-items-end gap-4 gap-md-5 mb-3">
-                                    <div class="footer-2-hours text-white">
-                                        <?php $hd = function_exists('get_field') ? get_field('footer2_hours_days', 'option') : ''; ?>
-                                         <?php if ($hd) : ?><span class="d-block fz-font-md opacity-50"><?php echo esc_html($hd); ?></span><?php endif; ?>
-                                        <?php $ht = function_exists('get_field') ? get_field('footer2_hours_time', 'option') : ''; ?>
-                                         <?php if ($ht) : ?><h3 class="h5 fw-400 common-white"><?php echo esc_html($ht); ?></h3><?php endif; ?>
+                            <div class="col-lg-3 col-md-4 text-end">
+                                <div class="at-footer-widget at-footer-link">
+                                    <?php $f2_socials = function_exists('orisa_socials') ? orisa_socials() : []; ?>
+                                    <?php if ($f2_socials) : ?>
+                                    <div class="at-hero-social at-hero-social--icons justify-content-md-end">
+                                        <?php foreach ($f2_socials as $f2_soc) : ?>
+                                        <a href="<?php echo esc_url($f2_soc['url']); ?>" aria-label="<?php echo esc_attr($f2_soc['label']); ?>" title="<?php echo esc_attr($f2_soc['label']); ?>">
+                                            <?php echo orisa_soc_icon($f2_soc['slug'], 18); ?>
+                                        </a>
+                                        <?php endforeach; ?>
                                     </div>
+                                    <?php endif; ?>
                                 </div>
+                                <span class="at-footer-copyright d-block mt-3"><?php echo orisa_copyright(function_exists('get_field') ? (string) get_field('copyright', 'option') : ''); ?></span>
 
                             </div>
                         </div>

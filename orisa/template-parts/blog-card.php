@@ -17,7 +17,7 @@ $cat_slug = !empty($cats) ? $cats[0]->slug : '';
             <a href="<?php the_permalink(); ?>" class="blog-card__title-link"><?php the_title(); ?></a>
         </h2>
         <p class="blog-card__meta">
-            <span class="blog-card__meta-text"><?php esc_html_e('By ', 'orisa'); ?></span>
+            <span class="blog-card__meta-text"><?php esc_html_e('Автор: ', 'orisa'); ?></span>
             <a href="<?php echo esc_url(get_author_posts_url(get_the_author_meta('ID'))); ?>" class="blog-card__author"><?php the_author(); ?></a>
             <span class="blog-card__meta-text"> – <?php echo esc_html(get_the_date()); ?></span>
         </p>

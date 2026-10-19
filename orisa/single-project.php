@@ -300,24 +300,9 @@ if (is_array($orisa_pt_terms) && $orisa_pt_terms !== []) {
                 <?php
                 $orisa_cta_form = function_exists('get_field') ? (string) get_field('project_cta_form', 'option') : '';
                 $orisa_cta_phone = function_exists('get_field') ? (string) get_field('phone', 'option') : '';
-                $orisa_cta_phone_href = function_exists('get_field') ? (string) get_field('phone_href', 'option') : '';
-                $orisa_cta_addr = function_exists('get_field') ? (string) get_field('address', 'option') : '';
-                $orisa_cta_email = '';
-                $orisa_cta_emails = function_exists('get_field') ? get_field('emails', 'option') : '';
-                if (is_array($orisa_cta_emails)) {
-                    foreach ($orisa_cta_emails as $orisa_cta_em) {
-                        if (is_array($orisa_cta_em) && !empty($orisa_cta_em['email'])) {
-                            $orisa_cta_email = (string) $orisa_cta_em['email'];
-                            break;
-                        }
-                    }
-                }
-                $orisa_cta_soc = [
-                    ['soc_whatsapp', 'WhatsApp', 'whatsapp'],
-                    ['soc_telegram', 'Telegram', 'telegram'],
-                    ['soc_max', 'MAX', 'max'],
-                    ['soc_vk', 'ВКонтакте', 'vk'],
-                ];
+                $orisa_cta_phone_href = function_exists('orisa_phone_href') ? orisa_phone_href($orisa_cta_phone) : '';
+                $orisa_cta_email = function_exists('orisa_first_email') ? orisa_first_email() : '';
+                $orisa_cta_soc = function_exists('orisa_socials') ? orisa_socials(['doublegis', 'yandex']) : [];
                 ?>
                 <div class="sec-4-about bg-neutral-0 pt-120 pb-120" id="project-cta">
                     <div class="container">
@@ -361,7 +346,7 @@ if (is_array($orisa_pt_terms) && $orisa_pt_terms !== []) {
                                                 <div class="d-flex flex-wrap gap-md-5 gap-4">
                                                     <span class="fz-font-md neutral-500">
                                                         <?php if ($orisa_cta_phone !== '') : ?>
-                                                            Телефон: <span class="neutral-900"><a href="<?php echo esc_attr($orisa_cta_phone_href !== '' ? $orisa_cta_phone_href : 'tel:' . preg_replace('/[^+\d]/', '', $orisa_cta_phone)); ?>"><?php echo esc_html($orisa_cta_phone); ?></a></span>
+                                                            Телефон: <span class="neutral-900"><a href="<?php echo esc_attr($orisa_cta_phone_href); ?>"><?php echo esc_html($orisa_cta_phone); ?></a></span>
                                                             <br class="d-block">
                                                         <?php endif; ?>
                                                         <?php if ($orisa_cta_email !== '') : ?>
@@ -377,15 +362,12 @@ if (is_array($orisa_pt_terms) && $orisa_pt_terms !== []) {
                                     <div class="col-xxl-6 col-lg-8 mx-auto">
                                         <ul class="at-social-list list-unstyled d-flex flex-wrap gap-md-4 gap-3 pt-50">
                                             <?php foreach ($orisa_cta_soc as $orisa_cta_s) : ?>
-                                                <?php $orisa_cta_url = function_exists('get_field') ? (string) get_field($orisa_cta_s[0], 'option') : ''; ?>
-                                                <?php if ($orisa_cta_url !== '') : ?>
-                                                    <li>
-                                                        <a href="<?php echo esc_url($orisa_cta_url); ?>" target="_blank" rel="noopener" class="at-social__link d-flex align-items-center gap-2" aria-label="<?php echo esc_attr($orisa_cta_s[1]); ?>">
-                                                            <?php echo orisa_soc_icon($orisa_cta_s[2]); ?>
-                                                            <span class="fw-500"><?php echo esc_html($orisa_cta_s[1]); ?></span>
-                                                        </a>
-                                                    </li>
-                                                <?php endif; ?>
+                                                <li>
+                                                    <a href="<?php echo esc_url($orisa_cta_s['url']); ?>" target="_blank" rel="noopener" class="at-social__link d-flex align-items-center gap-2" aria-label="<?php echo esc_attr($orisa_cta_s['label']); ?>">
+                                                        <?php echo orisa_soc_icon($orisa_cta_s['slug']); ?>
+                                                        <span class="fw-500"><?php echo esc_html($orisa_cta_s['label']); ?></span>
+                                                    </a>
+                                                </li>
                                             <?php endforeach; ?>
                                         </ul>
                                     </div>
@@ -396,7 +378,7 @@ if (is_array($orisa_pt_terms) && $orisa_pt_terms !== []) {
                                 <?php if ($orisa_cta_form !== '') : ?>
                                     <?php echo do_shortcode($orisa_cta_form); ?>
                                 <?php elseif ($orisa_cta_phone !== '') : ?>
-                                    <a class="at-btn" href="<?php echo esc_attr($orisa_cta_phone_href !== '' ? $orisa_cta_phone_href : 'tel:' . preg_replace('/[^+\d]/', '', $orisa_cta_phone)); ?>"><?php echo esc_html($orisa_cta_phone); ?></a>
+                                    <a class="at-btn" href="<?php echo esc_attr($orisa_cta_phone_href); ?>"><?php echo esc_html($orisa_cta_phone); ?></a>
                                 <?php endif; ?>
                             </div>
                         </div>

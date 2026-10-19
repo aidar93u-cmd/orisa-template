@@ -20,7 +20,7 @@ $footer_style = function_exists('get_field') && is_page() ? (string) get_field('
                                     <div>
                                         <?php $ft = function_exists('get_field') ? get_field('footer_title', 'option') : ''; ?>
                                         <?php if ($ft) : ?><h3 class="h4 text-white reveal-text"><?php echo esc_html($ft); ?></h3><?php endif; ?>
-                                        <?php $fa = function_exists('get_field') ? get_field('footer_address', 'option') : ''; ?>
+                                        <?php $fa = function_exists('get_field') ? get_field('address', 'option') : ''; ?>
                                         <?php if ($fa) : ?><p class="mb-0">
                                             <?php echo nl2br(esc_html($fa)); ?>
                                         </p><?php endif; ?>
@@ -29,43 +29,20 @@ $footer_style = function_exists('get_field') && is_page() ? (string) get_field('
                             </div>
                             <div class="col-xxl-3 col-lg-5 col-md-8 ms-lg-auto text-lg-end">
                                 <div class="at-footer-title-wrap">
-                                    <?php $ph2 = function_exists('get_field') ? get_field('phone_secondary', 'option') : ''; ?>
-                                        <?php if ($ph2) : ?><h4 class="h6 text-white"><?php echo esc_html($ph2); ?></h4><?php endif; ?>
-                                    <?php $ph = function_exists('get_field') ? get_field('phone', 'option') : ''; $ph_h = function_exists('get_field') ? get_field('phone_href', 'option') : ''; ?>
-                                        <?php if ($ph) : ?><h5 class="h4 text-white text-decoration-underline text-wrap"><?php echo esc_html($ph); ?></h5><?php endif; ?>
+                                    <?php $ph = function_exists('get_field') ? get_field('phone', 'option') : ''; ?>
+                                        <?php if ($ph) : ?><h5 class="h4 text-white text-decoration-underline text-wrap"><a href="<?php echo esc_attr(orisa_phone_href($ph)); ?>" class="text-white text-decoration-underline"><?php echo esc_html($ph); ?></a></h5><?php endif; ?>
                                     <div class="at-footer-widget at-footer-link pt-50">
+                                        <?php $std_socials = function_exists('orisa_socials') ? orisa_socials() : []; ?>
+                                        <?php if ($std_socials) : ?>
                                         <div class="at-hero-social justify-content-lg-end">
-                                            <?php $u_herosoc = function_exists('get_field') ? get_field('soc_whatsapp', 'option') : ''; ?>
-                                            <a href="<?php echo $u_herosoc ? esc_url($u_herosoc) : '#'; ?>">
-                                            WhatsApp
-                                                <?php echo orisa_soc_icon('whatsapp'); ?>
+                                            <?php foreach ($std_socials as $std_soc) : ?>
+                                            <a href="<?php echo esc_url($std_soc['url']); ?>">
+                                            <?php echo esc_html($std_soc['label']); ?>
+                                                <?php echo orisa_soc_icon($std_soc['slug']); ?>
                                             </a>
-                                            <?php $u_herosoc = function_exists('get_field') ? get_field('soc_telegram', 'option') : ''; ?>
-                                            <a href="<?php echo $u_herosoc ? esc_url($u_herosoc) : '#'; ?>">
-                                            Telegram
-                                                <?php echo orisa_soc_icon('telegram'); ?>
-                                            </a>
-                                            <?php $u_herosoc = function_exists('get_field') ? get_field('soc_max', 'option') : ''; ?>
-                                            <a href="<?php echo $u_herosoc ? esc_url($u_herosoc) : '#'; ?>">
-                                            MAX
-                                                <?php echo orisa_soc_icon('max'); ?>
-                                            </a>
-                                            <?php $u_herosoc = function_exists('get_field') ? get_field('soc_2gis', 'option') : ''; ?>
-                                            <a href="<?php echo $u_herosoc ? esc_url($u_herosoc) : '#'; ?>">
-                                            2ГИС
-                                                <?php echo orisa_soc_icon('doublegis'); ?>
-                                            </a>
-                                            <?php $u_herosoc = function_exists('get_field') ? get_field('soc_yandex', 'option') : ''; ?>
-                                            <a href="<?php echo $u_herosoc ? esc_url($u_herosoc) : '#'; ?>">
-                                            Яндекс Карты
-                                                <?php echo orisa_soc_icon('yandex'); ?>
-                                            </a>
-                                            <?php $u_herosoc = function_exists('get_field') ? get_field('soc_vk', 'option') : ''; ?>
-                                            <a href="<?php echo $u_herosoc ? esc_url($u_herosoc) : '#'; ?>">
-                                            ВКонтакте
-                                                <?php echo orisa_soc_icon('vk'); ?>
-                                            </a>
+                                            <?php endforeach; ?>
                                         </div>
+                                        <?php endif; ?>
                                     </div>
                                 </div>
                             </div>
@@ -79,32 +56,10 @@ $footer_style = function_exists('get_field') && is_page() ? (string) get_field('
                                         <div class="alt-footer-link-item col-6">
                                             <?php wp_nav_menu(['theme_location' => 'orisa-footer-1', 'container' => false, 'items_wrap' => '<ul>%3$s</ul>', 'walker' => new Orisa_Plain_Walker('mb-15'), 'fallback_cb' => false]); ?>
                                         </div>
-                                        <?php elseif (function_exists('have_rows') && have_rows('footer_menu_1', 'option')) : ?>
-                                        <div class="alt-footer-link-item col-6">
-                                            <ul>
-                                                <?php while (have_rows('footer_menu_1', 'option')) : the_row(); ?>
-                                                    <?php $l1 = get_sub_field('link'); ?>
-                                                    <?php if (is_array($l1) && !empty($l1['url'])) : ?>
-                                                        <li class="mb-15"><a href="<?php echo esc_url($l1['url']); ?>"><?php echo esc_html($l1['title'] !== '' ? $l1['title'] : $l1['url']); ?></a></li>
-                                                    <?php endif; ?>
-                                                <?php endwhile; ?>
-                                            </ul>
-                                        </div>
                                         <?php endif; ?>
                                         <?php if (has_nav_menu('orisa-footer-2')) : ?>
                                         <div class="alt-footer-link-item col-6">
                                             <?php wp_nav_menu(['theme_location' => 'orisa-footer-2', 'container' => false, 'items_wrap' => '<ul>%3$s</ul>', 'walker' => new Orisa_Plain_Walker('mb-15'), 'fallback_cb' => false]); ?>
-                                        </div>
-                                        <?php elseif (function_exists('have_rows') && have_rows('footer_menu_2', 'option')) : ?>
-                                        <div class="alt-footer-link-item col-6">
-                                            <ul>
-                                                <?php while (have_rows('footer_menu_2', 'option')) : the_row(); ?>
-                                                    <?php $l2 = get_sub_field('link'); ?>
-                                                    <?php if (is_array($l2) && !empty($l2['url'])) : ?>
-                                                        <li class="mb-15"><a href="<?php echo esc_url($l2['url']); ?>"><?php echo esc_html($l2['title'] !== '' ? $l2['title'] : $l2['url']); ?></a></li>
-                                                    <?php endif; ?>
-                                                <?php endwhile; ?>
-                                            </ul>
                                         </div>
                                         <?php endif; ?>
                                     </div>

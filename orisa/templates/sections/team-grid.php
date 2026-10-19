@@ -16,31 +16,8 @@ $button = get_sub_field('button');
 $btn_url = is_array($button) && !empty($button['url']) ? $button['url'] : '';
 $btn_title = is_array($button) && isset($button['title']) ? $button['title'] : '';
 
-$orisa_tg_members = [];
-if (function_exists('have_rows') && have_rows('members')) {
-    while (have_rows('members')) {
-        the_row();
-        $m_photo = get_sub_field('photo');
-        $m_name = get_sub_field('name');
-        $m_role = get_sub_field('role');
-        $m_link = get_sub_field('link');
-        $m_dark = get_sub_field('dark');
-        $m_url = is_array($m_link) && !empty($m_link['url']) ? $m_link['url'] : '';
-        if (empty($m_photo) && !$m_name && !$m_role) {
-            continue;
-        }
-        $orisa_tg_members[] = [
-            'photo' => $m_photo,
-            'name'  => $m_name,
-            'role'  => $m_role,
-            'url'   => $m_url,
-            'dark'  => !empty($m_dark),
-        ];
-    }
-}
-if ($orisa_tg_members === []) {
-    $orisa_tg_members = orisa_team_posts(8);
-}
+// Сотрудники — всегда посты команды (CPT team), ручного ввода нет.
+$orisa_tg_members = function_exists('orisa_team_posts') ? orisa_team_posts(8) : [];
 $orisa_tg_half = (int) ceil(count($orisa_tg_members) / 2);
 $orisa_tg_col1 = array_slice($orisa_tg_members, 0, $orisa_tg_half);
 $orisa_tg_col2 = array_slice($orisa_tg_members, $orisa_tg_half);

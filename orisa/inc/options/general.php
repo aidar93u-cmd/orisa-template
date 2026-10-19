@@ -51,24 +51,6 @@ function orisa_options_general() {
                 'type'          => 'text',
                 'default_value' => 'Поиск по сайту…',
             ],
-            [
-                'key'          => 'field_orisa_opt_search_popular',
-                'label'        => 'Популярные запросы',
-                'name'         => 'search_popular',
-                'type'         => 'repeater',
-                'layout'       => 'table',
-                'button_label' => 'Добавить запрос',
-                'sub_fields'   => [
-                    ['key' => 'field_orisa_opt_sp_link', 'label' => 'Ссылка', 'name' => 'link', 'type' => 'link'],
-                ],
-            ],
-            [
-                'key'           => 'field_orisa_opt_search_title',
-                'label'         => 'Заголовок популярных запросов',
-                'name'          => 'search_popular_title',
-                'type'          => 'text',
-                'default_value' => 'Популярные запросы',
-            ],
         ],
         'location' => [
             [

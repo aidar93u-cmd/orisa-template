@@ -28,25 +28,25 @@ defined('ABSPATH') || exit;
             <div class="at-offcanvas-menu d-xl-none pb-50">
                 <nav></nav>
             </div>
+            <?php $off_gallery = function_exists('orisa_team_posts') ? orisa_team_posts() : []; ?>
+            <?php if ($off_gallery) : ?>
             <div class="at-offcanvas-gallery d-none d-xl-block">
-                <?php if (function_exists('have_rows') && have_rows('offcanvas_gallery', 'option')) : ?>
                 <div class="sec-2-home-5__avatars-row d-flex gap-2">
-                    <?php while (have_rows('offcanvas_gallery', 'option')) : the_row(); ?>
+                    <?php foreach ($off_gallery as $off_member) : ?>
+                        <?php if (empty($off_member['photo'])) continue; ?>
                     <div class="sec-2-home-5__avatar-sm at-offcanvas-gallery-img">
-                        <?php echo orisa_img(get_sub_field('image'), 'full', ['class' => 'img-cover', 'alt' => get_bloginfo('name')]); ?>
+                        <?php echo orisa_img((int) $off_member['photo'], 'full', ['class' => 'img-cover', 'alt' => isset($off_member['name']) ? (string) $off_member['name'] : get_bloginfo('name')]); ?>
                     </div>
-                    <?php endwhile; ?>
+                    <?php endforeach; ?>
                 </div>
-                <?php endif; ?>
             </div>
+            <?php endif; ?>
             <div class="at-offcanvas-contact">
                 <?php $off_ct = function_exists('get_field') ? get_field('offcanvas_contact_title', 'option') : ''; ?>
                 <?php if ($off_ct) : ?><h4 class="h5 at-offcanvas-title sm"><?php echo esc_html($off_ct); ?></h4><?php endif; ?>
                 <ul>
-                    <?php $ph = function_exists('get_field') ? get_field('phone', 'option') : ''; $ph_h = function_exists('get_field') ? get_field('phone_href', 'option') : ''; ?>
-                    <?php if ($ph) : ?><li><a class="fz-font-lg" href="<?php echo esc_attr($ph_h ? $ph_h : 'tel:' . preg_replace('/[^+0-9]/', '', $ph)); ?>"><?php echo esc_html($ph); ?></a></li><?php endif; ?>
-                    <?php $wa = function_exists('get_field') ? get_field('whatsapp_url', 'option') : ''; ?>
-                    <?php if ($wa) : ?><li><a class="fz-font-lg" href="<?php echo esc_url($wa); ?>" target="_blank">WhatsApp · Telegram · MAX</a></li><?php endif; ?>
+                    <?php $ph = function_exists('get_field') ? get_field('phone', 'option') : ''; ?>
+                    <?php if ($ph) : ?><li><a class="fz-font-lg" href="<?php echo esc_attr(orisa_phone_href($ph)); ?>"><?php echo esc_html($ph); ?></a></li><?php endif; ?>
                     <?php $addr = function_exists('get_field') ? get_field('address', 'option') : ''; ?>
                     <?php if ($addr) : ?><li>
                         <a class="fz-font-lg" href="#">
@@ -57,43 +57,19 @@ defined('ABSPATH') || exit;
             </div>
             <div class="at-offcanvas-social">
                 <h3 class="at-offcanvas-title sm"><?php esc_html_e('Мы в соцсетях', 'orisa'); ?></h3>
+                <?php $off_socials = function_exists('orisa_socials') ? orisa_socials(['vk']) : []; ?>
+                <?php if ($off_socials) : ?>
                 <ul class="at-offcanvas-social__grid">
+                    <?php foreach ($off_socials as $off_soc) : ?>
                     <li>
-                        <?php $u_soc_whatsapp = function_exists('get_field') ? get_field('soc_whatsapp', 'option') : ''; ?>
-                        <a href="<?php echo $u_soc_whatsapp ? esc_url($u_soc_whatsapp) : '#'; ?>" class="at-offcanvas-social__link" aria-label="WhatsApp">
-                            <?php echo orisa_soc_icon('whatsapp'); ?>
-                            <span>WhatsApp</span>
+                        <a href="<?php echo esc_url($off_soc['url']); ?>" class="at-offcanvas-social__link" aria-label="<?php echo esc_attr($off_soc['label']); ?>">
+                            <?php echo orisa_soc_icon($off_soc['slug']); ?>
+                            <span><?php echo esc_html($off_soc['label']); ?></span>
                         </a>
                     </li>
-                    <li>
-                        <?php $u_soc_telegram = function_exists('get_field') ? get_field('soc_telegram', 'option') : ''; ?>
-                        <a href="<?php echo $u_soc_telegram ? esc_url($u_soc_telegram) : '#'; ?>" class="at-offcanvas-social__link" aria-label="Telegram">
-                            <?php echo orisa_soc_icon('telegram'); ?>
-                            <span>Telegram</span>
-                        </a>
-                    </li>
-                    <li>
-                        <?php $u_soc_max = function_exists('get_field') ? get_field('soc_max', 'option') : ''; ?>
-                        <a href="<?php echo $u_soc_max ? esc_url($u_soc_max) : '#'; ?>" class="at-offcanvas-social__link" aria-label="MAX">
-                            <?php echo orisa_soc_icon('max'); ?>
-                            <span>MAX</span>
-                        </a>
-                    </li>
-                    <li>
-                        <?php $u_soc_2gis = function_exists('get_field') ? get_field('soc_2gis', 'option') : ''; ?>
-                        <a href="<?php echo $u_soc_2gis ? esc_url($u_soc_2gis) : '#'; ?>" class="at-offcanvas-social__link" aria-label="2ГИС">
-                            <?php echo orisa_soc_icon('doublegis'); ?>
-                            <span>2ГИС</span>
-                        </a>
-                    </li>
-                    <li>
-                        <?php $u_soc_yandex = function_exists('get_field') ? get_field('soc_yandex', 'option') : ''; ?>
-                        <a href="<?php echo $u_soc_yandex ? esc_url($u_soc_yandex) : '#'; ?>" class="at-offcanvas-social__link" aria-label="Яндекс Карты">
-                            <?php echo orisa_soc_icon('yandex'); ?>
-                            <span>Яндекс Карты</span>
-                        </a>
-                    </li>
+                    <?php endforeach; ?>
                 </ul>
+                <?php endif; ?>
             </div>
         </div>
     </div>
@@ -121,43 +97,19 @@ defined('ABSPATH') || exit;
                     <nav></nav>
                 </div>
                 <div class="at-offcanvas-social">
+                    <?php $off_socials = function_exists('orisa_socials') ? orisa_socials(['vk']) : []; ?>
+                    <?php if ($off_socials) : ?>
                     <ul class="at-offcanvas-social__grid">
+                        <?php foreach ($off_socials as $off_soc) : ?>
                         <li>
-                            <?php $u_soc_whatsapp = function_exists('get_field') ? get_field('soc_whatsapp', 'option') : ''; ?>
-                        <a href="<?php echo $u_soc_whatsapp ? esc_url($u_soc_whatsapp) : '#'; ?>" class="at-offcanvas-social__link" aria-label="WhatsApp">
-                            <?php echo orisa_soc_icon('whatsapp'); ?>
-                                <span>WhatsApp</span>
+                            <a href="<?php echo esc_url($off_soc['url']); ?>" class="at-offcanvas-social__link" aria-label="<?php echo esc_attr($off_soc['label']); ?>">
+                                <?php echo orisa_soc_icon($off_soc['slug']); ?>
+                                <span><?php echo esc_html($off_soc['label']); ?></span>
                             </a>
                         </li>
-                        <li>
-                            <?php $u_soc_telegram = function_exists('get_field') ? get_field('soc_telegram', 'option') : ''; ?>
-                        <a href="<?php echo $u_soc_telegram ? esc_url($u_soc_telegram) : '#'; ?>" class="at-offcanvas-social__link" aria-label="Telegram">
-                            <?php echo orisa_soc_icon('telegram'); ?>
-                                <span>Telegram</span>
-                            </a>
-                        </li>
-                        <li>
-                            <?php $u_soc_max = function_exists('get_field') ? get_field('soc_max', 'option') : ''; ?>
-                        <a href="<?php echo $u_soc_max ? esc_url($u_soc_max) : '#'; ?>" class="at-offcanvas-social__link" aria-label="MAX">
-                            <?php echo orisa_soc_icon('max'); ?>
-                                <span>MAX</span>
-                            </a>
-                        </li>
-                        <li>
-                            <?php $u_soc_2gis = function_exists('get_field') ? get_field('soc_2gis', 'option') : ''; ?>
-                        <a href="<?php echo $u_soc_2gis ? esc_url($u_soc_2gis) : '#'; ?>" class="at-offcanvas-social__link" aria-label="2ГИС">
-                            <?php echo orisa_soc_icon('doublegis'); ?>
-                                <span>2ГИС</span>
-                            </a>
-                        </li>
-                        <li>
-                            <?php $u_soc_yandex = function_exists('get_field') ? get_field('soc_yandex', 'option') : ''; ?>
-                        <a href="<?php echo $u_soc_yandex ? esc_url($u_soc_yandex) : '#'; ?>" class="at-offcanvas-social__link" aria-label="Яндекс Карты">
-                            <?php echo orisa_soc_icon('yandex'); ?>
-                                <span>Яндекс Карты</span>
-                            </a>
-                        </li>
+                        <?php endforeach; ?>
                     </ul>
+                    <?php endif; ?>
                 </div>
                 <span class="hamburger-close-btn hamburger-mobile-close-btn d-md-none">Закрыть</span>
             </div>

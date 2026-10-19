@@ -19,7 +19,6 @@ function orisa_register_options_pages() {
     ]);
     foreach ([
         ['Общее', 'general', 'orisa-settings-general'],
-        ['Шапка', 'header', 'orisa-settings-header'],
         ['Подвал', 'footer', 'orisa-settings-footer'],
         ['Контакты', 'contacts', 'orisa-settings-contacts'],
         ['Боковое меню', 'offcanvas', 'orisa-settings-offcanvas'],

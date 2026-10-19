@@ -2,8 +2,8 @@
 defined('ABSPATH') || exit;
 
 /**
- * Меню WordPress: шапка + две колонки подвала.
- * Шаблоны: есть меню в локации — wp_nav_menu, иначе старый повторитель ACF (фолбэк).
+ * Меню WordPress: шапка + две колонки подвала. Единственный источник меню —
+ * «Внешний вид → Меню». Нет меню в локации — колонка пустая, без фолбэков.
  */
 add_action('after_setup_theme', 'orisa_register_menus');
 function orisa_register_menus() {

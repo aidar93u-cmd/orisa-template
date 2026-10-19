@@ -14,7 +14,7 @@ if (have_posts()) :
                         <div class="row align-items-center">
                             <div class="col-lg-8 mx-auto">
                                 <div class="nav-menu d-flex align-items-center gap-2 pb-2">
-                                    <a href="<?php echo esc_url(get_post_type_archive_link('post')); ?>" class="nav-menu__item neutral-900">Blog</a>
+                                    <a href="<?php echo esc_url(get_post_type_archive_link('post')); ?>" class="nav-menu__item neutral-900">Блог</a>
                                     <span class="nav-menu__item-separator">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="6" height="11" viewBox="0 0 6 11" fill="none">
                                             <path d="M0.666992 0.666672L5.33366 5.33334L0.666992 10" stroke="#585959" stroke-width="1.33333" stroke-linecap="round" stroke-linejoin="round" />
@@ -34,7 +34,7 @@ if (have_posts()) :
                                         </div>
                                     </div>
                                     <div class="d-flex align-items-center gap-4">
-                                        <span class="nav-menu__item fz-font-label fw-600 neutral-500">SHARE THIS ARTICLE</span>
+                                        <span class="nav-menu__item fz-font-label fw-600 neutral-500">Поделиться статьёй</span>
                                         <ul class="at-social-list list-unstyled d-flex flex-wrap align-items-end gap-md-4 gap-3">
                                             <li>
                                                 <a href="https://twitter.com/intent/tweet?url=<?php echo esc_attr($post_url); ?>&text=<?php echo esc_attr($post_title); ?>" class="at-social__link d-flex align-items-center gap-2" aria-label="Twitter" target="_blank" rel="noopener">
@@ -68,7 +68,11 @@ if (have_posts()) :
                             </div>
                             <div class="col-lg-8 mx-auto">
                                 <div class="content">
-                                    <?php the_content(); ?>
+                                    <?php if (function_exists('have_rows') && have_rows('post_blocks')) : ?>
+                                        <?php get_template_part('template-parts/post-blocks'); ?>
+                                    <?php else : ?>
+                                        <?php the_content(); ?>
+                                    <?php endif; ?>
                                 </div>
                             </div>
                             <div class="col-lg-8 mx-auto">
@@ -90,7 +94,7 @@ if (have_posts()) :
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="13" viewBox="0 0 14 13" fill="none">
                                                     <path d="M3.19036 5.64852H13.3333V7.31518H3.19036L7.66033 11.7851L6.48183 12.9636L0 6.48185L6.48183 0L7.66033 1.17851L3.19036 5.64852Z" fill="currentColor" />
                                                 </svg>
-                                                <span class="text-uppercase">Prev</span>
+                                                <span class="text-uppercase">Назад</span>
                                             </a>
                                             <h3 class="h6 fw-600">
                                                 <a href="<?php echo esc_url(get_permalink($orisa_prev)); ?>"><?php echo esc_html(get_the_title($orisa_prev)); ?></a>
@@ -101,7 +105,7 @@ if (have_posts()) :
                                         <?php $orisa_next = get_next_post(); ?>
                                         <?php if ($orisa_next) : ?>
                                             <a href="<?php echo esc_url(get_permalink($orisa_next)); ?>" aria-label="Next">
-                                                <span class="text-uppercase">Next</span>
+                                                <span class="text-uppercase">Далее</span>
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22" fill="none">
                                                     <path d="M12.5 6.5L17.2143 11L12.5 15.5" stroke="currentColor" stroke-width="1.28571" stroke-linecap="round" stroke-linejoin="round" />
                                                     <path d="M16.9999 11H4.78564" stroke="currentColor" stroke-width="1.28571" stroke-linecap="round" stroke-linejoin="round" />
@@ -133,8 +137,8 @@ if (have_posts()) :
                             <div class="col-lg-2">
                                 <span class="at-btn common-black bg-transparent mb-10 rounded-0 p-0">
                                     <span class="text-uppercase">
-                                        <span class="text-1">Latest News</span>
-                                        <span class="text-2">Latest News</span>
+                                                <span class="text-1">Похожие статьи</span>
+                                                <span class="text-2">Похожие статьи</span>
                                     </span>
                                     <i>
                                         <svg width="11" height="11" viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg">

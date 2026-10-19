@@ -16,6 +16,8 @@ require_once ORISA_DIR . '/inc/helpers.php';
 require_once ORISA_DIR . '/inc/assets.php';
 require_once ORISA_DIR . '/inc/sections.php';
 require_once ORISA_DIR . '/inc/blocks.php';
+require_once ORISA_DIR . '/inc/post-blocks.php';
+require_once ORISA_DIR . '/inc/seed-posts.php';
 require_once ORISA_DIR . '/inc/options-pages.php';
 require_once ORISA_DIR . '/inc/acf-page-settings.php';
 require_once ORISA_DIR . '/inc/cf7.php';

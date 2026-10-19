@@ -24,42 +24,20 @@ get_template_part('template-parts/search-overlay');
             <div class="container">
                 <div class="row align-items-center">
                     <div class="col-xl-2 col-6">
-                        <div class="at-header-logo changeless">
-                            <a href="<?php echo esc_url(home_url('/')); ?>">
+                        <div class="at-header-logo at-header-logo--wide changeless">
+                            <a href="<?php echo esc_url(home_url('/')); ?>" aria-label="<?php echo esc_attr(get_bloginfo('name')); ?>">
                                 <?php
                                 $logo = function_exists('get_field') ? get_field('logo_dark', 'option') : 0;
-                                echo orisa_img($logo, 'full', ['data-width' => '30', 'alt' => get_bloginfo('name')]);
+                                echo orisa_img($logo, 'full', ['alt' => get_bloginfo('name')]);
                                 ?>
-                                <p class="h6 fw-700 fz-24 text-white mb-0"><?php echo orisa_text(function_exists('get_field') ? get_field('site_name_text', 'option') : ''); ?></p>
                             </a>
                         </div>
                     </div>
                     <div class="col-xl-8 mx-auto d-none d-xl-flex justify-content-center">
-                        <div class="at-main-menu <?php echo esc_attr(function_exists('get_field') ? (string) get_field('menu_style', 'option') : 'menu-light d-inline-flex justify-content-center style-1'); ?>">
+                        <div class="at-main-menu menu-light d-inline-flex justify-content-center style-1">
                             <nav class="at-mobile-menu-active">
                                 <?php if (has_nav_menu('orisa-header')) : ?>
                                     <?php wp_nav_menu(['theme_location' => 'orisa-header', 'container' => false, 'items_wrap' => '<ul>%3$s</ul>', 'walker' => new Orisa_Plain_Walker(), 'fallback_cb' => false]); ?>
-                                <?php elseif (function_exists('have_rows') && have_rows('menu_items', 'option')) : ?>
-                                <ul>
-                                        <?php while (have_rows('menu_items', 'option')) : the_row(); ?>
-                                            <?php $link = get_sub_field('link'); ?>
-                                            <?php if (is_array($link) && !empty($link['url'])) : ?>
-                                                <li>
-                                                    <a href="<?php echo esc_url($link['url']); ?>"><?php echo esc_html($link['title'] !== '' ? $link['title'] : $link['url']); ?></a>
-                                                    <?php if (have_rows('children')) : ?>
-                                                        <ul>
-                                                            <?php while (have_rows('children')) : the_row(); ?>
-                                                                <?php $sub = get_sub_field('link'); ?>
-                                                                <?php if (is_array($sub) && !empty($sub['url'])) : ?>
-                                                                    <li><a href="<?php echo esc_url($sub['url']); ?>"><?php echo esc_html($sub['title'] !== '' ? $sub['title'] : $sub['url']); ?></a></li>
-                                                                <?php endif; ?>
-                                                            <?php endwhile; ?>
-                                                        </ul>
-                                                    <?php endif; ?>
-                                                </li>
-                                            <?php endif; ?>
-                                        <?php endwhile; ?>
-                                </ul>
                                 <?php endif; ?>
                             </nav>
                         </div>

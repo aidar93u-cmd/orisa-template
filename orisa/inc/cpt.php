@@ -3,8 +3,7 @@ defined('ABSPATH') || exit;
 
 /**
  * CPT «Сотрудники» и «Проекты» + их ACF-поля.
- * Блоки team / team-grid / cases берут записи CPT, если они есть,
- * иначе — старый повторитель Flexible Content (фолбэк, см. helpers.php).
+ * Блоки team / team-grid берут записи CPT «Сотрудники» всегда (helpers.php).
  */
 add_action('init', 'orisa_register_cpt');
 function orisa_register_cpt() {
@@ -80,6 +79,13 @@ function orisa_cpt_fields() {
                 'label' => 'Стаж',
                 'name'  => 'experience',
                 'type'  => 'text',
+            ],
+            [
+                'key'   => 'field_orisa_team_dark',
+                'label' => 'Тёмный бейдж',
+                'name'  => 'dark',
+                'type'  => 'true_false',
+                'ui'    => 1,
             ],
         ],
         'location' => [

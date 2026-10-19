@@ -1,7 +1,6 @@
 <?php
 defined('ABSPATH') || exit;
 $search_placeholder = function_exists('get_field') ? (string) get_field('search_placeholder', 'option') : '';
-$popular_title = function_exists('get_field') ? (string) get_field('search_popular_title', 'option') : '';
 $logo = function_exists('get_field') ? get_field('logo_light', 'option') : 0;
 $site_name = function_exists('get_field') ? (string) get_field('site_name_text', 'option') : '';
 ?>
@@ -47,21 +46,6 @@ $site_name = function_exists('get_field') ? (string) get_field('site_name_text',
                                 </button>
                             </div>
                         </form>
-                    </div>
-                </div>
-                <div class="col-12">
-                    <div class="at-categories">
-                        <h3 class="at-categories-title"><?php echo orisa_text($popular_title); ?></h3>
-                        <ul class="at-categories-list">
-                            <?php if (function_exists('have_rows') && have_rows('search_popular', 'option')) : ?>
-                                <?php while (have_rows('search_popular', 'option')) : the_row(); ?>
-                                    <?php $plink = get_sub_field('link'); ?>
-                                    <?php if (is_array($plink) && !empty($plink['url'])) : ?>
-                                        <li><a href="<?php echo esc_url($plink['url']); ?>" class="at-categories-item"><?php echo esc_html($plink['title'] !== '' ? $plink['title'] : $plink['url']); ?></a></li>
-                                    <?php endif; ?>
-                                <?php endwhile; ?>
-                            <?php endif; ?>
-                        </ul>
                     </div>
                 </div>
             </div>

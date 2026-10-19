@@ -18,46 +18,29 @@ $title          = get_sub_field('title');
 $note           = get_sub_field('note');
 $offices        = get_sub_field('offices');
 $avatars        = get_sub_field('avatars');
+if ((!is_array($avatars) || !$avatars) && function_exists('orisa_team_posts')) {
+    $avatars = [];
+    foreach (orisa_team_posts() as $orisa_tm) {
+        if (empty($orisa_tm['photo'])) {
+            continue;
+        }
+        $avatars[] = ['image' => (int) $orisa_tm['photo']];
+    }
+}
 $form_title     = get_sub_field('form_title');
 $form_shortcode = get_sub_field('form_shortcode');
 $socials_title  = get_sub_field('socials_title');
 
 $opt_phone      = function_exists('get_field') ? (string) get_field('phone', 'option') : '';
-$opt_phone_href = function_exists('get_field') ? (string) get_field('phone_href', 'option') : '';
+$opt_phone_href = function_exists('orisa_phone_href') ? orisa_phone_href($opt_phone) : '';
 $opt_address    = function_exists('get_field') ? (string) get_field('address', 'option') : '';
-$opt_email      = '';
-if (function_exists('get_field')) {
-    $opt_emails = get_field('emails', 'option');
-    if (is_array($opt_emails)) {
-        foreach ($opt_emails as $opt_row) {
-            if (is_array($opt_row) && !empty($opt_row['email'])) {
-                $opt_email = (string) $opt_row['email'];
-                break;
-            }
-        }
-    }
-}
+$opt_email      = function_exists('orisa_first_email') ? orisa_first_email() : '';
 if (!is_array($offices) || !$offices) {
     $offices = [['title' => '', 'address' => '', 'phone' => '', 'email' => '']];
 }
 
-$orisa_socials = [];
-if (function_exists('get_field')) {
-    foreach ([
-        ['key' => 'soc_whatsapp', 'name' => 'WhatsApp'],
-        ['key' => 'soc_telegram', 'name' => 'Telegram'],
-        ['key' => 'soc_max', 'name' => 'MAX'],
-        ['key' => 'soc_2gis', 'name' => '2ГИС'],
-        ['key' => 'soc_yandex', 'name' => 'Яндекс Карты'],
-    ] as $orisa_soc) {
-        $orisa_soc_url = (string) get_field($orisa_soc['key'], 'option');
-        if ($orisa_soc_url === '') {
-            continue;
-        }
-        $orisa_socials[] = ['name' => $orisa_soc['name'], 'url' => $orisa_soc_url];
-    }
-}
-// ponytail: VK из Options не выводим — в настройках помечен «только подвал».
+// ponytail: VK здесь не выводим — в настройках помечен «только подвал».
+$orisa_socials = function_exists('orisa_socials') ? orisa_socials(['vk']) : [];
 ?>
 <div class="sec-1-contact overflow-hidden pt-120"<?php echo orisa_anchor(); ?>>
     <div class="container">
@@ -101,7 +84,7 @@ if (function_exists('get_field')) {
                                 $orisa_office_phone_href = 'tel:' . preg_replace('/[^+0-9]/', '', $orisa_row_phone);
                             } else {
                                 $orisa_office_phone      = $opt_phone;
-                                $orisa_office_phone_href = $opt_phone_href !== '' ? $opt_phone_href : 'tel:' . preg_replace('/[^+0-9]/', '', $opt_phone);
+                                $orisa_office_phone_href = $opt_phone_href;
                             }
                             if ($orisa_office_title === '' && $orisa_office_address === '' && $orisa_office_phone === '' && $orisa_office_email === '') {
                                 continue;
@@ -209,7 +192,7 @@ if (function_exists('get_field')) {
                                                         <path d="M0.21967 9.40717C-0.0732232 9.70006 -0.0732232 10.1749 0.21967 10.4678C0.512563 10.7607 0.987437 10.7607 1.28033 10.4678L0.21967 9.40717ZM10.6875 0.75C10.6875 0.335786 10.3517 2.97145e-09 9.9375 1.50485e-07L3.1875 -2.70983e-07C2.77329 -2.70983e-07 2.4375 0.335786 2.4375 0.75C2.4375 1.16421 2.77329 1.5 3.1875 1.5H9.1875V7.5C9.1875 7.91421 9.52329 8.25 9.9375 8.25C10.3517 8.25 10.6875 7.91421 10.6875 7.5L10.6875 0.75ZM0.75 9.9375L1.28033 10.4678L10.4678 1.28033L9.9375 0.75L9.40717 0.21967L0.21967 9.40717L0.75 9.9375Z" fill="currentColor" />
                                                     </svg>
                                                 </div>
-                                                <?php echo esc_html($orisa_soc_item['name']); ?>
+                                                <?php echo esc_html($orisa_soc_item['label']); ?>
                                             </div>
                                             <div class="icon">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="12" height="10" viewBox="0 0 12 10" fill="none">
